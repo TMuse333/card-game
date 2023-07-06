@@ -11,11 +11,11 @@ import Sainey from '../images/ss2_sainey.jpg'
 import War_Obito from '../images/war_obito.jpg'
 
 
-const CardSet = ({onClick,isClicked}) =>{
+const CardSet = ( {onClick, isClicked}) =>{
 
-    const handleCardClick = (value) =>{
-        console.log('card ${value} was clicked');
-        onClick(value)
+    const handleCardClick = (value) => {
+        console.log(`Card ${value} was clicked`);
+        onClick(value);
     }
 
     return (
@@ -26,13 +26,13 @@ const CardSet = ({onClick,isClicked}) =>{
     <div className="cardSet">
 
        <Card value={1} imageSrc={Abu} onClick={handleCardClick} isClicked={isClicked}/>
-        <Card value={2} imageSrc={MajinVegeta} onClick={handleCardClick} isClicked={isClicked}/>
-        <Card value={3} imageSrc={Obito} onClick={handleCardClick} isClicked={isClicked}/>
-        <Card value={4} imageSrc={Saiyans} onClick={handleCardClick} isClicked={isClicked}/>
-        <Card value={5} imageSrc={Sasuke} onClick={handleCardClick} isClicked={isClicked}/>
-        <Card value={6} imageSrc={Kakashi} onClick={handleCardClick} isClicked={isClicked}/>
-        <Card value={7} imageSrc={Sainey} onClick={handleCardClick} isClicked={isClicked}/>
-        <Card value={8} imageSrc={War_Obito} onClick={handleCardClick} isClicked={isClicked}/>
+        <Card value={2} imageSrc={MajinVegeta} />
+        <Card value={3} imageSrc={Obito} />
+        <Card value={4} imageSrc={Saiyans} />
+        <Card value={5} imageSrc={Sasuke} />
+        <Card value={6} imageSrc={Kakashi} />
+        <Card value={7} imageSrc={Sainey} />
+        <Card value={8} imageSrc={War_Obito} />
 
         </div>
         

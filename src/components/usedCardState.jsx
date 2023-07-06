@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+
 
 export const useCardState = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  // const [enlargedCard, setEnlargedCard] = useState(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -13,13 +16,19 @@ export const useCardState = () => {
   };
 
   const handleClick = () => {
-    console.log('card clicked')
     setIsClicked(!isClicked);
+    // setIsEnlarged((prevIsEnlarged) => !prevIsEnlarged)
   };
+
+  // useEffect(() => {
+  //   console.log('isClicked:', isClicked);
+  //   console.log('enlargedCard:', enlargedCard);
+  // }, [isClicked, enlargedCard]);
 
   return {
     isHovered,
     isClicked,
+    
     handleMouseEnter,
     handleMouseLeave,
     handleClick,

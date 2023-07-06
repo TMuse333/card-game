@@ -12,27 +12,27 @@ import { useCardState } from './components/usedCardState';
 
 function App() {
 
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
-
   
+  const { isHovered, isClicked, handleMouseEnter, handleMouseLeave, handleClick, isEnlarged } = useCardState();
 
-  const pageStyle = {
-    filter: isClicked ? 'blur(3px)' : 'none', // Apply blur to the page when clicked
-    transition: 'filter 0.3s ease-in-out',
-  };
+  console.log('isClicked:', isClicked);
+  
+const pageStyle = {
+  filter: isClicked  ? 'blur(5px)' : 'none',
+
+}
+
+
+ 
 
   return (
     <>
-<div style={pageStyle} >
+<div class="main" style={pageStyle}>
 
  <NavBar/>
  <CardSet onClick={handleClick} isClicked={isClicked}/>
-
  </div>
+
    
     </>
   )
