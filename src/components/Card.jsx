@@ -1,20 +1,19 @@
 import React from 'react';
+import CardSet from './CardSet';
 import { useCardState } from './usedCardState';
 // import Tilt from 'react-tilt';
 
 
-const Card = ({ value, imageSrc }) => {
-  const { isHovered, isClicked, handleMouseEnter, handleMouseLeave, handleClick } = useCardState();
+const Card = ({ value, imageSrc,cardData}) => {
+  const { isHovered,
+     isClicked,
+      handleMouseEnter, 
+      handleMouseLeave, 
+      handleClick
+     } = useCardState(value,cardData);
 
-  // const cardContainerStyle = {
-  //   perspective: '1000px',
-  //   height: '100%',
-  // };
   
-  // const cardContentStyle = {
-  //   height: '100%',
-  //   overflow: 'auto',
-  // };
+
   
 
   
@@ -31,8 +30,16 @@ const Card = ({ value, imageSrc }) => {
     
   };
 
+
+
+
+  const isEnlarged = false
+  const canBeEnlarged = true
+
+  
+
   return (
-   
+ 
       
       <div className="card-container">
     
@@ -42,13 +49,16 @@ const Card = ({ value, imageSrc }) => {
           className="card"
           style={cardStyle}
           onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => {
+          handleClick();
+          
+        }}
          
         />
        </div>
       
-     
+    
     
   );
 };
