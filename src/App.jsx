@@ -6,7 +6,7 @@ import CardSet from './components/newCard'
 
 
 import NavBar from './components/NavBar'
-import Card_Set from './components/Card'
+
 
 
 
@@ -34,7 +34,7 @@ function App() {
 
  <NavBar/>
 
- <Card_Set/>
+ <CardSet/>
  
  
 

@@ -13,7 +13,6 @@ import {cardData} from './cardData.js'
 
 const Card = ({ imageSrc, onClick, isBig, selectedImage, text }) => {
     const[isHovered, setIsHovered] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
 
     const handleMouseEnter = () =>{
         setIsHovered(true)
@@ -30,36 +29,26 @@ const Card = ({ imageSrc, onClick, isBig, selectedImage, text }) => {
   const cardStyle = {
     height: '23vw',
     width: '15vw',
-    transform: isBig ? 'scale(2.33) ' : isHovered  && selectedImage === null? 'scale(1.2)' : 'scale(1)',
+    transform: isBig ? 'scale(2.33)' : isHovered  && selectedImage === null? 'scale(1.2)' : 'scale(1)',
     position: isBig ? 'fixed' : 'static',
     top: isBig ? '30%' : '0',
     left: isBig ? '40%' : '0',
     zIndex: isBig ? 1 : 'auto',
     filter: selectedImage && selectedImage !== imageSrc ? 'blur(5px)' : 'none',
     boxShadow: isHovered && !isBig  && selectedImage === null? '0 0 10px 25px rgba(255, 215, 0, 0.5)' : 'none',
-    // transition: 'transform 0.3s ease-in-out',
     transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-
   };
 
   const textStyle = {
-  
-   color : 'black',
+   display: isBig ? 'block' : 'none',
+   color : 'red',
   position: 'fixed',
   top: '30%',
   left: '63%',
   zIndex: '1',
   background: 'orange',
-  transform: isBig ? 'scale(1)' : 'scale(0)',
   height: '23vw',
-  width: '15vw',
-//   transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-// opacity: isBig? '100%' : '0',
-transition: 'opacity 3s, transform 1s',
-
-
-
-  
+  width: '15vw'
 
 
   }
@@ -67,8 +56,8 @@ transition: 'opacity 3s, transform 1s',
   
 
   return (
-    <div className="card-container">
-       
+   <>
+        <p style={textStyle}>{text}</p>
       <img
         src={imageSrc}
         alt="img"
@@ -78,13 +67,10 @@ transition: 'opacity 3s, transform 1s',
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
-      <div style={textStyle}>
-        <p>{text}</p>
-      </div>
-      
+      </>
 
      
-    </div>
+
   );
 };
 
@@ -95,20 +81,23 @@ const CardSet = () => {
     if (selectedImage === imageSrc) {
       setSelectedImage(null); // Return the image to its original size
     } else if (!selectedImage) {
-        console.log("lol")
+        
       setSelectedImage(imageSrc); // Enlarge the clicked image
     }
   };
 
   return (
     <div className="cardSet">
-      <Card
+
+      <Card className
         imageSrc={Abu}
         onClick={() => handleCardClick(Abu)}
         isBig={selectedImage === Abu}
         selectedImage={selectedImage}
         text={cardData[0]}
       />
+  
+     
       <Card
         imageSrc={MajinVegeta}
         onClick={() => handleCardClick(MajinVegeta)}
@@ -116,6 +105,7 @@ const CardSet = () => {
         selectedImage={selectedImage}
         text={cardData[1]}
       />
+      
       <Card
         imageSrc={Obito}
         onClick={() => handleCardClick(Obito)}
