@@ -138,19 +138,13 @@ ul.navLinks li a {
 
 
 
-
-
-
-
-.card-container {
-  max-width: 65vw;
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 40px;
-
+.card-container{
   
+  display: flex;
+width: 23%;
+margin-bottom: 3%;
+justify-content: center;
 
-  
 }
 
 

@@ -32,21 +32,3 @@
 ]
 
 // (4.33%, 1%)
-
-import React, { useState } from 'react';
-
-import Abu from '../images/aboubacar4.png';
-import MajinVegeta from '../images/majin-vegeta.png';
-import Obito from '../images/obito_10TJ.jpg';
-import Saiyans from '../images/ssb_k20_goku_and_bssb_vegeta.jpg';
-import Sasuke from '../images/sasuke.jpg';
-import Kakashi from '../images/kakashi_susanoo.jpg';
-import Sainey from '../images/ss2_sainey.jpg';
-import War_Obito from '../images/war_obito.jpg';
-
-
-
-import React, { useState } from 'react';
-import MajinVegeta from '../images/majin-vegeta.png';
-
-
