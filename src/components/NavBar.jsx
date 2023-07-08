@@ -19,10 +19,10 @@ const NavBar = () =>{
 
       
 
-        <div className="welcome">
+        {/* <div className="welcome">
         <p>Welcome to my card game!<br></br>
         Can you match all the cards?</p>
-        </div>
+        </div> */}
         </>
     )
 }

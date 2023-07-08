@@ -151,10 +151,21 @@ ul.navLinks li a {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
+  justify-content: space-between;
 }
 
 .card-container{
-  width: 15vw;
+  display: flex;
+width: 23%;
+margin-bottom: 3%;
+}
+
+.card-container p{
+  font-size: 1vw;
+  padding-top: 3%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 1%;
 }
 
 

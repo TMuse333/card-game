@@ -1,33 +1,18 @@
-// import React, { useState } from 'react';
+// import React from 'react';
 
-// const Card = ({ value, imageSrc }) => {
-//   const [isClicked, setIsClicked] = useState(false);
-//   const [isHovered,setIsHovered] = useState(false)
-
-
-// const handleClick = () => {
-//   setIsClicked(!isClicked)
-// }
-
-//   const handleMouseEnter = () => {
-//     setIsHovered(true);
+// const Card = ({ imageSrc, onClick, isBig, isSelected }) => {
+//   const handleClick = () => {
+//     onClick();
 //   };
-
-//   const handleMouseLeave = () => {
-//     setIsHovered(false);
-//   };
-
-
 
 //   const cardStyle = {
-//     boxShadow: isHovered && !isClicked ? '0px 0px 100px 0px rgba(255, 0, 0, 0.5)' : 'none',
-//     transition: 'box-shadow 0.3s ease-in-out',
-//     transform: isClicked ? 'scale(2.33)' : isHovered ? 'scale(1.2)' : 'scale(1)',
-//     position: isClicked  ? 'fixed' : 'static',
-//     top: isClicked  ? '30%' : 'auto',
-//     left: isClicked  ? '40%' : 'auto',
-//     zIndex: isClicked  ? 1 : 'auto',
-//     overflow: 'auto',
+//     transform: isBig ? 'scale(2.33)' : 'scale(1)',
+//     position: isBig ? 'fixed' : 'static',
+//     top: isBig ? '30%' : 'auto',
+//     left: isBig ? '40%' : 'auto',
+//     zIndex: isBig ? 1 : 'auto',
+//     filter: selectedImage && selectedImage !== imageSrc ? 'blur(5px)' : 'none',
+//     transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out',
 //   };
 
 //   return (
@@ -38,14 +23,9 @@
 //         className="card"
 //         style={cardStyle}
 //         onClick={handleClick}
-//         onMouseEnter={handleMouseEnter}
-//         onMouseLeave={handleMouseLeave}
 //       />
 //     </div>
-    
 //   );
 // };
 
-// const card_set = () =>{
-
-// }
+// export default Card;

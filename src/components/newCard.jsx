@@ -9,31 +9,64 @@ import Kakashi from '../images/kakashi_susanoo.jpg';
 import Sainey from '../images/ss2_sainey.jpg';
 import War_Obito from '../images/war_obito.jpg';
 
-const Card = ({ imageSrc, onClick, isBig, selectedImage }) => {
+import {cardData} from './cardData.js'
+
+const Card = ({ imageSrc, onClick, isBig, selectedImage, text }) => {
+    const[isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () =>{
+        setIsHovered(true)
+    }
+
+    const handleMouseLeave = () =>{
+        setIsHovered(false)
+    }
   const handleClick = () => {
     onClick();
   };
 
   const cardStyle = {
-    transform: isBig ? 'scale(2.33)' : 'scale(1)',
+    transform: isBig ? 'scale(2.33)' : isHovered  && selectedImage === null? 'scale(1.2)' : 'scale(1)',
     position: isBig ? 'fixed' : 'static',
     top: isBig ? '30%' : 'auto',
     left: isBig ? '40%' : 'auto',
     zIndex: isBig ? 1 : 'auto',
     filter: selectedImage && selectedImage !== imageSrc ? 'blur(5px)' : 'none',
-    transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out',
+    boxShadow: isHovered && !isBig  && selectedImage === null? '0 0 10px 25px rgba(255, 215, 0, 0.5)' : 'none',
+    transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
   };
+
+  const textStyle = {
+   display: isBig ? 'block' : 'none',
+   color : 'red',
+  position: 'fixed',
+  top: '30%',
+  left: '63%',
+  zIndex: '1',
+  background: 'orange',
+  height: '23vw',
+  width: '15vw'
+
+
+  }
+  
   
 
   return (
     <div className="card-container">
+        <p style={textStyle}>{text}</p>
       <img
         src={imageSrc}
         alt="img"
         className="card"
         style={cardStyle}
         onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       />
+      
+
+     
     </div>
   );
 };
@@ -45,6 +78,7 @@ const CardSet = () => {
     if (selectedImage === imageSrc) {
       setSelectedImage(null); // Return the image to its original size
     } else if (!selectedImage) {
+        console.log("lol")
       setSelectedImage(imageSrc); // Enlarge the clicked image
     }
   };
@@ -56,6 +90,7 @@ const CardSet = () => {
         onClick={() => handleCardClick(Abu)}
         isBig={selectedImage === Abu}
         selectedImage={selectedImage}
+        text={cardData[0]}
       />
       <Card
         imageSrc={MajinVegeta}
