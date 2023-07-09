@@ -1,31 +1,49 @@
-// import React from 'react';
+import React, { useState } from 'react';
+import MajinVegeta from '../images/majin-vegeta.png';
 
-// const Card = ({ imageSrc, onClick, isBig, isSelected }) => {
-//   const handleClick = () => {
-//     onClick();
-//   };
 
-//   const cardStyle = {
-//     transform: isBig ? 'scale(2.33)' : 'scale(1)',
-//     position: isBig ? 'fixed' : 'static',
-//     top: isBig ? '30%' : 'auto',
-//     left: isBig ? '40%' : 'auto',
-//     zIndex: isBig ? 1 : 'auto',
-//     filter: selectedImage && selectedImage !== imageSrc ? 'blur(5px)' : 'none',
-//     transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out',
-//   };
+const FlipCard = () => {
+  const [isFlipped, setIsFlipped] = useState(false);
 
-//   return (
-//     <div className="card-container">
-//       <img
-//         src={imageSrc}
-//         alt="img"
-//         className="card"
-//         style={cardStyle}
-//         onClick={handleClick}
-//       />
-//     </div>
-//   );
-// };
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
+  };
 
-// export default Card;
+  const cardStyle={
+    height: '23vw',
+    width: '15vw',
+  
+}
+
+const textStyle={
+    color:'black',
+
+
+}
+
+const backStyle={
+    height: '23vw',
+    width: '15vw',
+    background: 'orange'
+
+}
+
+  return (
+    <div className={`flip-card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+      <div className="flip-card-inner">
+        <div className="flip-card-front">
+          <img 
+          src={MajinVegeta}
+           alt="Front"
+           style={cardStyle} />
+        </div>
+        <div className="flip-card-back" style={backStyle}>
+          <p style={textStyle}>Text Content</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+export default FlipCard

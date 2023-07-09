@@ -66,10 +66,12 @@ transition: 'opacity 3s, transform 1s',
   return (
     <div className="card-container">
        
+       <div className='the-card'>
+
       <img
         src={imageSrc}
         alt="img"
-        className="card"
+        className="card-front"
         style={cardStyle}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
@@ -78,10 +80,17 @@ transition: 'opacity 3s, transform 1s',
       <div style={textStyle}>
         <p>{text}</p>
       </div>
+
+      </div>
+
+
+      </div>
+
+   
       
 
      
-    </div>
+
   );
 };
 
