@@ -46,58 +46,7 @@ import War_Obito from '../images/war_obito.jpg';
 
 
 
-  /*  const flippedCards = () =>{
-
-        const[selectedImage,setSelectedImage] = useState(null)
-
-        const handleClick = (imageSrc) =>{
-        
-        selectedImage === imageSrc ? setSelectedImage(null) :
-        setSelectedImage(imageSrc)
-
-        }
-
-return (
-    <>
-
-<div className="cardSet">
-
-    <FlipCard
-    imageSrc={Abu}
-    onClick={() => handleClick(Abu)}
-    isBig={selectedImage === Abu}
-    selectedImage={selectedImage}
-    text={cardData[0]}
-    />
-    <FlipCard
-    imageSrc={MajinVegeta}
-    onClick={() => handleClick(MajinVegeta)}
-    isBig={selectedImage === MajinVegeta}
-    selectedImage={selectedImage}
-    text={cardData[1]}
-    />
-       <FlipCard
-    imageSrc={Obito}
-    onClick={() => handleClick(Obito)}
-    isBig={selectedImage === Obito}
-    selectedImage={selectedImage}
-    text={cardData[2]}
-    />
-
-<FlipCard
-    imageSrc={Saiyans}
-    onClick={() => handleClick(Saiyans)}
-    isBig={selectedImage === Saiyans}
-    selectedImage={selectedImage}
-    text={cardData[3]}
-    />
-    </div>
-    </>
-)
+import React, { useState } from 'react';
+import MajinVegeta from '../images/majin-vegeta.png';
 
 
-
-    }
-
-
-export default flippedCards*/
