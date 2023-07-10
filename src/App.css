@@ -135,85 +135,28 @@ ul.navLinks li a {
   color: black;
 }
 
-.card-front{
 
-  height: 23vw;
-  width: 15vw;
   
 
-}
-
-.container-f{
-  position: relative;
-  height: 23vw;
-  width: 15vw;
-
-
-}
-
-.the-card-f{
-  position: absolute;
-  height: 23vw;
-  width: 15vw;
-  transform-style:preserve-3d;
-  transition: all 0.5s ease;
-  background: green;
-  /* backface-visibility: hidden; */
-
-}
-
-.the-front-f{
-  position: absolute;
-  height: 23vw;
-  width: 15vw;
-  backface-visibility: hidden;
-  background: white;
-  color:#333;
-  
-}
-
-.the-back-f{
-  position: absolute;
-  height: 23vw;
-  width: 15vw;
-  backface-visibility: hidden;
-  background: blue;
-  color:red;
-  transform: rotateY(180deg);
-  transform-style:preserve-3d;
-}
 
 
 
-/* .the-card-f:hover{
-  transform: rotateY(180deg);
-}  */
-
-
-
-
-
-
-.cardSet{
-  margin-top: 6.5%;
+.cardSet {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 200px;
 }
 
-.card-container{
-  position: relative;
-  display: flex;
-width: 23%;
-margin-bottom: 3%;
-justify-content: center;
-}
 
-.the-card{
-  /* position: absolute; */
-  transform-style: preserve-3d;
-}
+
+
+
+
+
+
+
+
 
 .card-container p{
   font-size: 1vw;
@@ -225,14 +168,14 @@ justify-content: center;
 }
 
 .flip-card {
-  perspective: 1000px;
-  width: 200px;
-  height: 200px;
+  /* perspective: 1000px; */
+  /* width: 10px;
+  height: 10px; */
   position: relative;
   transform-style: preserve-3d;
   transition: transform 1s, 0.5s left;
   
-  transform-origin: center center;
+ 
 }
 
 .flip-card.flipped {
@@ -268,6 +211,10 @@ justify-content: center;
 .flip-card-back {
   transform: rotateY(180deg);
   
+}
+
+.box-text{
+  font-size: 1vw;
 }
 
 
