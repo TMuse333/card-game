@@ -136,30 +136,17 @@ ul.navLinks li a {
 }
 
 
-  .cardSet{
-    display: flex;
-    flex-wrap: wrap;
-    gap:20px;
-  } 
-
-  /* .card-row{
-    width: 25%;
-  }  */
-
-
-
-
-
- .card-one{
- 
-  /* z-index: 100; */
-}  
-
- .card-two{
   
-  
-}  
 
+
+
+
+.cardSet {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 200px;
+}
 
 
 
@@ -181,7 +168,7 @@ ul.navLinks li a {
 }
 
 .flip-card {
-  perspective: 1000px;
+  /* perspective: 1000px; */
   /* width: 10px;
   height: 10px; */
   position: relative;
@@ -229,34 +216,6 @@ ul.navLinks li a {
 
 .box-text{
   font-size: 1vw;
-  transform: translateX(2vw);
-}
-
-.cardSet {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center; /* Adjust the alignment as per your design */
-}
-
-.container{
-  height:280px;
-  width:200px;
-}
-
-.card{
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
-
-.front,
-.back{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  
-
 }
 
 

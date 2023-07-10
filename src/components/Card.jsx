@@ -18,7 +18,7 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage, text }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
   const handleClick = (event) => {
-    event.shiftKey  && !isBig? setIsFlipped(!isFlipped) :( () =>{
+    event.shiftKey ? setIsFlipped(!isFlipped) :( () =>{
         setIsExpanded(!isExpanded)
         onClick();
         
@@ -37,17 +37,16 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage, text }) => {
        height: '23vw',
         width: '15vw',
         transform: isBig 
-        ? 'scale(1.75)'
+        ? 'scale(2)'
         : isHovered && selectedImage === null
         ? 'scale(1.2)'
         : !isBig && selectedImage !== null
-        ? 'scale(0.8)'
+        ? 'scale(0.5)'
         : 'scale(1)',
-        position: isBig ? 'fixed' : 'relative',
-        top: isBig ? '20%' : 'auto',
-        left: isBig ? '50%' : 'auto',
-       
-       
+        position: isBig ? 'fixed' : 'static',
+        top: isBig ? '5%' : 'auto',
+        left: isBig ? '60%' : 'auto',
+        zIndex: isBig || selectedImage !== null ? '2' : '0',
         filter: selectedImage && selectedImage !== imageSrc ? 'blur(5px)' : 'none',
         boxShadow: isHovered && !isBig  && selectedImage === null? '0 0 10px 25px rgba(255, 215, 0, 0.5)' : 'none',
         transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
@@ -64,10 +63,8 @@ const backTextStyle={
 const backStyle={
     height: '23vw',
     width: '15vw',
-    background: 'red',
-  
-    
-   
+    background: 'orange',
+    zIndex:'1'
 
 }
 
@@ -75,11 +72,10 @@ const textStyle = {
     color : 'black',
    position: 'fixed',
    top: '30%',
-   left: '2%',
-
-  
+   left: '175%',
+   zIndex: '1',
    background: 'orange',
-   transform: isBig ? 'scale(1)' : 'scale(0) ',
+   transform: isBig ? 'scale(1)' : 'scale(0)',
    height: '23vw',
    width: '15vw',
    transition: 'opacity 3s, transform 1s',
@@ -87,19 +83,10 @@ const textStyle = {
    
  }
 
- const containerStyle = {
-    position: isBig ? 'fixed' : 'static',
-    top: isBig ? '20%' : 'auto',
-    left: isBig ? '50%' : 'auto',
-    transform: 'translate(-50%, 0)', // Add this line
-  };
-
-
   return (
 
 
 
-<div style={containerStyle}>
     <div className={`flip-card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
       <div className="flip-card-inner">
         <div className="flip-card-front">
@@ -107,18 +94,18 @@ const textStyle = {
           src={imageSrc}
            alt="Front"
            style={cardStyle} 
-        //    onClick={handleClick}
+           onClick={handleClick}
            onMouseEnter={handleMouseEnter}
            onMouseLeave={handleMouseLeave}/>
         </div>
         <div className="flip-card-back" style={backStyle}>
           <p style={backTextStyle}>Text Content</p>
         </div>
-        {/* <aside className="box-text"
-        style={textStyle}>{text}</aside> */}
+        <span className="box-text"
+        style={textStyle}>{text}</span>
       </div>
     </div>
-    </div>
+   
     
    
   );
@@ -140,49 +127,24 @@ const textStyle = {
 return (
     <>
 
-<div className='cardSet'>
+<div className="cardSet">
 
-    <div className='card-one' style={{
-        zIndex: selectedImage === Abu ? 100 : 0,
-        transform: selectedImage === Abu ? 
-        'translate(-5vw,-8vw)' : 'translate(-45vw,-20vw)',
-        transition: 'transform 0.3s ease-in-out'
-     }}
-     >
     <FlipCard
     imageSrc={Abu}
     onClick={() => handleClick(Abu)}
     isBig={selectedImage === Abu}
     selectedImage={selectedImage}
     text={cardData[0]}
-   
+    
     />
-    </div>
-    <div className='card-two'style={{
-        zIndex: selectedImage === MajinVegeta ? 100 : 0,
-        transform: selectedImage === MajinVegeta ? 
-        'translate(-5vw,-8vw)' : 'translate(-25vw,-20vw)',
-        transition: 'transform 0.3s ease-in-out'
-     }}
-     >
     <FlipCard
     imageSrc={MajinVegeta}
     onClick={() => handleClick(MajinVegeta)}
     isBig={selectedImage === MajinVegeta}
     selectedImage={selectedImage}
     text={cardData[1]}
+    
     />
-    </div>
-
-     <div className='card-row' style={{zIndex: selectedImage === Obito ? 100 : 0,
-    transform:'translate(-5vw,-20vw)',
-    transition: 'transform 0.3s ease-in-out',
-    position: selectedImage === Obito?
-    'fixed' : 'auto',
-    top:selectedImage === Obito?
-    '70%' : 'auto',
-    left: selectedImage === Obito?
-    '45vw':'auto'}}>
        <FlipCard
     imageSrc={Obito}
     onClick={() => handleClick(Obito)}
@@ -191,14 +153,6 @@ return (
     text={cardData[2]}
    
     />
-</div>
-
-{/* selectedImage === Obito? 
-    'translate(-10vw,-8vw)': */}
-
-<div className='card-row' style={{zIndex: selectedImage === Saiyans ? 100 : 0,
-transform: 'translate(15vw,-20vw)',
-transition: 'transform 0.3s ease-in-out'}}>
 <FlipCard
     imageSrc={Saiyans}
     onClick={() => handleClick(Saiyans)}
@@ -208,22 +162,6 @@ transition: 'transform 0.3s ease-in-out'}}>
     
     />
     </div>
-
-    <div className='card-row' 
-    style={{zIndex: selectedImage === Sasuke ? 100 : 0,
-        transform: 'translate(-45vw,10vw)',
-        transition: 'transform 0.3s ease-in-out'}}>
-<FlipCard
-    imageSrc={Sasuke}
-    onClick={() => handleClick(Sasuke)}
-    isBig={selectedImage === Sasuke}
-    selectedImage={selectedImage}
-    text={cardData[3]}
-    
-    />
-    </div> 
-
-</div>
     </>
 )
 

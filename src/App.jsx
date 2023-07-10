@@ -6,6 +6,9 @@ import './App.css'
 import NavBar from './components/NavBar'
 
 
+
+
+
 import FlippedCards from './components/Card'
 
 import Card_Flip from './components/pureCard'
@@ -26,9 +29,7 @@ function App() {
 
 
  <NavBar/>
- {/* <FlippedCards/> */}
-
- <Card_Flip/>
+ <FlippedCards/>
  
 
  {/* <Flipper/> */}
