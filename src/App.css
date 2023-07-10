@@ -136,17 +136,30 @@ ul.navLinks li a {
 }
 
 
+  .cardSet{
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+  } 
+
+  /* .card-row{
+    width: 25%;
+  }  */
+
+
+
+
+
+ .card-one{
+ 
+  /* z-index: 100; */
+}  
+
+ .card-two{
   
+  
+}  
 
-
-
-
-.cardSet {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 200px;
-}
 
 
 
