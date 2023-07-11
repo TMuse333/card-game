@@ -135,81 +135,12 @@ ul.navLinks li a {
   color: black;
 }
 
-.card-front{
-
-  height: 23vw;
-  width: 15vw;
-  
-
-}
-
-.container-f{
-  position: relative;
-  height: 23vw;
-  width: 15vw;
 
 
-}
-
-.the-card-f{
-  position: absolute;
-  height: 23vw;
-  width: 15vw;
-  transform-style:preserve-3d;
-  transition: all 0.5s ease;
-  background: green;
-  /* backface-visibility: hidden; */
-
-}
-
-.the-front-f{
-  position: absolute;
-  height: 23vw;
-  width: 15vw;
-  backface-visibility: hidden;
-  background: white;
-  color:#333;
-  
-}
-
-.the-back-f{
-  position: absolute;
-  height: 23vw;
-  width: 15vw;
-  backface-visibility: hidden;
-  background: blue;
-  color:red;
-  transform: rotateY(180deg);
-  transform-style:preserve-3d;
-}
+;
 
 
 
-/* .the-card-f:hover{
-  transform: rotateY(180deg);
-}  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.the-card{
-  /* position: absolute; */
-  transform-style: preserve-3d;
-}
 
 .card-container p{
   font-size: 1vw;
@@ -220,7 +151,7 @@ ul.navLinks li a {
   /* transition: transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out; */
 }
 
-.flip-card {
+/* .flip-card {
   perspective: 1000px;
   width: 200px;
   height: 200px;
@@ -229,10 +160,12 @@ ul.navLinks li a {
   transition: transform 1s, 0.5s left;
   
   transform-origin: center center;
+  z-index: 0;
 }
 
 .flip-card.flipped {
   transform: rotateY(180deg);
+  z-index: 0;
   
 }
 
@@ -242,6 +175,7 @@ ul.navLinks li a {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.5s, left 0s;
+  z-index: 1;
   
 }
 
@@ -252,20 +186,84 @@ ul.navLinks li a {
   height: 100%;
   backface-visibility: hidden;
   transition: inherit;
+  z-index: 0;
   
 
 }
 
 .flip-card-front {
   transform: rotateY(0deg);
+  z-index: 0;
  
 }
 
 .flip-card-back {
   transform: rotateY(180deg);
+  z-index: 0;
   
 }
 
+
+ */
+
+
+ .flipped-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card-container {
+  position: relative;
+  z-index: 2;
+  margin: 0 10px;
+}
+
+.flip-card {
+  perspective: 1000px;
+  width: 200px;
+  height: 300px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  transform-origin: center center;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.flip-card-back {
+  background-color: #ffcc00;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
 
 
 

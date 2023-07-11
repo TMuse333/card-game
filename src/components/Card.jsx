@@ -13,6 +13,7 @@ import War_Obito from '../images/war_obito.jpg';
 const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
     const [isFlipped, setIsFlipped] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [isEnlarged,setIsEnlarged] = useState(false)
   
     const handleMouseEnter = () =>{
         setIsHovered(true)
@@ -28,7 +29,7 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
             setIsFlipped(!isFlipped)
             isBig = false;
         })()  : null
-
+        setIsEnlarged(!isEnlarged)
       onClick();
     };
   
@@ -39,6 +40,9 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
        isHovered && !isBig ? 'scale(1.2)' : null,
       transition: 'transform 0.3s ease-in-out',
       boxShadow: isHovered && !isBig ? '0 0 20px 20px gold' : 'none',
+      position: isHovered ? 'relative' : 'static',
+    //   zIndex: isBig ? 10 : 0,
+     
        
     };
   
@@ -46,31 +50,36 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
       color: 'black',
       height: '23vw',
       width: '15vw',
+      zIndex: 0,
     };
   
     const backStyle = {
       height: '23vw',
       width: '15vw',
-      background: 'orange'
+      background: 'orange',
+      zIndex: 0
     };
   
     return (
 
-      <div className={`flip-card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+<>
+
+      {/* <div className={`flip-card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
         <div className="flip-card-inner">
-          <div className="flip-card-front">
+          <div className="flip-card-front"> */}
             <img src={imageSrc}
              alt="Front"
               style={cardStyle}
                onClick={onClick}
                onMouseEnter={handleMouseEnter}
                onMouseLeave={handleMouseLeave} />
-          </div>
+          {/* </div>
           <div className="flip-card-back" style={backStyle}>
             <img src={Sasuke} style={textStyle}/>
           </div>
         </div>
-      </div>
+      </div> */}
+      </>
     );
   };
   
@@ -84,20 +93,28 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
     return (
 <>
 
-<div className='cardSet'>
+
+
+
 
 <FlipCard
         imageSrc={Abu}
         isBig={selectedImage === Abu}
         onClick={() => handleCardClick(Abu)}
+       
+        
       />
+
+
+
 
       <FlipCard
         imageSrc={MajinVegeta}
         isBig={selectedImage === MajinVegeta}
         onClick={() => handleCardClick(MajinVegeta)}
       />
-</div>
+      
+
 </>
     );
   };
