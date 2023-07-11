@@ -34,17 +34,23 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
     };
   
     const cardStyle = {
-      height: '23vw',
-      width: '15vw',
-      transform: isBig && !isFlipped ? 'scale(2)' :
-       isHovered && !isBig ? 'scale(1.2)' : null,
-      transition: 'transform 0.3s ease-in-out',
-      boxShadow: isHovered && !isBig ? '0 0 20px 20px gold' : 'none',
-      position: isHovered ? 'relative' : 'static',
-    //   zIndex: isBig ? 10 : 0,
-     
-       
-    };
+        height: '23vw',
+        width: '15vw',
+        transform: isBig
+          ? 'scale(2) translate(-50%, -50%)' // Scale and center if isBig is true
+          : isHovered
+          ? 'scale(1.2)' // Scale on hover if not isBig
+          : 'none',
+        transition: 'transform 0.3s ease-in-out',
+        boxShadow: isHovered && !isBig ? '0 0 20px 20px gold' : 'none',
+        position: isBig ? 'fixed' : 'static',
+        maxHeight: '400px',
+        maxWidth: '260px',
+        left: isBig ? '50%' : 'auto',
+        top: isBig ? '50%' : 'auto',
+      };
+      
+      
   
     const textStyle = {
       color: 'black',
@@ -64,26 +70,19 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
 
 <>
 
-      {/* <div className={`flip-card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
-        <div className="flip-card-inner">
-          <div className="flip-card-front"> */}
+     
             <img src={imageSrc}
-             alt="Front"
+            
               style={cardStyle}
                onClick={onClick}
                onMouseEnter={handleMouseEnter}
                onMouseLeave={handleMouseLeave} />
-          {/* </div>
-          <div className="flip-card-back" style={backStyle}>
-            <img src={Sasuke} style={textStyle}/>
-          </div>
-        </div>
-      </div> */}
+    
       </>
     );
   };
   
-  const Flipped_Cards = () => {
+  const Card_Set = () => {
     const [selectedImage, setSelectedImage] = useState(null);
   
     const handleCardClick = (imageSrc) => {
@@ -92,7 +91,7 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
   
     return (
 <>
-
+<div className='card-container'>
 
 
 
@@ -101,9 +100,7 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
         imageSrc={Abu}
         isBig={selectedImage === Abu}
         onClick={() => handleCardClick(Abu)}
-       
-        
-      />
+       />
 
 
 
@@ -113,11 +110,53 @@ const FlipCard = ({ imageSrc, onClick, isBig, selectedImage }) => {
         isBig={selectedImage === MajinVegeta}
         onClick={() => handleCardClick(MajinVegeta)}
       />
+
+<FlipCard
+        imageSrc={Obito}
+        isBig={selectedImage === Obito}
+        onClick={() => handleCardClick(Obito)}
+       />
+
+<FlipCard
+        imageSrc={Saiyans}
+        isBig={selectedImage === Saiyans}
+        onClick={() => handleCardClick(Saiyans)}
+       />
+
+<FlipCard
+        imageSrc={Sasuke}
+        isBig={selectedImage === Sasuke}
+        onClick={() => handleCardClick(Sasuke)}
+       />
+
+<FlipCard
+        imageSrc={Kakashi}
+        isBig={selectedImage === Kakashi}
+        onClick={() => handleCardClick(Kakashi)}
+       />
+
+<FlipCard
+        imageSrc={Sainey}
+        isBig={selectedImage === Sainey}
+        onClick={() => handleCardClick(Sainey)}
+       />
+
+<FlipCard
+        imageSrc={War_Obito}
+        isBig={selectedImage === War_Obito}
+        onClick={() => handleCardClick(War_Obito)}
+       />
+
+</div>
+
+
+
+       
       
 
 </>
     );
   };
   
-  export default Flipped_Cards;
+  export default Card_Set;
   

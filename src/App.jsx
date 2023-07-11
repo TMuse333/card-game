@@ -7,8 +7,8 @@ import './App.css'
 import NavBar from './components/NavBar'
 
 
-import Flipped_Cards from './components/Card'
-import PlsWork from './components/leFuq'
+import Card_Set from './components/Card'
+
 
 
 
@@ -32,11 +32,10 @@ function App() {
 
 
  <NavBar/>
- <PlsWork/>
- {/* <Flipped_Cards/> */}
+
+ <Card_Set/>
  
- {/* <CardSet/> */}
- {/* <Flipper/> */}
+ 
 
 
    
