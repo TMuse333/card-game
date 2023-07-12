@@ -9,11 +9,14 @@ import Kakashi from '../images/kakashi_susanoo.jpg';
 import Sainey from '../images/ss2_sainey.jpg';
 import War_Obito from '../images/war_obito.jpg';
 
+import { cardData } from './cardData';
 
 
-const Card = ({ imageSrc, onClick, isBig, selectedImage }) => {
+
+const Card = ({ imageSrc, onClick, isBig, selectedImage,text,altSrc,shiftClick,altShown }) => {
   const[isClicked,setIsClicked] = useState(false)
   const[isHovered, setIsHovered] = useState(false)
+  
 
   const handleClick = () => {
     setIsClicked(!isClicked)
@@ -28,62 +31,131 @@ const Card = ({ imageSrc, onClick, isBig, selectedImage }) => {
     setIsHovered(false)
   }
 
+  const handleShiftClick = (event) =>{
+       
+    event.shiftKey ? shiftClick() : null
+    console.log("function went through")
+        }
+
   const cardStyle = {
     height: '23vw',
     width: '15vw',
     maxHeight: '400px',
     maxWidth: '260px',
-    transform: isBig ? 'scale(2)' :
+    transform: isBig && !altShown? 'scale(2)' :
      isHovered && selectedImage === null ?
      'scale(1.2)' : !isBig && selectedImage != null ?
      'scale(0.75)' : null,
      transition: 'transform 0.3s ease',
-     filter: selectedImage && selectedImage != imageSrc ?
+     filter: selectedImage && selectedImage != imageSrc && !altShown ?
      'blur(5px)' : null,
-     position: isBig? 'fixed' : 'static',
-     top: isBig ? '35%' : '1%',
-     left: isBig ? '43%' : '1%',
+     boxShadow: !isBig && isHovered && !selectedImage ?
+     '0 0 40px 20px gold' : null,
+     position: isBig && !altShown ? 'fixed' : 'static',
+     top: isBig && !altShown? '35%' : 'auto%',
+     left: isBig && !altShown? '43%' : 'auto%',
+    }
+
+//window.innerWidth, window.innerHeight for things based off screenSize
+
+    const textStyle = {
+  
+     transform: isBig ? 'scale(1) translate(320%,-20%)' : 'scale(0)',
+     transition: 'transform 1.2s ease',
+     background: 'orange',
+     maxWidth: '350px',
+     color: 'black',
+     padding: '10px',
+     paddingBottom: '30px',
+     paddingTop: '25px',
+     
+    }
+
+    const otherSide = {
+        transform: !isHovered ? 'scale(0)' : 'scale(1)',
+        transition: 'transform 0.3s ease',
+        height: '23vw',
+        width: '15vw',
+        maxHeight: '400px',
+        maxWidth: '260px',
     }
 
   return (
+
+    // transform: imageSrc === Abu ? 'translateX(50%)' : null
+    //the above code can potentially fix the transportation issue,
+    //but you would have to set up a lot of the card style
+    //position properties in the card-container class
+    //with imageSrc === character, which could take lots
+    //of time
+
     <div className='card-container'
-    style={{ position: 'relative', zIndex: isBig ? 1 : 'auto' }}>
-        <img src={imageSrc}
-        onClick={handleClick}
+    style=
+    {{ position: 'relative', zIndex: isBig || isHovered? 1 : 0 ,
+   }}>
+        <img src={!altShown?imageSrc:altSrc}
+        onClick={(event) => {
+            handleClick();
+            handleShiftClick(event)
+            
+          }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseleave}
         style={cardStyle}
+
         />
+        
     </div>
   )
   }
     const CardSet = () =>{
         const [selectedImage,setSelectedImage] = useState(null)
+        const [alternate, setAlternate] = useState(false)
         
         const cardClick = (imageSrc) =>{
-            selectedImage === imageSrc ? setSelectedImage(null):
-            setSelectedImage(imageSrc)
+            selectedImage === imageSrc ? setSelectedImage(null): 
+            !selectedImage? setSelectedImage(imageSrc) : null
         }
+
+        const handleShiftClick = () =>{
+            
+           setAlternate(!alternate) 
+
+            console.log("shiftTeam baby!")
+
+            return (
+                alternate
+            )
+        }
+
+     
 
         return (
             <>
 
-            <div className='cardSet'>
+            <div className='cardSet'
+            >
 
             <Card
             imageSrc={Abu}
             onClick={()=>cardClick(Abu)}
             isBig={selectedImage === Abu}
             selectedImage={selectedImage}
+            altSrc={Sasuke}
+            shiftClick={handleShiftClick}
+            altShown={alternate}
+            // text={cardData[0]}
             />
 
-            <Card
+             <Card
             imageSrc={MajinVegeta}
             onClick={()=>cardClick(MajinVegeta)}
             isBig={selectedImage === MajinVegeta}
             selectedImage={selectedImage}
-            />
 
+            
+            />
+{/*
 <Card
             imageSrc={Obito}
             onClick={()=>cardClick(Obito)}
@@ -124,7 +196,7 @@ const Card = ({ imageSrc, onClick, isBig, selectedImage }) => {
             onClick={()=>cardClick(Sainey)}
             isBig={selectedImage === Sainey}
             selectedImage={selectedImage}
-            />
+            /> */}
 </div>
             </>
         )
