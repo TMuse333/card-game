@@ -2,10 +2,13 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import CardSet from './components/newCard'
+
 
 
 import NavBar from './components/NavBar'
+
+import CardSet from './components/Card'
+
 
 
 
@@ -33,8 +36,8 @@ function App() {
 
 
  <NavBar/>
+<CardSet/>
 
- <CardSet/>
  
  
 
