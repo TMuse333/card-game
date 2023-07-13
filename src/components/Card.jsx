@@ -13,7 +13,13 @@ import { cardData } from './cardData';
 
 
 
-const Card = ({ imageSrc, onClick, isBig, selectedImage,text,altSrc,shiftClick,altShown }) => {
+const Card = ({ imageSrc,
+   onClick, 
+   isBig,
+    selectedImage,
+   text,
+   altSrc,shiftClick,altShown,alternate,
+  isDissolving }) => {
   const[isClicked,setIsClicked] = useState(false)
   const[isHovered, setIsHovered] = useState(false)
   
@@ -44,10 +50,10 @@ const Card = ({ imageSrc, onClick, isBig, selectedImage,text,altSrc,shiftClick,a
     maxWidth: '260px',
     transform: isBig && !altShown? 'scale(2)' :
      isHovered && selectedImage === null ?
-     'scale(1.2)' : !isBig && selectedImage != null ?
+     'scale(1.2)' : !isBig && selectedImage != null && !altShown?
      'scale(0.75)' : null,
      transition: 'transform 0.3s ease',
-     filter: selectedImage && selectedImage != imageSrc && !altShown ?
+     filter: selectedImage && selectedImage != imageSrc && !altShown && alternate === null?
      'blur(5px)' : null,
      boxShadow: !isBig && isHovered && !selectedImage ?
      '0 0 40px 20px gold' : null,
@@ -111,21 +117,25 @@ const Card = ({ imageSrc, onClick, isBig, selectedImage,text,altSrc,shiftClick,a
     const CardSet = () =>{
         const [selectedImage,setSelectedImage] = useState(null)
         const [alternate, setAlternate] = useState(false)
+        const [isDissolving, setIsDissolving] = useState(false)
         
         const cardClick = (imageSrc) =>{
             selectedImage === imageSrc ? setSelectedImage(null): 
             !selectedImage? setSelectedImage(imageSrc) : null
         }
 
-        const handleShiftClick = () =>{
-            
-           setAlternate(!alternate) 
+        const handleShiftClick = (altSrc, isBig) =>{
+          console.log(alternate === Sasuke)  
 
-            console.log("shiftTeam baby!")
+           alternate === altSrc ?
+           setAlternate(null) : !isBig? (()=>{
+            setAlternate(altSrc)
+           
+           })():null
 
-            return (
-                alternate
-            )
+            console.log(alternate === Sasuke)
+
+           
         }
 
      
@@ -142,8 +152,10 @@ const Card = ({ imageSrc, onClick, isBig, selectedImage,text,altSrc,shiftClick,a
             isBig={selectedImage === Abu}
             selectedImage={selectedImage}
             altSrc={Sasuke}
-            shiftClick={handleShiftClick}
-            altShown={alternate}
+            shiftClick={()=>handleShiftClick(Sasuke,selectedImage === Abu)}
+            altShown={alternate === Sasuke}
+            alternate={alternate}
+            isDissolving={isDissolving}
             // text={cardData[0]}
             />
 
@@ -152,6 +164,10 @@ const Card = ({ imageSrc, onClick, isBig, selectedImage,text,altSrc,shiftClick,a
             onClick={()=>cardClick(MajinVegeta)}
             isBig={selectedImage === MajinVegeta}
             selectedImage={selectedImage}
+            altSrc={Kakashi}
+            shiftClick={()=>handleShiftClick(Kakashi,selectedImage === Kakashi)}
+            altShown={alternate === Kakashi}
+            alternate={alternate}
 
             
             />
