@@ -19,7 +19,8 @@ import Squirtle from '../images/giphy.gif'
 import Majikarp from '../images/pokemon-magikarp.gif'
 
 
-import { cardData } from './cardData';
+import { card_names } from './cardData';
+import { slatt } from './cardData';
 
 
 
@@ -142,13 +143,18 @@ const Card = ({ imageSrc,
         }
 
 
-        const shuffleCards = () => {
+        const shuffleCards = (slatt) => {
+
+          if (slatt && !selectedImage){
+
+          
           const shuffledCards = [...cards];
           for (let i = shuffledCards.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
           }
           setCards(shuffledCards);
+        }
         };
 
 
@@ -170,16 +176,10 @@ const handleShiftClick = (altSrc, isBig) => {
 };
 
 
-const [cards,setCards] = useState([
-  {imageSrc: Abu, altSrc: Sudo1},
-  {imageSrc: MajinVegeta, altSrc: Sudo2},
-  {imageSrc: Obito, altSrc: Sudo3},
-  {imageSrc: Saiyans, altSrc: Piplup},
-  {imageSrc: Sasuke, altSrc: Turtwig},
-  {imageSrc: Kakashi, altSrc: Hitmonlee},
-  {imageSrc: War_Obito, altSrc: Squirtle},
-  {imageSrc: Sainey, altSrc: Majikarp}
-  ])
+const [cards,setCards] = useState(
+  card_names
+ 
+  )
 
 
      
@@ -206,7 +206,7 @@ const [cards,setCards] = useState([
                 />
               ))}
 
-<button onClick={shuffleCards}
+<button onClick={()=>shuffleCards(slatt)}
 >Shuffle Cards</button>
 
            
@@ -218,4 +218,6 @@ const [cards,setCards] = useState([
 
 
 export default CardSet;
+
+
 
