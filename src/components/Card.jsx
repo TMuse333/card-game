@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Abu from '../images/aboubacar4.png';
 import MajinVegeta from '../images/majin-vegeta.png';
@@ -20,7 +20,7 @@ import Majikarp from '../images/pokemon-magikarp.gif'
 
 
 import { card_names } from './cardData';
-import { slatt } from './cardData';
+
 
 
 
@@ -55,14 +55,14 @@ const Card = ({ imageSrc,
   const handleShiftClick = (event) =>{
        
     event.shiftKey ? shiftClick() : null
-    console.log("function went through")
+    
         }
 
   const cardStyle = {
     height: '23vw',
     width: '15vw',
-    maxHeight: '300px',
-    maxWidth: '195px',
+    maxHeight: '250px',
+    maxWidth: '160px',
     transform: isBig && !altShown &&!isDissolving? 'scale(2)' :
      isHovered && selectedImage === null ?
      'scale(1.2)' : !isBig && selectedImage != null && alternate === null && alternate === altSrc?
@@ -74,7 +74,7 @@ const Card = ({ imageSrc,
      left: isBig && !altShown &&!isDissolving? '43%' : 'auto%',
      opacity: isDissolving &&altShown? 0 : 1,
      boxShadow: !alternate && isHovered && selectedImage === null? '0 0 50px 25px gold' : 'none',
-    //  ...style
+    // ...(alternate === randomImage ? {filter: 'blur(14px)'} : {})
     }
 
 
@@ -132,7 +132,7 @@ const Card = ({ imageSrc,
     </div>
   )
   }
-    const CardSet = () =>{
+    const CardSet = ({changeVar}) =>{
         const [selectedImage,setSelectedImage] = useState(null)
         const [alternate, setAlternate] = useState(false)
         const [isDissolving, setIsDissolving] = useState(false)
@@ -143,9 +143,9 @@ const Card = ({ imageSrc,
         }
 
 
-        const shuffleCards = (slatt) => {
+        const shuffleCards = () => {
 
-          if (slatt && !selectedImage){
+          // if (changeVar && !selectedImage){
 
           
           const shuffledCards = [...cards];
@@ -154,7 +154,7 @@ const Card = ({ imageSrc,
             [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
           }
           setCards(shuffledCards);
-        }
+        
         };
 
 
@@ -173,6 +173,8 @@ const handleShiftClick = (altSrc, isBig) => {
         }, 100); // Delay before switching the image
       })()
     : null;
+
+  altSrc === randomImage ? console.log("correct!") : console.log("incorrect!")
 };
 
 
@@ -181,11 +183,57 @@ const [cards,setCards] = useState(
  
   )
 
+  const randoms = {
+    Sudo1,
+    Sudo2,
+    Sudo3,
+    Turtwig,
+    Piplup,
+    Hitmonlee,
+    Majikarp,
+    Squirtle
+  }
 
+  const getRandomImage = () => {
+    const randomKeys = Object.keys(randoms);
+    const randomIndex = Math.floor(Math.random() * randomKeys.length);
+    return randoms[randomKeys[randomIndex]];
+  };
+    
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomImage = getRandomImage();
+      setRandomImage(randomImage);
+      shuffleCards()
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const [randomImage, setRandomImage] = useState(getRandomImage());
+
+  const resultStyle = {
+    transform: 'translate(450px,200px)',
+    background: alternate === randomImage ?'green': alternate != randomImage && alternate != null? 'red':'grey',
+    width: '200px',
+    height: '150px'
+   
+
+  }
+
+  const resultText = alternate === randomImage ? 'Correct!' : alternate != randomImage  && alternate!= null? 'Incorrect!' : 'Find the match!';
      
 
         return (
             <>
+
+            <div className='object-card'
+            >
+              <p style={resultStyle}>{resultText}</p>
+             
+            <Card
+            imageSrc={randomImage}/>
+          </div>
 
             <div className='cardSet'
             >
@@ -205,9 +253,8 @@ const [cards,setCards] = useState(
                 isDissolving={isDissolving}
                 />
               ))}
+      
 
-<button onClick={()=>shuffleCards(slatt)}
->Shuffle Cards</button>
 
            
 </div>
@@ -217,7 +264,22 @@ const [cards,setCards] = useState(
 
 
 
-export default CardSet;
+// export default CardSet;
 
 
+
+
+const Game = () => {
+
+
+  return (
+    <>
+    <CardSet/>
+    
+</>
+    
+  )
+
+}
+export default Game
 

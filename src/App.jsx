@@ -8,8 +8,9 @@ import './App.css'
 
 import NavBar from './components/NavBar'
 
-import CardSet from './components/Card'
+// import CardSet from './components/Card'
 
+import Game from './components/Card'
 
 
 
@@ -40,7 +41,7 @@ function App() {
 
 
  <NavBar/>
-<CardSet/>
+<Game/>
 
  
  
