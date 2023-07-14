@@ -14,6 +14,9 @@ import Sudo2 from '../images/3b82c72924a818c910bd4fd3b8557dc8fed0f14d_hq.gif'
 import Sudo3 from '../images/pokemon-sudowoodo-2.gif'
 import Piplup from '../images/piplup-excited.gif'
 import Turtwig from '../images/pokémon-turtwig.gif'
+import Hitmonlee from '../images/pokémon-hitmonlee.gif'
+import Squirtle from '../images/giphy.gif'
+import Majikarp from '../images/pokemon-magikarp.gif'
 
 
 import { cardData } from './cardData';
@@ -53,18 +56,19 @@ const Card = ({ imageSrc,
   const cardStyle = {
     height: '23vw',
     width: '15vw',
-    maxHeight: '400px',
-    maxWidth: '260px',
+    maxHeight: '350px',
+    maxWidth: '225px',
     transform: isBig && !altShown &&!isDissolving? 'scale(2)' :
      isHovered && selectedImage === null ?
      'scale(1.2)' : !isBig && selectedImage != null && alternate === null &&alternate === altSrc?
      'scale(0.75)' : null,
      transition: 'transform 0.3s ease, opacity 0.2s ease',
-     filter:  selectedImage && selectedImage != imageSrc && alternate === null &&!isDissolving? 'blur(5px)' : null,
+     filter:  selectedImage && selectedImage != imageSrc  &&!alternate &&!isDissolving? 'blur(5px)' : null,
      position: isBig && !altShown &&!isDissolving? 'fixed' : 'static',
      top: isBig && !altShown &&!isDissolving? '35%' : 'auto%',
      left: isBig && !altShown &&!isDissolving? '43%' : 'auto%',
      opacity: isDissolving &&altShown? 0 : 1,
+     boxShadow: !alternate && isHovered && selectedImage === null? '0 0 50px 25px gold' : 'none',
     }
 
 
@@ -108,7 +112,7 @@ const Card = ({ imageSrc,
 
     <div className='card-container'
     style=
-    {{ position: 'relative', zIndex: isBig || isHovered? 1 : 0 ,
+    {{ position: 'relative', zIndex: isBig || isHovered && selectedImage === imageSrc? 1 : 0 ,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={(event) => {
@@ -179,6 +183,17 @@ const handleShiftClick = (altSrc, isBig) => {
 };
 
 
+const [cards,setCards] = useState([
+  {imageSrc: Abu, altSrc: Sudo1},
+  {imageSrc: MajinVegeta, altSrc: Sudo2},
+  {imageSrc: Obito, altSrc: Sudo3},
+  {imageSrc: Saiyans, altSrc: Piplup},
+  {imageSrc: Sasuke, altSrc: Turtwig},
+  {imageSrc: Kakashi, altSrc: Hitmonlee},
+  {imageSrc: War_Obito, altSrc: Squirtle},
+  {imageSrc: Sainey, altSrc: Majikarp}
+  ])
+
 
      
 
@@ -187,106 +202,22 @@ const handleShiftClick = (altSrc, isBig) => {
 
             <div className='cardSet'
             >
+              {cards.map((card) => (
+                <Card
+                imageSrc={card.imageSrc}
+                onClick={()=>cardClick(card.imageSrc)}
+                isBig={selectedImage === card.imageSrc}
+                selectedImage={selectedImage}
+                altSrc={card.altSrc}
+                shiftClick={()=>handleShiftClick(card.altSrc,selectedImage === card.imageSrc)}
+                altShown={alternate === card.altSrc}
+                alternate={alternate}
+                isDissolving={isDissolving}
+                />
+              ))}
 
-            <Card
-            imageSrc={Abu}
-            onClick={()=>cardClick(Abu)}
-            isBig={selectedImage === Abu}
-            selectedImage={selectedImage}
-            altSrc={Sudo1}
-            shiftClick={()=>handleShiftClick(Sudo1,selectedImage === Abu)}
-            altShown={alternate === Sudo1}
-            alternate={alternate}
-            isDissolving={isDissolving}
-            // text={cardData[0]}
-            />
 
-             <Card
-            imageSrc={MajinVegeta}
-            onClick={()=>cardClick(MajinVegeta)}
-            isBig={selectedImage === MajinVegeta}
-            selectedImage={selectedImage}
-            altSrc={Sudo2}
-            shiftClick={()=>handleShiftClick(Sudo2,selectedImage === Sudo2)}
-            altShown={alternate === Sudo2}
-            alternate={alternate}
-            isDissolving={isDissolving}
-
-            
-            />
-
-<Card
-            imageSrc={Obito}
-            onClick={()=>cardClick(Obito)}
-            isBig={selectedImage === Obito}
-            selectedImage={selectedImage}
-            shiftClick={()=>handleShiftClick(Sudo3,selectedImage === Sudo3)}
-            altSrc={Sudo3}
-            altShown={alternate === Sudo3}
-            alternate={alternate}
-            isDissolving={isDissolving}
-            
-            />
-
-<Card
-            imageSrc={Saiyans}
-            onClick={()=>cardClick(Saiyans)}
-            isBig={selectedImage === Saiyans}
-            selectedImage={selectedImage}
-            altSrc={Piplup}
-            shiftClick={()=>handleShiftClick(Piplup,selectedImage === Piplup)}
-            altShown={alternate === Piplup}
-            alternate={alternate}
-            isDissolving={isDissolving}
-            />
-
-<Card
-            imageSrc={Sasuke}
-            onClick={()=>cardClick(Sasuke)}
-            isBig={selectedImage === Sasuke}
-            selectedImage={selectedImage}
-            shiftClick={()=>handleShiftClick(Turtwig,selectedImage === Turtwig)}
-            altSrc={Turtwig}
-            altShown={alternate === Turtwig}
-            alternate={alternate}
-            isDissolving={isDissolving}
-            />
-
-<Card
-            imageSrc={Kakashi}
-            onClick={()=>cardClick(Kakashi)}
-            isBig={selectedImage === Kakashi}
-            selectedImage={selectedImage}
-            shiftClick={()=>handleShiftClick(Sudo2,selectedImage === Sudo2)}
-            altSrc={Piplup}
-            altShown={alternate === Sudo2}
-            alternate={alternate}
-            isDissolving={isDissolving}
-            />
-
-<Card
-            imageSrc={War_Obito}
-            onClick={()=>cardClick(War_Obito)}
-            isBig={selectedImage === War_Obito}
-            selectedImage={selectedImage}
-            shiftClick={()=>handleShiftClick(Sudo2,selectedImage === Sudo2)}
-            altSrc={Piplup}
-            altShown={alternate === Sudo2}
-            alternate={alternate}
-            isDissolving={isDissolving}
-            />
-
-<Card
-            imageSrc={Sainey}
-            onClick={()=>cardClick(Sainey)}
-            isBig={selectedImage === Sainey}
-            selectedImage={selectedImage}
-            altSrc={Piplup}
-            shiftClick={()=>handleShiftClick(Sudo2,selectedImage === Sudo2)}
-            altShown={alternate === Sudo2}
-            alternate={alternate}
-            isDissolving={isDissolving}
-            /> 
+           
 </div>
             </>
         )
