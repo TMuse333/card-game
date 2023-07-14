@@ -5,9 +5,11 @@ import './App.css'
 
 
 
+
 import NavBar from './components/NavBar'
 
 import CardSet from './components/Card'
+import Game from './components/Game'
 
 
 

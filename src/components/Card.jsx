@@ -28,8 +28,12 @@ const Card = ({ imageSrc,
    isBig,
     selectedImage,
    text,
-   altSrc,shiftClick,altShown,alternate,
-  isDissolving }) => {
+   altSrc,
+   shiftClick,
+   altShown,
+   alternate,
+  isDissolving,
+  style }) => {
   const[isClicked,setIsClicked] = useState(false)
   const[isHovered, setIsHovered] = useState(false)
   
@@ -56,11 +60,11 @@ const Card = ({ imageSrc,
   const cardStyle = {
     height: '23vw',
     width: '15vw',
-    maxHeight: '350px',
-    maxWidth: '225px',
+    maxHeight: '300px',
+    maxWidth: '195px',
     transform: isBig && !altShown &&!isDissolving? 'scale(2)' :
      isHovered && selectedImage === null ?
-     'scale(1.2)' : !isBig && selectedImage != null && alternate === null &&alternate === altSrc?
+     'scale(1.2)' : !isBig && selectedImage != null && alternate === null && alternate === altSrc?
      'scale(0.75)' : null,
      transition: 'transform 0.3s ease, opacity 0.2s ease',
      filter:  selectedImage && selectedImage != imageSrc  &&!alternate &&!isDissolving? 'blur(5px)' : null,
@@ -69,13 +73,11 @@ const Card = ({ imageSrc,
      left: isBig && !altShown &&!isDissolving? '43%' : 'auto%',
      opacity: isDissolving &&altShown? 0 : 1,
      boxShadow: !alternate && isHovered && selectedImage === null? '0 0 50px 25px gold' : 'none',
+    //  ...style
     }
 
 
-    // selectedImage && selectedImage != imageSrc && !altShown && alternate != null?
-    // 'blur(5px)' : null,
-    // boxShadow: !isBig && isHovered && !selectedImage ?
-    // '0 0 40px 20px gold' : null,
+  
 
 //window.innerWidth, window.innerHeight for things based off screenSize
 
@@ -139,32 +141,17 @@ const Card = ({ imageSrc,
             !selectedImage? setSelectedImage(imageSrc) : null
         }
 
-//         const handleShiftClick = (altSrc, isBig) =>{
-          
 
-//            alternate === altSrc ?
-//            setAlternate(null) : !isBig? (()=>{
-//             setTimeout(() => {
-//               setAlternate(altSrc)
-//               console.log("timeout?")
-//             }),2000
-            
-//          })():null
-//  }
+        const shuffleCards = () => {
+          const shuffledCards = [...cards];
+          for (let i = shuffledCards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
+          }
+          setCards(shuffledCards);
+        };
 
 
-// const handleShiftClick = (altSrc, isBig) => {
-//   alternate === altSrc
-//     ? setAlternate(null)
-//     : !isBig
-//     ? (() => {
-//       setAlternate(altSrc)
-//         setTimeout(() => {
-//           console.log("timeout?");
-//         }, 2000);
-//       })()
-//     : null;
-// };
 
 const handleShiftClick = (altSrc, isBig) => {
   alternate === altSrc
@@ -209,6 +196,9 @@ const [cards,setCards] = useState([
                 isBig={selectedImage === card.imageSrc}
                 selectedImage={selectedImage}
                 altSrc={card.altSrc}
+                // style={{
+                //   transition: 'transform 0.3s ease',
+                //   transform: `translateX(${2 * 25}%)`,}}
                 shiftClick={()=>handleShiftClick(card.altSrc,selectedImage === card.imageSrc)}
                 altShown={alternate === card.altSrc}
                 alternate={alternate}
@@ -216,6 +206,8 @@ const [cards,setCards] = useState([
                 />
               ))}
 
+<button onClick={shuffleCards}
+>Shuffle Cards</button>
 
            
 </div>
