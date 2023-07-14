@@ -9,227 +9,221 @@ import Kakashi from '../images/kakashi_susanoo.jpg';
 import Sainey from '../images/ss2_sainey.jpg';
 import War_Obito from '../images/war_obito.jpg';
 
-import {cardData} from './cardData'
+import Sudo1 from '../images/pokemon-sudowoodo.gif'
+import Sudo2 from '../images/3b82c72924a818c910bd4fd3b8557dc8fed0f14d_hq.gif'
+import Sudo3 from '../images/pokemon-sudowoodo-2.gif'
+import Piplup from '../images/piplup-excited.gif'
+import Turtwig from '../images/pokémon-turtwig.gif'
+import Hitmonlee from '../images/pokémon-hitmonlee.gif'
+import Squirtle from '../images/giphy.gif'
+import Majikarp from '../images/pokemon-magikarp.gif'
 
 
-const FlipCard = ({ imageSrc, onClick, isBig, selectedImage, text }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const[isHovered, setIsHovered] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
+import { cardData } from './cardData';
 
-  const handleClick = (event) => {
-    event.shiftKey  && !isBig? setIsFlipped(!isFlipped) :( () =>{
-        setIsExpanded(!isExpanded)
-        onClick();
-        
-    })()
-  };
 
-  const handleMouseEnter = () =>{
+
+const Card = ({ imageSrc,
+   onClick, 
+   isBig,
+    selectedImage,
+   text,
+   altSrc,shiftClick,altShown,alternate,
+  isDissolving }) => {
+  const[isClicked,setIsClicked] = useState(false)
+  const[isHovered, setIsHovered] = useState(false)
+  
+
+  const handleClick = () => {
+    setIsClicked(!isClicked)
+    onClick()
+  }
+
+  const handleMouseEnter = () => {
     setIsHovered(true)
   }
 
-  const handleMouseLeave = () =>{
+  const handleMouseleave = () => {
     setIsHovered(false)
   }
 
-  const cardStyle={
-       height: '23vw',
-        width: '15vw',
-        transform: isBig 
-        ? 'scale(1.75)'
-        : isHovered && selectedImage === null
-        ? 'scale(1.2)'
-        : !isBig && selectedImage !== null
-        ? 'scale(0.8)'
-        : 'scale(1)',
-        position: isBig ? 'fixed' : 'relative',
-        top: isBig ? '20%' : 'auto',
-        left: isBig ? '50%' : 'auto',
+  const handleShiftClick = (event) =>{
        
-       
-        filter: selectedImage && selectedImage !== imageSrc ? 'blur(5px)' : 'none',
-        boxShadow: isHovered && !isBig  && selectedImage === null? '0 0 10px 25px rgba(255, 215, 0, 0.5)' : 'none',
-        transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-      };
-  
-
-
-const backTextStyle={
-    color:'black',
-
-
-}
-
-const backStyle={
-    height: '23vw',
-    width: '15vw',
-    background: 'red',
-  
-    
-   
-
-}
-
-const textStyle = {
-    color : 'black',
-   position: 'fixed',
-   top: '30%',
-   left: '2%',
-
-  
-   background: 'orange',
-   transform: isBig ? 'scale(1)' : 'scale(0) ',
-   height: '23vw',
-   width: '15vw',
-   transition: 'opacity 3s, transform 1s',
-   padding: '5px',
-   
- }
-
- const containerStyle = {
-    position: isBig ? 'fixed' : 'static',
-    top: isBig ? '20%' : 'auto',
-    left: isBig ? '50%' : 'auto',
-    transform: 'translate(-50%, 0)', // Add this line
-  };
-
-
-  return (
-
-
-
-<div style={containerStyle}>
-    <div className={`flip-card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
-      <div className="flip-card-inner">
-        <div className="flip-card-front">
-          <img 
-          src={imageSrc}
-           alt="Front"
-           style={cardStyle} 
-        //    onClick={handleClick}
-           onMouseEnter={handleMouseEnter}
-           onMouseLeave={handleMouseLeave}/>
-        </div>
-        <div className="flip-card-back" style={backStyle}>
-          <p style={backTextStyle}>Text Content</p>
-        </div>
-        {/* <aside className="box-text"
-        style={textStyle}>{text}</aside> */}
-      </div>
-    </div>
-    </div>
-    
-   
-  );
-};
-
-
-
-    const flippedCards = () =>{
-
-        const[selectedImage,setSelectedImage] = useState(null)
-
-        const handleClick = (imageSrc) =>{
-        
-        selectedImage === imageSrc ? setSelectedImage(null) :
-        setSelectedImage(imageSrc)
-
+    event.shiftKey ? shiftClick() : null
+    console.log("function went through")
         }
 
-return (
-    <>
-
-<div className='cardSet'>
-
-    <div className='card-one' style={{
-        zIndex: selectedImage === Abu ? 100 : 0,
-        transform: selectedImage === Abu ? 
-        'translate(-5vw,-8vw)' : 'translate(-45vw,-20vw)',
-        transition: 'transform 0.3s ease-in-out'
-     }}
-     >
-    <FlipCard
-    imageSrc={Abu}
-    onClick={() => handleClick(Abu)}
-    isBig={selectedImage === Abu}
-    selectedImage={selectedImage}
-    text={cardData[0]}
-   
-    />
-    </div>
-    <div className='card-two'style={{
-        zIndex: selectedImage === MajinVegeta ? 100 : 0,
-        transform: selectedImage === MajinVegeta ? 
-        'translate(-5vw,-8vw)' : 'translate(-25vw,-20vw)',
-        transition: 'transform 0.3s ease-in-out'
-     }}
-     >
-    <FlipCard
-    imageSrc={MajinVegeta}
-    onClick={() => handleClick(MajinVegeta)}
-    isBig={selectedImage === MajinVegeta}
-    selectedImage={selectedImage}
-    text={cardData[1]}
-    />
-    </div>
-
-     <div className='card-row' style={{zIndex: selectedImage === Obito ? 100 : 0,
-    transform:'translate(-5vw,-20vw)',
-    transition: 'transform 0.3s ease-in-out',
-    position: selectedImage === Obito?
-    'fixed' : 'auto',
-    top:selectedImage === Obito?
-    '70%' : 'auto',
-    left: selectedImage === Obito?
-    '45vw':'auto'}}>
-       <FlipCard
-    imageSrc={Obito}
-    onClick={() => handleClick(Obito)}
-    isBig={selectedImage === Obito}
-    selectedImage={selectedImage}
-    text={cardData[2]}
-   
-    />
-</div>
-
-{/* selectedImage === Obito? 
-    'translate(-10vw,-8vw)': */}
-
-<div className='card-row' style={{zIndex: selectedImage === Saiyans ? 100 : 0,
-transform: 'translate(15vw,-20vw)',
-transition: 'transform 0.3s ease-in-out'}}>
-<FlipCard
-    imageSrc={Saiyans}
-    onClick={() => handleClick(Saiyans)}
-    isBig={selectedImage === Saiyans}
-    selectedImage={selectedImage}
-    text={cardData[3]}
-    
-    />
-    </div>
-
-    <div className='card-row' 
-    style={{zIndex: selectedImage === Sasuke ? 100 : 0,
-        transform: 'translate(-45vw,10vw)',
-        transition: 'transform 0.3s ease-in-out'}}>
-<FlipCard
-    imageSrc={Sasuke}
-    onClick={() => handleClick(Sasuke)}
-    isBig={selectedImage === Sasuke}
-    selectedImage={selectedImage}
-    text={cardData[3]}
-    
-    />
-    </div> 
-
-</div>
-    </>
-)
-
-
-
+  const cardStyle = {
+    height: '23vw',
+    width: '15vw',
+    maxHeight: '350px',
+    maxWidth: '225px',
+    transform: isBig && !altShown &&!isDissolving? 'scale(2)' :
+     isHovered && selectedImage === null ?
+     'scale(1.2)' : !isBig && selectedImage != null && alternate === null &&alternate === altSrc?
+     'scale(0.75)' : null,
+     transition: 'transform 0.3s ease, opacity 0.2s ease',
+     filter:  selectedImage && selectedImage != imageSrc  &&!alternate &&!isDissolving? 'blur(5px)' : null,
+     position: isBig && !altShown &&!isDissolving? 'fixed' : 'static',
+     top: isBig && !altShown &&!isDissolving? '35%' : 'auto%',
+     left: isBig && !altShown &&!isDissolving? '43%' : 'auto%',
+     opacity: isDissolving &&altShown? 0 : 1,
+     boxShadow: !alternate && isHovered && selectedImage === null? '0 0 50px 25px gold' : 'none',
     }
 
 
-export default flippedCards
+    // selectedImage && selectedImage != imageSrc && !altShown && alternate != null?
+    // 'blur(5px)' : null,
+    // boxShadow: !isBig && isHovered && !selectedImage ?
+    // '0 0 40px 20px gold' : null,
+
+//window.innerWidth, window.innerHeight for things based off screenSize
+
+    const textStyle = {
+  
+     transform: isBig ? 'scale(1) translate(320%,-20%)' : 'scale(0)',
+     transition: 'transform 1.2s ease',
+     background: 'orange',
+     maxWidth: '350px',
+     color: 'black',
+     padding: '10px',
+     paddingBottom: '30px',
+     paddingTop: '25px',
+     
+    }
+
+    const otherSide = {
+        transform: !isHovered ? 'scale(0)' : 'scale(1)',
+        transition: 'transform 0.3s ease',
+        height: '23vw',
+        width: '15vw',
+        maxHeight: '400px',
+        maxWidth: '260px',
+    }
+
+  return (
+
+    // transform: imageSrc === Abu ? 'translateX(50%)' : null
+    //the above code can potentially fix the transportation issue,
+    //but you would have to set up a lot of the card style
+    //position properties in the card-container class
+    //with imageSrc === character, which could take lots
+    //of time
+
+    <div className='card-container'
+    style=
+    {{ position: 'relative', zIndex: isBig || isHovered && selectedImage === imageSrc? 1 : 0 ,
+   }}>
+        <img src={!altShown?imageSrc:altSrc}
+        onClick={(event) => {
+            handleClick();
+            handleShiftClick(event)
+            
+          }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseleave}
+        style={cardStyle}
+
+        />
+        
+    </div>
+  )
+  }
+    const CardSet = () =>{
+        const [selectedImage,setSelectedImage] = useState(null)
+        const [alternate, setAlternate] = useState(false)
+        const [isDissolving, setIsDissolving] = useState(false)
+        
+        const cardClick = (imageSrc) =>{
+            selectedImage === imageSrc ? setSelectedImage(null): 
+            !selectedImage? setSelectedImage(imageSrc) : null
+        }
+
+//         const handleShiftClick = (altSrc, isBig) =>{
+          
+
+//            alternate === altSrc ?
+//            setAlternate(null) : !isBig? (()=>{
+//             setTimeout(() => {
+//               setAlternate(altSrc)
+//               console.log("timeout?")
+//             }),2000
+            
+//          })():null
+//  }
+
+
+// const handleShiftClick = (altSrc, isBig) => {
+//   alternate === altSrc
+//     ? setAlternate(null)
+//     : !isBig
+//     ? (() => {
+//       setAlternate(altSrc)
+//         setTimeout(() => {
+//           console.log("timeout?");
+//         }, 2000);
+//       })()
+//     : null;
+// };
+
+const handleShiftClick = (altSrc, isBig) => {
+  alternate === altSrc
+    ? setAlternate(null)
+    : !isBig
+    ? (() => {
+        setIsDissolving(true); // Start the dissolving animation
+        setTimeout(() => {
+          setAlternate(altSrc);
+          setTimeout(() => {
+            setIsDissolving(false); // End the dissolving animation
+          }, 75); // Adjust the duration as needed
+        }, 100); // Delay before switching the image
+      })()
+    : null;
+};
+
+
+const [cards,setCards] = useState([
+  {imageSrc: Abu, altSrc: Sudo1},
+  {imageSrc: MajinVegeta, altSrc: Sudo2},
+  {imageSrc: Obito, altSrc: Sudo3},
+  {imageSrc: Saiyans, altSrc: Piplup},
+  {imageSrc: Sasuke, altSrc: Turtwig},
+  {imageSrc: Kakashi, altSrc: Hitmonlee},
+  {imageSrc: War_Obito, altSrc: Squirtle},
+  {imageSrc: Sainey, altSrc: Majikarp}
+  ])
+
+
+     
+
+        return (
+            <>
+
+            <div className='cardSet'
+            >
+              {cards.map((card) => (
+                <Card
+                imageSrc={card.imageSrc}
+                onClick={()=>cardClick(card.imageSrc)}
+                isBig={selectedImage === card.imageSrc}
+                selectedImage={selectedImage}
+                altSrc={card.altSrc}
+                shiftClick={()=>handleShiftClick(card.altSrc,selectedImage === card.imageSrc)}
+                altShown={alternate === card.altSrc}
+                alternate={alternate}
+                isDissolving={isDissolving}
+                />
+              ))}
+
+
+           
+</div>
+            </>
+        )
+    }
+
+
+
+export default CardSet;
+
