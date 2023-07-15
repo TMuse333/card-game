@@ -38,6 +38,7 @@ const Card = ({ imageSrc,
   const[isClicked,setIsClicked] = useState(false)
   const[isHovered, setIsHovered] = useState(false)
   
+  
 
   const handleClick = () => {
     setIsClicked(!isClicked)
@@ -63,18 +64,18 @@ const Card = ({ imageSrc,
     width: '15vw',
     maxHeight: '250px',
     maxWidth: '160px',
-    
-   /* transform: isBig && !altShown &&!isDissolving? 'scale(2)' :
-     isHovered && selectedImage === null ?
-     'scale(1.2)' : !isBig && selectedImage != null && alternate === null && alternate === altSrc?
-     'scale(0.75)' : null,
+
+   // transform: isBig && !altShown &&!isDissolving? 'scale(2)' :
+    // isHovered && selectedImage === null ?
+     //'scale(1.2)' : !isBig && selectedImage != null && alternate === null && alternate === altSrc?
+    // 'scale(0.75)' : null,
      transition: 'transform 0.3s ease, opacity 0.2s ease',
-     filter:  selectedImage && selectedImage != imageSrc  &&!alternate &&!isDissolving? 'blur(5px)' : null,
-     position: isBig && !altShown &&!isDissolving? 'fixed' : 'static',
-     top: isBig && !altShown &&!isDissolving? '35%' : 'auto%',
-     left: isBig && !altShown &&!isDissolving? '43%' : 'auto%',
+   //  filter:  selectedImage && selectedImage != imageSrc  &&!alternate &&!isDissolving? 'blur(5px)' : null,
+   //  position: isBig && !altShown &&!isDissolving? 'fixed' : 'static',
+    // top: isBig && !altShown &&!isDissolving? '35%' : 'auto%',
+   //  left: isBig && !altShown &&!isDissolving? '43%' : 'auto%',
      opacity: isDissolving &&altShown? 0 : 1,
-     boxShadow: !alternate && isHovered && selectedImage === null? '0 0 50px 25px gold' : 'none',*/
+     boxShadow: !alternate && isHovered && selectedImage === null? '0 0 50px 25px gold' : 'none',
     // ...(alternate === randomImage ? {filter: 'blur(14px)'} : {})
     }
 
@@ -138,6 +139,9 @@ const Card = ({ imageSrc,
         const [alternate, setAlternate] = useState(null)
         const [isDissolving, setIsDissolving] = useState(false)
         const [matchCount,setMatchCount] = useState(0)
+        const [errors, setErrors] = useState(0)
+        const [isClicked, setIsClicked] = useState(false)
+        const [transition, setTransition] = useState(false)
         
         const cardClick = (imageSrc) =>{
             selectedImage === imageSrc ? setSelectedImage(null): 
@@ -183,7 +187,7 @@ const Card = ({ imageSrc,
 };*/
 
 
-const handleShiftClick = (altSrc, isBig) => {
+/*const handleShiftClick = (altSrc, isBig) => {
   alternate === altSrc
     ? setAlternate(null)
     : !isBig
@@ -195,6 +199,7 @@ const handleShiftClick = (altSrc, isBig) => {
             setIsDissolving(false); // End the dissolving animation
             setTimeout(() => {
               setAlternate(null);
+
               setTimeout(() => {
                 setRandomImage(getRandomImage()); // Change the random image
                 shuffleCards(); // Shuffle the cards
@@ -210,7 +215,50 @@ const handleShiftClick = (altSrc, isBig) => {
         setMatchCount(matchCount + 1);
         console.log(matchCount);
       })()
-    : console.log("incorrect!");
+    : setErrors(errors+1);
+};*/
+
+const handleShiftClick = (altSrc, isBig) => {
+  alternate === altSrc
+    ? setAlternate(null)
+    : !isBig
+    ? (() => {
+        setIsDissolving(true); 
+        setTimeout(() => {                                     
+          setAlternate(altSrc);
+          setTimeout(() => {
+            setIsDissolving(false); 
+            setTimeout(
+              () =>
+                !isClicked &&
+                (() => {
+                  setRandomImage(getRandomImage()); 
+                  shuffleCards()
+                  setAlternate(null)
+                  ; // Shuffle the cards
+                })(),
+              2000 // Flip back to imageSrc after 2 seconds
+            );
+          }, 75); // Duration of dissolving animation
+        }, 100); // Delay before switching to altSrc
+      })()
+    : null;
+
+  altSrc === randomImage && alternate === null
+    ? (() => {
+        setMatchCount(matchCount + 1);
+        setAlternate(null)
+        setRandomImage(getRandomImage()); // Change the random image
+        shuffleCards()
+        
+        console.log(matchCount);
+      })()
+    : setErrors(errors + 1);
+
+  setIsClicked(true); // Mark a card as clicked
+  setTimeout(() => {
+    setIsClicked(false); // Reset the clicked status after 5 seconds
+  }, 5000);
 };
 
 
@@ -238,16 +286,21 @@ const [cards,setCards] = useState(
     return randoms[randomKeys[randomIndex]];
   };
     
-  useEffect(() => {
+  /*useEffect(() => {
     const interval = setInterval(() => {
-      const randomImage = getRandomImage();
-      setRandomImage(randomImage);
-      shuffleCards()
+      setTransition(false)
+      if (!isClicked) {
+        const randomImage = getRandomImage();
+        setTransition(true)
+        setRandomImage(randomImage);
+        shuffleCards();
+        setAlternate(null)
+      }
     }, 5000);
-
+  
     return () => clearInterval(interval);
-  }, []);
-
+  }, [isClicked]); */
+  
   const [randomImage, setRandomImage] = useState(getRandomImage());
 
   const resultStyle = {
@@ -262,6 +315,10 @@ const [cards,setCards] = useState(
   const resultText = alternate === randomImage ? 'Correct!' : alternate != randomImage  && alternate!= null? 'Incorrect!' : 'Find the match!';
      
 
+const randomStyle = {
+  boxShadow: transition? '0 0 50px 25px gold' : 'none',
+}
+
         return (
             <>
 
@@ -270,7 +327,9 @@ const [cards,setCards] = useState(
               <p style={resultStyle}>{resultText}</p>
              
             <Card
-            imageSrc={randomImage}/>
+            imageSrc={randomImage}
+            style={randomStyle}
+            />
           </div>
 
             <div className='cardSet'
@@ -296,7 +355,7 @@ const [cards,setCards] = useState(
 
            
 </div>
-{<p>{matchCount}</p>}
+{<p>{matchCount} &nbsp; {errors}</p>}
   {matchCount === 5 && (
     
     <p>Congratulations! You won the game!</p>
