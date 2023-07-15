@@ -22,7 +22,7 @@ import Majikarp from '../images/pokemon-magikarp.gif'
 import { card_names } from './cardData';
 
 
-
+let previousRandomImage = null;
 
 const Card = ({ imageSrc,
    onClick, 
@@ -75,7 +75,8 @@ const Card = ({ imageSrc,
     // top: isBig && !altShown &&!isDissolving? '35%' : 'auto%',
    //  left: isBig && !altShown &&!isDissolving? '43%' : 'auto%',
      opacity: isDissolving &&altShown? 0 : 1,
-     boxShadow: !alternate && isHovered && selectedImage === null? '0 0 50px 25px gold' : 'none',
+     boxShadow:  isHovered  && !selectedImage? '0 0 50px 25px gold' : 'none',
+     transform: isHovered  && !selectedImage? 'scale(1.2)' : null
     // ...(alternate === randomImage ? {filter: 'blur(14px)'} : {})
     }
 
@@ -160,106 +161,87 @@ const Card = ({ imageSrc,
             [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
           }
           setCards(shuffledCards);
+            
+        };
+
+        const handleShiftClick = (altSrc, isBig) => {
+          alternate === altSrc
+            ? setAlternate(null)
+            : !isBig
+            ? (() => {
+                setIsDissolving(true); 
+                setIsClicked(true)
+                setTimeout(() => {                                     
+                  setAlternate(altSrc);
+                  setTimeout(() => {
+                    setIsDissolving(false); 
+                 
+                  }, 75); // Duration of dissolving animation
+                }, 100); // Delay before switching to altSrc
+              })()
+            : null;
         
+          altSrc === randomImage && alternate === null
+            ? (() => {
+                setMatchCount(matchCount + 1);
+                
+                setTimeout(()=>{
+                  setRandomImage(getRandomImage()); // Change the random image
+                  shuffleCards()
+                  setSelectedImage(null)
+                  console.log("Shuffle because of click")
+                  setAlternate(null)
+                  setIsClicked(false)
+                  
+                },4000)
+               
+                
+                console.log(matchCount);
+              })()
+            : (()=>{
+              setIsClicked(true)
+              setErrors(errors + 1);
+              setTimeout(()=>{
+                setRandomImage(getRandomImage());
+                 // Change the random image
+                shuffleCards()
+                setSelectedImage(null)
+                console.log("Shuffle because of click")
+                setAlternate(null)
+                setIsClicked(false)
+                
+              },4000)
+
+            })()
+          setIsClicked(true); // Mark a card as clicked
+
+         
         };
 
 
+        useEffect(()=>{
+          console.log(isClicked)
+        },[isClicked])
 
-/*const handleShiftClick = (altSrc, isBig) => {
-  alternate === altSrc
-    ? setAlternate(null)
-    : !isBig
-    ? (() => {
-        setIsDissolving(true); // Start the dissolving animation
-        setTimeout(() => {
-          setAlternate(altSrc);
-          setTimeout(() => {
-            setIsDissolving(false); // End the dissolving animation
-          }, 75); // Adjust the duration as needed
-        }, 100); // Delay before switching the image
-      })()
-    : null;
-
-  altSrc === randomImage ?(()=>{
-    setMatchCount(matchCount+1)
-    console.log(matchCount)
-  })()  : console.log("incorrect!")
-};*/
-
-
-/*const handleShiftClick = (altSrc, isBig) => {
-  alternate === altSrc
-    ? setAlternate(null)
-    : !isBig
-    ? (() => {
-        setIsDissolving(true); // Start the dissolving animation
-        setTimeout(() => {
-          setAlternate(altSrc);
-          setTimeout(() => {
-            setIsDissolving(false); // End the dissolving animation
-            setTimeout(() => {
+        useEffect(() => {
+          const interval = setInterval(() => {
+            if (!isClicked) {
+              setRandomImage(getRandomImage());
               setAlternate(null);
-
-              setTimeout(() => {
-                setRandomImage(getRandomImage()); // Change the random image
-                shuffleCards(); // Shuffle the cards
-              }, 3000); // Delay 3 seconds before changing the random image and shuffling the cards
-            }, 2000); // Flip back to imageSrc after 2 seconds
-          }, 75); // Duration of dissolving animation
-        }, 100); // Delay before switching to altSrc
-      })()
-    : null;
-
-  altSrc === randomImage && alternate === null
-    ? (() => {
-        setMatchCount(matchCount + 1);
-        console.log(matchCount);
-      })()
-    : setErrors(errors+1);
-};*/
-
-const handleShiftClick = (altSrc, isBig) => {
-  alternate === altSrc
-    ? setAlternate(null)
-    : !isBig
-    ? (() => {
-        setIsDissolving(true); 
-        setTimeout(() => {                                     
-          setAlternate(altSrc);
-          setTimeout(() => {
-            setIsDissolving(false); 
-            setTimeout(
-              () =>
-                !isClicked &&
-                (() => {
-                  setRandomImage(getRandomImage()); 
-                  shuffleCards()
-                  setAlternate(null)
-                  ; // Shuffle the cards
-                })(),
-              2000 // Flip back to imageSrc after 2 seconds
-            );
-          }, 75); // Duration of dissolving animation
-        }, 100); // Delay before switching to altSrc
-      })()
-    : null;
-
-  altSrc === randomImage && alternate === null
-    ? (() => {
-        setMatchCount(matchCount + 1);
-        setAlternate(null)
-        setRandomImage(getRandomImage()); // Change the random image
-        shuffleCards()
+              shuffleCards();
+              
+              console.log("no clicking occured within 5s. is clicked = "+isClicked)
+              
+            }
+          }, 10000);
         
-        console.log(matchCount);
-      })()
-    : setErrors(errors + 1);
+          return () => {
+            clearInterval(interval);
+          };
+        }, [isClicked]);
+        
+        
 
-  setIsClicked(true); // Mark a card as clicked
-  setTimeout(() => {
-    setIsClicked(false); // Reset the clicked status after 5 seconds
-  }, 5000);
-};
 
 
 
@@ -282,24 +264,35 @@ const [cards,setCards] = useState(
 
   const getRandomImage = () => {
     const randomKeys = Object.keys(randoms);
-    const randomIndex = Math.floor(Math.random() * randomKeys.length);
-    return randoms[randomKeys[randomIndex]];
+    let randomIndex = Math.floor(Math.random() * randomKeys.length);
+    let randomImage = randoms[randomKeys[randomIndex]];
+  
+    // Check if the generated image is the same as the previous one
+    while (randomImage === previousRandomImage) {
+      randomIndex = Math.floor(Math.random() * randomKeys.length);
+      randomImage = randoms[randomKeys[randomIndex]];
+    }
+  
+    // Update the previousRandomImage variable
+    previousRandomImage = randomImage;
+  
+    return randomImage;
   };
     
-  /*useEffect(() => {
-    const interval = setInterval(() => {
-      setTransition(false)
-      if (!isClicked) {
-        const randomImage = getRandomImage();
-        setTransition(true)
-        setRandomImage(randomImage);
-        shuffleCards();
-        setAlternate(null)
-      }
-    }, 5000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setTransition(false)
+  //     if (!isClicked) {
+  //       const randomImage = getRandomImage();
+  //       setTransition(true)
+  //       setRandomImage(randomImage);
+  //       shuffleCards();
+  //       setAlternate(null)
+  //     }
+  //   }, 5000);
   
-    return () => clearInterval(interval);
-  }, [isClicked]); */
+  //   return () => clearInterval(interval);
+  // }, [isClicked]); 
   
   const [randomImage, setRandomImage] = useState(getRandomImage());
 
@@ -318,6 +311,8 @@ const [cards,setCards] = useState(
 const randomStyle = {
   boxShadow: transition? '0 0 50px 25px gold' : 'none',
 }
+
+const winningText = matchCount === 5 ? "Congratulations! You won the game" : null
 
         return (
             <>
@@ -355,11 +350,11 @@ const randomStyle = {
 
            
 </div>
-{<p>{matchCount} &nbsp; {errors}</p>}
-  {matchCount === 5 && (
-    
-    <p>Congratulations! You won the game!</p>
-  )}
+<div><p>{matchCount} &nbsp; {errors}</p>
+<p>{winningText}</p></div>
+
+  
+  
             </>
         )
     }
