@@ -143,9 +143,37 @@ ul.navLinks li a {
   margin-top: 200px;
 }
 
+.cardSetGameOver {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  margin-top: 200px;
+  filter:blur(5px);
+}
+
+.cardSetGameOver :hover {
+  box-shadow: none;
+}
+
 .object-card{
   margin-top: -133px;
   margin-bottom: -150px;
+}
+
+.object-card-gameOver :not(p) {
+  margin-top: -1px;
+  margin-bottom: -10px;
+  display: none;
+}
+
+.no-show{
+  display: none;
+}
+
+.start-button{
+  margin-top: 50px;
+  margin-bottom: -250px;
+  display: grid;
 }
 
 
