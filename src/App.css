@@ -176,10 +176,39 @@ ul.navLinks li a {
   display: grid;
 }
 
+.progress-bar {
+  width: 100%;
+  height: 5px;
+  background-color: red;
+}
 
+/* .progress-bar-filled {
+  height: 100%;
+  background-color: green;
+  transition: width 1s linear;
+} */
 
+.quantum-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background-image: radial-gradient(circle, #733855, #37643d, #800080, #0e860e);
+  background-size: 200% 200%;
+  animation: quantum-animation 5s linear infinite;
+}
 
-
+@keyframes quantum-animation {
+  0% {
+    background-position: -100% -100%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
 
 
 

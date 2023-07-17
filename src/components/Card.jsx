@@ -63,7 +63,8 @@ const Card = ({ imageSrc,
    
      opacity: isDissolving &&altShown? 0 : 1,
      boxShadow:  isHovered  && !selectedImage? '0 0 50px 25px red' : 'none',
-     transform: isHovered  && !selectedImage? 'scale(1.2)' : null
+     transform: isHovered  && !selectedImage? 'scale(1.2)' : null,
+     border: '2px solid black'
    
     }
 
@@ -131,10 +132,13 @@ const Card = ({ imageSrc,
         const [isClicked, setIsClicked] = useState(false)
         const [transition, setTransition] = useState(false)
         const [gameOver, setGameOver] = useState(true)
+        const [progress, setProgress] = useState(0)
+        const [filling, setFilling] = useState(true)
         
         const cardClick = (imageSrc) =>{
             selectedImage === imageSrc ? setSelectedImage(null): 
             !selectedImage? setSelectedImage(imageSrc) : null
+            setProgress(0)
         }
 
         const startGame = () =>{
@@ -229,28 +233,45 @@ const Card = ({ imageSrc,
           console.log(isClicked)
         },[isClicked])
 
+       
+
+       
+
+
+
         useEffect(() => {
+          const intervalDuration = 10000; // Interval duration in milliseconds
+        
+          let startTime = Date.now(); // Track the start time
+        
           const interval = setInterval(() => {
             if (!isClicked && !gameOver) {
-              setRandomImage(getRandomImage());
-              setAlternate(null);
-              shuffleCards();
-              setErrors(errors + 1)
+              setFilling(true)
+              const currentTime = Date.now();
+              const elapsedTime = currentTime - startTime;
+              const progress = (elapsedTime / intervalDuration) * 100;
+        
+              if (progress >= 100) {
               
-              errors === 4 ? setGameOver(true) : null
-
-              console.log("no clicking occured within 5s. is clicked = "+isClicked)
-              
+                setRandomImage(getRandomImage());
+                setAlternate(null);
+                shuffleCards();
+                setErrors(errors + 1);
+                startTime = currentTime;
+                setFilling(false) // Reset the start time for the next interval
+              }
+        
+              setProgress(progress);
             }
-          }, 10000);
+          }, 1000); // Interval duration is changed to 1 second (1000 milliseconds)
         
           return () => {
             clearInterval(interval);
           };
-        }, [isClicked,gameOver,errors]);
+        }, [isClicked, gameOver, errors,filling]);
         
         
-
+        
 
 
 
@@ -316,7 +337,7 @@ const winningTextStyle = {
   transition: 'color 0.3s ease',
   color: matchCount >= 5 ? 'green' : errors >= 5 ? 'red' : 'black',
   transform: matchCount >= 5 ? 'scale(2)' : 'scale(0)',
-  background: matchCount >= 5 ? 'purple' : null,
+  background: matchCount >= 5 ? 'lightPurle' : null,
   width: '15vw',
   height: '75px',
   zIndex:20,
@@ -329,6 +350,19 @@ const winningTextStyle = {
 
 };
 
+
+const progressStyle = {
+  
+    height: '100%',
+    backgroundColor: 'green',
+    transition: 'width 1s linear',
+  }
+
+  const declineStyle = {
+    height: '100%',
+    backgroundColor: 'green',
+    transition: 'none'
+  }
 
 
 
@@ -344,6 +378,15 @@ gameOver ? console.log("game over playa") : null
 className={!gameOver ? 'no-show' : 'start-button'}
                       >
   Start game</button>
+
+  <div className="progress-bar">
+  <div
+    className="progress-bar-filled"
+    style={filling ? { ...progressStyle, width: `${progress}%` } : declineStyle}
+  ></div>
+</div>
+
+
 
             <div className={gameOver? 'object-card-gameOver' : 'object-card'}
             >
