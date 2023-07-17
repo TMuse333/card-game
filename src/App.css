@@ -156,7 +156,7 @@ ul.navLinks li a {
 }
 
 .object-card{
-  margin-top: -133px;
+  margin-top: -120px;
   margin-bottom: -150px;
 }
 
@@ -177,10 +177,14 @@ ul.navLinks li a {
 }
 
 .progress-bar {
-  width: 100%;
+  width: 33vw;
   height: 5px;
   background-color: red;
   overflow: hidden;
+  position: fixed;
+  top: 15%;
+  left: 5%;
+
 }
 
 /* .progress-bar-filled {

@@ -269,6 +269,8 @@ const Card = ({ imageSrc,
                 setAlternate(null);
                 shuffleCards();
                 setErrors(errors + 1);
+
+                errors === 4 ? endGame() : null
                
                 startTime = currentTime;  
                 setFilling(false) 
@@ -363,11 +365,12 @@ const winningText = matchCount >= 5 ? "Congratulations! You won the game" : erro
 const winningTextStyle = {
   animation: gameOver && matchCount >= 5 ? 'flash 3s infinite' : 'none',
   transition: 'color 0.3s ease',
-  color: matchCount >= 5 ? 'green' : errors >= 5 ? 'red' : 'black',
+  color: matchCount >= 5 ? 'black' : errors >= 5 ? 'red' : 'black',
   transform: matchCount >= 5 ? 'scale(2)' : 'scale(0)',
   background: matchCount >= 5 ? 'grey' : null,
   width: '15vw',
   height: '75px',
+  
   zIndex:20,
   position: 'fixed',
   top: '80%',
@@ -384,6 +387,7 @@ const winningImgStyle={
   transform: win? 'scale(1.2)' : 'scale(0)',
   width: '75vw',
   height: '40vw',
+  maxHeight: '1000px',
   zIndex:19,
   position: 'fixed',
   top: '30%',
@@ -406,7 +410,8 @@ className={!gameOver ? 'no-show' : 'start-button'}
                       >
   Start game</button>
 
-  <div className="progress-bar">
+  <div className="progress-bar"
+  style={{transform: gameOver? 'scale(0)' : 'scale(1)'}}>
   <div
     className="progress-bar-filled"
     style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle, width: `${progress}%` }}
