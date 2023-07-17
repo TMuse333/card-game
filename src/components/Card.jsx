@@ -10,6 +10,7 @@ import Turtwig from '../images/pokémon-turtwig.gif'
 import Hitmonlee from '../images/pokémon-hitmonlee.gif'
 import Squirtle from '../images/giphy.gif'
 import Majikarp from '../images/pokemon-magikarp.gif'
+import gokuVsJiren from '../images/goku-vs-jiren.jpg'
 
 
 import { card_names } from './cardData';
@@ -134,6 +135,7 @@ const Card = ({ imageSrc,
         const [gameOver, setGameOver] = useState(true)
         const [progress, setProgress] = useState(0)
         const [filling, setFilling] = useState(true)
+        const [win, setWin] = useState(null)
         
         const cardClick = (imageSrc) =>{
             selectedImage === imageSrc ? setSelectedImage(null): 
@@ -144,7 +146,8 @@ const Card = ({ imageSrc,
         const startGame = () =>{
           setGameOver(false)
           setErrors(0)
-          setMatchCount(0)
+          setWin(null)
+          setMatchCount(4)
           
         }
 
@@ -188,7 +191,10 @@ const Card = ({ imageSrc,
             ? (() => {
                 setMatchCount(matchCount + 1);
 
-               matchCount === 4 ? endGame() : null
+               matchCount === 4 ? (()=>{
+                endGame()
+                setWin(true)
+                })() : null
                
 
                 
@@ -240,35 +246,57 @@ const Card = ({ imageSrc,
 
 
         useEffect(() => {
-          const intervalDuration = 10000; // Interval duration in milliseconds
+        
+          const intervalDuration = 9000; // Interval duration in milliseconds
         
           let startTime = Date.now(); // Track the start time
         
           const interval = setInterval(() => {
             if (!isClicked && !gameOver) {
+              
               setFilling(true)
               const currentTime = Date.now();
               const elapsedTime = currentTime - startTime;
               const progress = (elapsedTime / intervalDuration) * 100;
+
+              elapsedTime === intervalDuration ? (()=>{
+                
+              })() : null
         
-              if (progress >= 100) {
+              if (elapsedTime >= 10000) {
               
                 setRandomImage(getRandomImage());
                 setAlternate(null);
                 shuffleCards();
                 setErrors(errors + 1);
-                startTime = currentTime;
-                setFilling(false) // Reset the start time for the next interval
+               
+                startTime = currentTime;  
+                setFilling(false) 
+                setProgress(0); 
               }
-        
               setProgress(progress);
+             
             }
-          }, 1000); // Interval duration is changed to 1 second (1000 milliseconds)
+          }, 1000); 
         
           return () => {
             clearInterval(interval);
           };
         }, [isClicked, gameOver, errors,filling]);
+
+        const progressStyle = {
+  
+          height: '100%',
+          backgroundColor: 'green',
+          transition: 'width 1s linear',
+          overflow: 'hidden'
+        }
+      
+        const declineStyle = {
+          height: '100%',
+          backgroundColor: 'red',
+          transition: 'none'
+        }
         
         
         
@@ -337,40 +365,39 @@ const winningTextStyle = {
   transition: 'color 0.3s ease',
   color: matchCount >= 5 ? 'green' : errors >= 5 ? 'red' : 'black',
   transform: matchCount >= 5 ? 'scale(2)' : 'scale(0)',
-  background: matchCount >= 5 ? 'lightPurle' : null,
+  background: matchCount >= 5 ? 'grey' : null,
   width: '15vw',
   height: '75px',
   zIndex:20,
   position: 'fixed',
-  top: '50%',
+  top: '80%',
   left: '40%',
-
+  
 
 
 
 };
 
 
-const progressStyle = {
-  
-    height: '100%',
-    backgroundColor: 'green',
-    transition: 'width 1s linear',
-  }
+const winningImgStyle={
+  transition: 'transform 0.3s ease, opacity 0.3s ease',
+  transform: win? 'scale(1.2)' : 'scale(0)',
+  width: '75vw',
+  height: '40vw',
+  zIndex:19,
+  position: 'fixed',
+  top: '30%',
+  left: '13%',
+  opacity: win ? 1 : 0,
+  animation: win ? 'explode 0.3s forwards' : 'none',
 
-  const declineStyle = {
-    height: '100%',
-    backgroundColor: 'green',
-    transition: 'none'
-  }
+}
+
+// 
+
+//winningImgStyle.animationName = explodeAnimation;
 
 
-
-useEffect(()=>{
- 
-gameOver ? console.log("game over playa") : null
-
-},[gameOver])
 
         return (
             <>
@@ -382,15 +409,21 @@ className={!gameOver ? 'no-show' : 'start-button'}
   <div className="progress-bar">
   <div
     className="progress-bar-filled"
-    style={filling ? { ...progressStyle, width: `${progress}%` } : declineStyle}
+    style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle, width: `${progress}%` }}
   ></div>
 </div>
 
 
+                <img src={gokuVsJiren}
+                style={winningImgStyle}/>
 
             <div className={gameOver? 'object-card-gameOver' : 'object-card'}
             >
+
+             
+            
               <p style={resultStyle}>{resultText}</p>
+            
              
             <Card
             imageSrc={randomImage}
