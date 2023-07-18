@@ -11,6 +11,7 @@ import Hitmonlee from '../images/pokémon-hitmonlee.gif'
 import Squirtle from '../images/giphy.gif'
 import Majikarp from '../images/pokemon-magikarp.gif'
 import gokuVsJiren from '../images/goku-vs-jiren.jpg'
+import clown from '../images/Emoji_Icon_-_Clown_emoji_1024x1024.png.webp'
 
 
 import { card_names } from './cardData';
@@ -28,19 +29,23 @@ const Card = ({ imageSrc,
    altShown,
    alternate,
   isDissolving,
-  style }) => {
+  additonalStyle,
+ 
+ }) => {
   const[isClicked,setIsClicked] = useState(false)
   const[isHovered, setIsHovered] = useState(false)
   
   
 
   const handleClick = () => {
-    setIsClicked(!isClicked)
-    onClick()
+   // setIsClicked(!isClicked)
+   // onClick()
+   
   }
 
   const handleMouseEnter = () => {
     setIsHovered(true)
+   
   }
 
   const handleMouseleave = () => {
@@ -48,7 +53,8 @@ const Card = ({ imageSrc,
   }
 
   const handleShiftClick = () =>{
-       
+    setIsClicked(!isClicked)
+    onClick()
      shiftClick()
     
         }
@@ -70,6 +76,7 @@ const Card = ({ imageSrc,
     }
 
 
+    const mergedStyle = { ...cardStyle, ...additonalStyle}
   
 
 //window.innerWidth, window.innerHeight for things based off screenSize
@@ -111,13 +118,14 @@ const Card = ({ imageSrc,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {
-            handleClick();
+          //  handleClick();
             handleShiftClick()
             
           }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseleave}
-        style={cardStyle}
+        style={mergedStyle}
+       
 
         />
         
@@ -128,7 +136,7 @@ const Card = ({ imageSrc,
         const [selectedImage,setSelectedImage] = useState(null)
         const [alternate, setAlternate] = useState(null)
         const [isDissolving, setIsDissolving] = useState(false)
-        const [matchCount,setMatchCount] = useState(3)
+        const [matchCount,setMatchCount] = useState(0)
         const [errors, setErrors] = useState(0)
         const [isClicked, setIsClicked] = useState(false)
         const [transition, setTransition] = useState(false)
@@ -147,13 +155,19 @@ const Card = ({ imageSrc,
           setGameOver(false)
           setErrors(0)
           setWin(null)
-          setMatchCount(4)
+          setMatchCount(0)
+          setProgress(0)
+          setFilling(true)
+          console.log("lets get it poppin")
+          setAlternate(null)
+          
           
         }
 
         const endGame = () =>{
           setGameOver(true)
         }
+        const [slow, setTooSlow] = useState(false)
 
 
         const shuffleCards = () => {
@@ -167,10 +181,21 @@ const Card = ({ imageSrc,
             [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
           }
           setCards(shuffledCards);
+          setCorrect(null)
+          setIncorrect(null)
+          
             
         };
 
+        const [correct,setCorrect] = useState(null)
+        const [incorrect, setIncorrect] = useState(null)
+
         const handleShiftClick = (altSrc, isBig) => {
+
+       
+
+          setCorrect(null);
+          setIncorrect(null);
           alternate === altSrc && gameOver 
             ? setAlternate(null)
             : !isBig && !alternate 
@@ -190,10 +215,11 @@ const Card = ({ imageSrc,
           altSrc === randomImage && alternate === null && !isClicked && !gameOver
             ? (() => {
                 setMatchCount(matchCount + 1);
-
+                setCorrect(true)
                matchCount === 4 ? (()=>{
                 endGame()
                 setWin(true)
+                setProgress(0)
                 })() : null
                
 
@@ -207,7 +233,7 @@ const Card = ({ imageSrc,
                   setAlternate(null)
                   setIsClicked(false)
                   
-                },4000)
+                },2000)
                
                 
                 console.log(matchCount);
@@ -215,7 +241,12 @@ const Card = ({ imageSrc,
             : !isClicked  && !gameOver ?(()=>{
               setIsClicked(true)
               setErrors(errors + 1);
-              errors === 4 ? setGameOver(true) : null
+              setIncorrect(true)
+              errors === 4 ? (()=>{
+                setGameOver(true)
+                setWin(false)
+                setProgress(0)
+               })() : null
               setTimeout(()=>{
                 setRandomImage(getRandomImage());
                  // Change the random image
@@ -225,7 +256,7 @@ const Card = ({ imageSrc,
                 setAlternate(null)
                 setIsClicked(false)
                 
-              },4000)
+              },2000)
 
             })() :null
              
@@ -243,11 +274,10 @@ const Card = ({ imageSrc,
 
        
 
-
-
+       
         useEffect(() => {
-        
-          const intervalDuration = 9000; // Interval duration in milliseconds
+       
+          const intervalDuration = 10000; // Interval duration in milliseconds
         
           let startTime = Date.now(); // Track the start time
         
@@ -258,33 +288,42 @@ const Card = ({ imageSrc,
               const currentTime = Date.now();
               const elapsedTime = currentTime - startTime;
               const progress = (elapsedTime / intervalDuration) * 100;
+              setTooSlow(false)
 
-              elapsedTime === intervalDuration ? (()=>{
-                
-              })() : null
+         
         
-              if (elapsedTime >= 10000) {
-              
+              if (elapsedTime >= intervalDuration+1000) {
+                
                 setRandomImage(getRandomImage());
                 setAlternate(null);
                 shuffleCards();
                 setErrors(errors + 1);
 
-                errors === 4 ? endGame() : null
-               
+                errors === 4 ? (()=>{
+                  endGame()
+                  setWin(false)
+                  setProgress(0)
+                  return
+                 })() : null
+                 
+                 setTooSlow(true)
                 startTime = currentTime;  
                 setFilling(false) 
                 setProgress(0); 
               }
+              // setTooSlow(false)
               setProgress(progress);
+              
              
             }
           }, 1000); 
         
           return () => {
+           
             clearInterval(interval);
           };
-        }, [isClicked, gameOver, errors,filling]);
+         
+        }, [isClicked, gameOver, errors,filling,slow]);
 
         const progressStyle = {
   
@@ -344,15 +383,17 @@ const [cards,setCards] = useState(
 
   const resultStyle = {
     transform: gameOver ? 'translate(450px,200px) scale(0)' : 'translate(450px,200px)',
-    background: alternate === randomImage  && !gameOver?'green': alternate != randomImage && alternate != null && !gameOver? 'red':'grey',
+    background: correct  && !gameOver?'green': incorrect ? 'red':'grey',
     width: '200px',
     height: '150px',
+    animation: !gameOver? 'shake 0.5s' : 'none',
+    animationIterationCount: 'infinite',
 
    
 
   }
 
-  const resultText = alternate === randomImage  && !gameOver ? 'Correct!' : alternate != randomImage  && alternate!= null  && !gameOver? 'Incorrect!' : 'Find the match!';
+  const resultText = alternate === randomImage  && !gameOver ? 'Correct!' : alternate != randomImage  && alternate!= null  && !gameOver? 'Incorrect!' :slow ?'Too slow!' : 'Find the match!';
      
 
 const randomStyle = {
@@ -363,14 +404,14 @@ const randomStyle = {
 const winningText = matchCount >= 5 ? "Congratulations! You won the game" : errors >= 5? "You have lost the game!" : null
 
 const winningTextStyle = {
-  animation: gameOver && matchCount >= 5 ? 'flash 3s infinite' : 'none',
+  //animation: gameOver && win !== null ? 'flash 3s infinite' : 'none',
   transition: 'color 0.3s ease',
-  color: matchCount >= 5 ? 'black' : errors >= 5 ? 'red' : 'black',
-  transform: matchCount >= 5 ? 'scale(2)' : 'scale(0)',
-  background: matchCount >= 5 ? 'grey' : null,
+  color: gameOver && win ? 'black' : errors >= 5 ? 'red' : 'black',
+  transform: gameOver && win !== null ? 'scale(2)' : 'scale(0)',
+  background:  'linear-gradient(45deg, #00FFFF, #0000FF)' ,
   width: '15vw',
   height: '75px',
-  
+  animation: 'pulse 2s infinite',
   zIndex:20,
   position: 'fixed',
   top: '80%',
@@ -382,20 +423,33 @@ const winningTextStyle = {
 };
 
 
+
+
+
+
 const winningImgStyle={
-  transition: 'transform 0.3s ease, opacity 0.3s ease',
-  transform: win? 'scale(1.2)' : 'scale(0)',
+  transition: 'transform 0.8s ease, opacity 1.5s ease',
   width: '75vw',
   height: '40vw',
-  maxHeight: '1000px',
-  zIndex:19,
-  position: 'fixed',
-  top: '30%',
-  left: '13%',
-  opacity: win ? 1 : 0,
+  maxHeight: '401px',
+  maxWidth: '730px',
+  opacity: win != null ? 1 : 0,
   animation: win ? 'explode 0.3s forwards' : 'none',
 
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'fixed',
+  top: '30%',
+  
+  zIndex: win != null ? 1 : -1,
+
 }
+
+
+const additionalCardStyle = {
+  transform: correct  ? 'scale(3)' : incorrect ? 'scale(0.5)' : 'scale(1)',
+};
 
 // 
 
@@ -418,9 +472,11 @@ className={!gameOver ? 'no-show' : 'start-button'}
   ></div>
 </div>
 
+          <img
+            src={win ? gokuVsJiren : !win ? clown : null}
+            style={winningImgStyle}
+                />
 
-                <img src={gokuVsJiren}
-                style={winningImgStyle}/>
 
             <div className={gameOver? 'object-card-gameOver' : 'object-card'}
             >
@@ -431,6 +487,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
             
              
             <Card
+            additonalStyle={additionalCardStyle}
             imageSrc={randomImage}
             style={randomStyle}
             />
@@ -438,20 +495,27 @@ className={!gameOver ? 'no-show' : 'start-button'}
 
             <div className={matchCount >=5 || errors >=5 ? 'cardSetGameOver' : 'cardSet'}
             >
+
+             
               {cards.map((card) => (
+               
                 <Card
+              
                 imageSrc={card.imageSrc}
                 onClick={()=>cardClick(card.imageSrc)}
                 isBig={selectedImage === card.imageSrc}
                 selectedImage={selectedImage}
                 altSrc={card.altSrc}
-                // style={{
-                //   transition: 'transform 0.3s ease',
-                //   transform: `translateX(${2 * 25}%)`,}}
+               // hoverEnterFunction={()=>handleHover(card.imageSrc)}
+             /*   additonalStyle={{
+                transform: cardHovered ? 'scale(1.2)' : 'scale(1)',
+                             boxShadow: correct && alternate === card.altSrc ? '0 0 25px 25px green' : 'auto'}}*/
                 shiftClick={()=>handleShiftClick(card.altSrc,selectedImage === card.imageSrc)}
                 altShown={alternate === card.altSrc}
                 alternate={alternate}
                 isDissolving={isDissolving}
+               
+                
                 
                 />
               ))}

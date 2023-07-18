@@ -171,7 +171,7 @@ ul.navLinks li a {
 }
 
 .start-button{
-  margin-top: 50px;
+  margin-top: 2vw;
   margin-bottom: -250px;
   display: grid;
 }
@@ -179,7 +179,7 @@ ul.navLinks li a {
 .progress-bar {
   width: 33vw;
   height: 5px;
-  background-color: red;
+  background-color: grey;
   overflow: hidden;
   position: fixed;
   top: 15%;
@@ -206,6 +206,21 @@ ul.navLinks li a {
   animation: quantum-animation 5s linear infinite;
 }
 
+/* @keyframes shake {
+  0% { transform: translate(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-5px, 0); }
+  20%, 40%, 60%, 80% { transform: translate(5px, 0); }
+  100% { transform: translate(0); }
+} */
+
+@keyframes shake {
+  0% { transform: translate(450px, 200px); }
+  25% { transform: translate(455px, 205px); }
+  50% { transform: translate(450px, 200px); }
+  75% { transform: translate(445px, 195px); }
+  100% { transform: translate(450px, 200px); }
+};
+
 @keyframes quantum-animation {
   0% {
     background-position: -100% -100%;
@@ -229,6 +244,11 @@ ul.navLinks li a {
     opacity: 1;
   }
 };
+
+/* styles.css */
+
+
+
 
 
 
