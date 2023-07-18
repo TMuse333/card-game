@@ -176,6 +176,17 @@ ul.navLinks li a {
   display: grid;
 }
 
+.home-button{
+  color: black;
+  transition: transform 0.3s ease;
+  background-image: linear-gradient(to right, #ff416c,#ff4b2b);
+
+}
+
+.home-button:hover{
+  transform: scale(1.3);
+}
+
 .progress-bar {
   width: 33vw;
   height: 5px;
@@ -186,6 +197,10 @@ ul.navLinks li a {
   left: 5%;
 
 }
+
+
+
+
 
 /* .progress-bar-filled {
   height: 100%;

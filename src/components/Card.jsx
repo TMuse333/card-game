@@ -37,11 +37,7 @@ const Card = ({ imageSrc,
   
   
 
-  const handleClick = () => {
-   // setIsClicked(!isClicked)
-   // onClick()
-   
-  }
+
 
   const handleMouseEnter = () => {
     setIsHovered(true)
@@ -52,10 +48,10 @@ const Card = ({ imageSrc,
     setIsHovered(false)
   }
 
-  const handleShiftClick = () =>{
+  const handleClick = () =>{
     setIsClicked(!isClicked)
     onClick()
-     shiftClick()
+    
     
         }
 
@@ -118,10 +114,8 @@ const Card = ({ imageSrc,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {
-          //  handleClick();
-            handleShiftClick()
-            
-          }}
+            handleClick();
+             }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseleave}
         style={mergedStyle}
@@ -145,11 +139,7 @@ const Card = ({ imageSrc,
         const [filling, setFilling] = useState(true)
         const [win, setWin] = useState(null)
         
-        const cardClick = (imageSrc) =>{
-            selectedImage === imageSrc ? setSelectedImage(null): 
-            !selectedImage? setSelectedImage(imageSrc) : null
-            setProgress(0)
-        }
+      
 
         const startGame = () =>{
           setGameOver(false)
@@ -158,10 +148,23 @@ const Card = ({ imageSrc,
           setMatchCount(0)
           setProgress(0)
           setFilling(true)
-          console.log("lets get it poppin")
+          
           setAlternate(null)
           
           
+        }
+
+        const homeScreen = () => {
+          setWin(null)
+         
+          setErrors(0)
+          setWin(null)
+          setMatchCount(0)
+          setProgress(0)
+          setFilling(true)
+          
+          setAlternate(null)
+
         }
 
         const endGame = () =>{
@@ -190,11 +193,14 @@ const Card = ({ imageSrc,
         const [correct,setCorrect] = useState(null)
         const [incorrect, setIncorrect] = useState(null)
 
-        const handleShiftClick = (altSrc, isBig) => {
+        const handleClick = (altSrc, isBig, imageSrc) => {
 
-       
+        
 
-          setCorrect(null);
+        setAlternate(altSrc) 
+        setProgress(0)
+
+        setCorrect(null);
           setIncorrect(null);
           alternate === altSrc && gameOver 
             ? setAlternate(null)
@@ -266,9 +272,7 @@ const Card = ({ imageSrc,
         };
 
 
-        useEffect(()=>{
-          console.log(isClicked)
-        },[isClicked])
+      
 
        
 
@@ -448,8 +452,13 @@ const winningImgStyle={
 
 
 const additionalCardStyle = {
-  transform: correct  ? 'scale(3)' : incorrect ? 'scale(0.5)' : 'scale(1)',
+  transform: correct  ? 'scale(1.5)' : incorrect ? 'scale(0.5)' : 'scale(1)',
+  zIndex: correct ? 1000 : 0,
+  boxShadow: correct ? '0 0 25px 25px green' : incorrect ? '0 0 25px 25px red' : null
 };
+
+
+
 
 // 
 
@@ -459,6 +468,10 @@ const additionalCardStyle = {
 
         return (
             <>
+
+<button className={win!== null ? 'home-button' : 'no-show'}
+onClick={()=>homeScreen()}>Home screen</button>
+
 <button onClick={()=>startGame()}
 className={!gameOver ? 'no-show' : 'start-button'}
                       >
@@ -472,11 +485,13 @@ className={!gameOver ? 'no-show' : 'start-button'}
   ></div>
 </div>
 
+          <div className='result-screen'>
           <img
             src={win ? gokuVsJiren : !win ? clown : null}
             style={winningImgStyle}
                 />
-
+             
+</div>
 
             <div className={gameOver? 'object-card-gameOver' : 'object-card'}
             >
@@ -484,7 +499,8 @@ className={!gameOver ? 'no-show' : 'start-button'}
              
             
               <p style={resultStyle}>{resultText}</p>
-            
+              
+           
              
             <Card
             additonalStyle={additionalCardStyle}
@@ -502,7 +518,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
                 <Card
               
                 imageSrc={card.imageSrc}
-                onClick={()=>cardClick(card.imageSrc)}
+             //  onClick={()=>cardClick(card.imageSrc)}
                 isBig={selectedImage === card.imageSrc}
                 selectedImage={selectedImage}
                 altSrc={card.altSrc}
@@ -510,7 +526,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
              /*   additonalStyle={{
                 transform: cardHovered ? 'scale(1.2)' : 'scale(1)',
                              boxShadow: correct && alternate === card.altSrc ? '0 0 25px 25px green' : 'auto'}}*/
-                shiftClick={()=>handleShiftClick(card.altSrc,selectedImage === card.imageSrc)}
+                onClick={()=>handleClick(card.altSrc,selectedImage === card.imageSrc)}
                 altShown={alternate === card.altSrc}
                 alternate={alternate}
                 isDissolving={isDissolving}
