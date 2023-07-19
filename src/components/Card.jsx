@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
+import Abu from '../images/aboubacar4.png';
+import MajinVegeta from '../images/majin-vegeta.png';
+import Obito from '../images/obito_10TJ.jpg';
+import Saiyans from '../images/ssb_k20_goku_and_bssb_vegeta.jpg';
+import Sasuke from '../images/sasuke.jpg';
+import Kakashi from '../images/kakashi_susanoo.jpg';
+import Sainey from '../images/ss2_sainey.jpg';
+import War_Obito from '../images/war_obito.jpg';
+
 
 
 import Sudo1 from '../images/pokemon-sudowoodo.gif'
@@ -48,12 +57,13 @@ const Card = ({ imageSrc,
     setIsHovered(false)
   }
 
-  const handleClick = () =>{
-    setIsClicked(!isClicked)
-    onClick()
+  const handleClick = (event) =>{
+   selectedImage === null ? setIsClicked(!isClicked) : null
+
+     event.shiftKey? shiftClick() : selectedImage === null ? onClick() : null
+    }
+
     
-    
-        }
 
   const cardStyle = {
     height: '23vw',
@@ -61,13 +71,28 @@ const Card = ({ imageSrc,
     maxHeight: '250px',
     maxWidth: '160px',
 
+    filter: selectedImage !== null && selectedImage != imageSrc ? 'blur(5px)' : null,
+
   
-     transition: 'transform 0.3s ease, opacity 0.2s ease',
+     transition: 'transform 0.3s ease, opacity 0.2s ease, top 0.3s ease, left 0.3s ease, right 0.3s ease',
    
      opacity: isDissolving &&altShown? 0 : 1,
      boxShadow:  isHovered  && !selectedImage? '0 0 50px 25px red' : 'none',
-     transform: isHovered  && !selectedImage? 'scale(1.2)' : null,
-     border: '2px solid black'
+     transform:
+      isHovered  && !selectedImage? 'scale(1.2)' : 
+      isBig && selectedImage === Abu? 'scale(3) translate(60%, 12%)' :
+      isBig && selectedImage === MajinVegeta? 'scale(3) translate(20%,12%)' :
+      isBig && selectedImage === Obito? 'scale(3) translate(-20%,12%)' :
+      isBig && selectedImage === Saiyans? 'scale(3) translate(-60%,12%)' :
+      isBig && selectedImage === Sasuke? 'scale(3) translate(60%,-25%)' :
+      isBig && selectedImage === Kakashi? 'scale(3) translate(20%,-25%)' :
+      isBig && selectedImage === War_Obito? 'scale(3) translate(-19%,-25%)' :
+      isBig && selectedImage === Sainey? 'scale(3) translate(-61%,-25%)'  : null,
+
+     border: '2px solid black',
+  /*  position: isBig ? 'fixed' : 'static',
+    top: isBig ? '35%' : 'auto',
+    left: isBig ? '40%' : "auto"*/
    
     }
 
@@ -77,27 +102,7 @@ const Card = ({ imageSrc,
 
 //window.innerWidth, window.innerHeight for things based off screenSize
 
-    const textStyle = {
   
-     transform: isBig ? 'scale(1) translate(320%,-20%)' : 'scale(0)',
-     transition: 'transform 1.2s ease',
-     background: 'orange',
-     maxWidth: '350px',
-     color: 'black',
-     padding: '10px',
-     paddingBottom: '30px',
-     paddingTop: '25px',
-     
-    }
-
-    const otherSide = {
-        transform: !isHovered ? 'scale(0)' : 'scale(1)',
-        transition: 'transform 0.3s ease',
-        height: '23vw',
-        width: '15vw',
-        maxHeight: '400px',
-        maxWidth: '260px',
-    }
 
   return (
 
@@ -114,7 +119,7 @@ const Card = ({ imageSrc,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {
-            handleClick();
+            handleClick(event);
              }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseleave}
@@ -152,6 +157,12 @@ const Card = ({ imageSrc,
           setAlternate(null)
           
           
+        }
+
+
+        const shiftClick = (imageSrc) => {
+            selectedImage === imageSrc ?
+            setSelectedImage(null) : setSelectedImage(imageSrc)
         }
 
         const homeScreen = () => {
@@ -527,9 +538,10 @@ className={!gameOver ? 'no-show' : 'start-button'}
                 transform: cardHovered ? 'scale(1.2)' : 'scale(1)',
                              boxShadow: correct && alternate === card.altSrc ? '0 0 25px 25px green' : 'auto'}}*/
                 onClick={()=>handleClick(card.altSrc,selectedImage === card.imageSrc)}
-                altShown={alternate === card.altSrc}
+                altShown={alternate === card.altSrc && selectedImage != card.imageSrc}
                 alternate={alternate}
                 isDissolving={isDissolving}
+                shiftClick={()=>shiftClick(card.imageSrc)}
                
                 
                 
