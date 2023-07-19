@@ -229,12 +229,23 @@ ul.navLinks li a {
 } */
 
 @keyframes shake {
-  0% { transform: translate(450px, 200px); }
-  25% { transform: translate(455px, 205px); }
-  50% { transform: translate(450px, 200px); }
-  75% { transform: translate(445px, 195px); }
-  100% { transform: translate(450px, 200px); }
+  0% { transform: translate(2px, 2px); }
+  25% { transform: translate(6px, -6px); }
+  50% { transform: translate(-2px, -2px); }
+  75% { transform: translate(6px, 6px); }
+  100% { transform: translate(2px, 2px); }
 };
+
+@keyframes shuffle1 {
+  0% { transform: translateX(60px);}
+  25% { transform: translateX(60px);}
+  50% { transform: translateX(60px);}
+  75% { transform: translateX(60px);}
+  100% { transform: translateX(60px);}
+  
+};
+
+
 
 @keyframes quantum-animation {
   0% {

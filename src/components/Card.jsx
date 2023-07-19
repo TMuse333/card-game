@@ -39,6 +39,9 @@ const Card = ({ imageSrc,
    alternate,
   isDissolving,
   additonalStyle,
+  gameOver,
+  correct,
+  incorrect
  
  }) => {
   const[isClicked,setIsClicked] = useState(false)
@@ -58,9 +61,10 @@ const Card = ({ imageSrc,
   }
 
   const handleClick = (event) =>{
-   selectedImage === null ? setIsClicked(!isClicked) : null
+  setIsClicked(!isClicked)
 
-     event.shiftKey? shiftClick() : selectedImage === null ? onClick() : null
+     event.shiftKey && gameOver || ( selectedImage !== null &&
+      selectedImage === imageSrc)? shiftClick() : onClick() 
     }
 
     
@@ -71,25 +75,40 @@ const Card = ({ imageSrc,
     maxHeight: '250px',
     maxWidth: '160px',
 
-    filter: selectedImage !== null && selectedImage != imageSrc ? 'blur(5px)' : null,
+    filter: selectedImage !== null && selectedImage != imageSrc && gameOver? 'blur(5px)' : null,
+
+   // correct && altShown ? '0 0 50px 50px green'
 
   
      transition: 'transform 0.3s ease, opacity 0.2s ease, top 0.3s ease, left 0.3s ease, right 0.3s ease',
    
      opacity: isDissolving &&altShown? 0 : 1,
-     boxShadow:  isHovered  && !selectedImage? '0 0 50px 25px red' : 'none',
+     boxShadow:correct && altShown ? '0 0 30px 30px green':
+      incorrect && altShown ? '0 0 30px 30px red' :  isHovered  && !selectedImage? '0 0 50px 25px gold': 'none', 
      transform:
-      isHovered  && !selectedImage? 'scale(1.2)' : 
-      isBig && selectedImage === Abu? 'scale(3) translate(60%, 12%)' :
-      isBig && selectedImage === MajinVegeta? 'scale(3) translate(20%,12%)' :
-      isBig && selectedImage === Obito? 'scale(3) translate(-20%,12%)' :
-      isBig && selectedImage === Saiyans? 'scale(3) translate(-60%,12%)' :
-      isBig && selectedImage === Sasuke? 'scale(3) translate(60%,-25%)' :
-      isBig && selectedImage === Kakashi? 'scale(3) translate(20%,-25%)' :
-      isBig && selectedImage === War_Obito? 'scale(3) translate(-19%,-25%)' :
-      isBig && selectedImage === Sainey? 'scale(3) translate(-61%,-25%)'  : null,
+      isHovered  && !selectedImage && correct === null? 'scale(1.2)' : 
+      isBig && selectedImage === Abu && gameOver? 'scale(3) translate(60%, 12%)' :
+      isBig && selectedImage === MajinVegeta && gameOver? 'scale(3) translate(20%,12%)' :
+      isBig && selectedImage === Obito && gameOver? 'scale(3) translate(-20%,12%)' :
+      isBig && selectedImage === Saiyans && gameOver? 'scale(3) translate(-60%,12%)' :
+      isBig && selectedImage === Sasuke && gameOver? 'scale(3) translate(60%,-25%)' :
+      isBig && selectedImage === Kakashi && gameOver? 'scale(3) translate(20%,-25%)' :
+      isBig && selectedImage === War_Obito && gameOver? 'scale(3) translate(-19%,-25%)' :
+      isBig && selectedImage === Sainey && gameOver? 'scale(3) translate(-61%,-25%)'  :
+      correct && altShown ? 'scale(1.5)' : null,
+     // zIndex: correct && altShown ? 1000 : 0,
 
      border: '2px solid black',
+     animation:imageSrc === Abu ? 'shake' : 'none',
+     animationDuration: '4s', 
+  animationTimingFunction: 'linear', 
+  animationIterationCount: 'infinite',
+  
+  /*animationName: 'shuffle1',
+  animationDuration: '2s',
+  animationTimingFunction: 'ease',
+  animationIterationCount: 'infinite',*/
+
   /*  position: isBig ? 'fixed' : 'static',
     top: isBig ? '35%' : 'auto',
     left: isBig ? '40%' : "auto"*/
@@ -115,7 +134,7 @@ const Card = ({ imageSrc,
 
     <div className='card-container'
     style=
-    {{ position: 'relative', zIndex: isBig || isHovered && selectedImage === imageSrc? 1 : 0 ,
+    {{ position: 'relative', zIndex: isBig || isHovered && selectedImage === imageSrc || (correct && altShown) ? 1 : 0 ,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {
@@ -233,6 +252,7 @@ const Card = ({ imageSrc,
             ? (() => {
                 setMatchCount(matchCount + 1);
                 setCorrect(true)
+               
                matchCount === 4 ? (()=>{
                 endGame()
                 setWin(true)
@@ -277,7 +297,9 @@ const Card = ({ imageSrc,
 
             })() :null
              
-          setIsClicked(true); // Mark a card as clicked
+          setIsClicked(true);
+          
+        
 
          
         };
@@ -517,6 +539,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
             additonalStyle={additionalCardStyle}
             imageSrc={randomImage}
             style={randomStyle}
+            gameOver={gameOver}
             />
           </div>
 
@@ -542,6 +565,9 @@ className={!gameOver ? 'no-show' : 'start-button'}
                 alternate={alternate}
                 isDissolving={isDissolving}
                 shiftClick={()=>shiftClick(card.imageSrc)}
+                gameOver={gameOver}
+                correct={correct}
+                incorrect={incorrect}
                
                 
                 
