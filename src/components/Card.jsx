@@ -101,7 +101,7 @@ const Card = ({ imageSrc,
 
      border: '2px solid black',
      animation: gameOver && !isBig &&isHovered ? 'shake 2s infinite'
-     :'none' ,
+     : correct && altShown ? 'moveAndScale 1s 1' : 'none' ,
    
    
     }
@@ -148,6 +148,7 @@ const Card = ({ imageSrc,
         const [progress, setProgress] = useState(0)
         const [filling, setFilling] = useState(true)
         const [win, setWin] = useState(null)
+        const[originalOrder, setOriginalOrder] = useState([...card_names.map((_,index)=>index)])
         
       
 
@@ -158,7 +159,8 @@ const Card = ({ imageSrc,
           setMatchCount(0)
           setProgress(0)
           setFilling(true)
-          
+          setIsClicked(false)
+          setSelectedImage(null)
           setAlternate(null)
           
           
@@ -170,18 +172,7 @@ const Card = ({ imageSrc,
             setSelectedImage(null) : setSelectedImage(imageSrc)
         }
 
-        const homeScreen = () => {
-          setWin(null)
-         
-          setErrors(0)
-          setWin(null)
-          setMatchCount(0)
-          setProgress(0)
-          setFilling(true)
-          
-          setAlternate(null)
-
-        }
+        
 
         const endGame = () =>{
           setGameOver(true)
@@ -203,6 +194,7 @@ const Card = ({ imageSrc,
           setCorrect(null)
           setIncorrect(null)
           
+          setOriginalOrder([...originalOrder])
             
         };
 
@@ -210,6 +202,11 @@ const Card = ({ imageSrc,
         const [incorrect, setIncorrect] = useState(null)
 
         const handleClick = (altSrc, isBig) => {
+
+          gameOver ?(()=>{
+            setAlternate(null) 
+            return
+          })() : null 
 
         setAlternate(altSrc) 
         setProgress(0)
@@ -346,6 +343,15 @@ const Card = ({ imageSrc,
          
         }, [isClicked, gameOver, errors,filling,slow]);
 
+
+        const resetToOriginalOrder = () => {
+          setCards([...card_names]);
+          setCorrect(null);
+          setIncorrect(null);
+          setOriginalOrder([...originalOrder]);
+         
+        };
+
         const progressStyle = {
   
           height: '100%',
@@ -399,6 +405,18 @@ const [cards,setCards] = useState(
     return randomImage;
   };
     
+  const homeScreen = () => {
+    setWin(null)
+   
+    setErrors(0)
+    setWin(null)
+    setMatchCount(0)
+    setProgress(0)
+    setFilling(true)
+    
+    setAlternate(null)
+    resetToOriginalOrder()
+  }
   
   const [randomImage, setRandomImage] = useState(getRandomImage());
 
@@ -435,8 +453,8 @@ const winningTextStyle = {
   animation: 'pulse 2s infinite',
   zIndex:20,
   position: 'fixed',
-  top: '80%',
-  left: '40%',
+  top: '79%',
+  left: '43%',
   
 
 
@@ -504,7 +522,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
 
           <div className='result-screen'>
           <img
-            src={win ? gokuVsJiren : !win ? clown : null}
+            src={win ? gokuVsJiren : !win && win !== null? clown : null}
             style={winningImgStyle}
                 />
              
@@ -562,9 +580,13 @@ className={!gameOver ? 'no-show' : 'start-button'}
 
            
 </div>
-<div><p>{matchCount} &nbsp; {errors}</p>
-<p style={winningTextStyle}>{winningText}</p></div>
+<div className={`scoreboard-container ${gameOver ? 'gameOver' : ''}`}>
+        <p className='scoreboard-text'>
+          {matchCount} &nbsp; {errors}
+        </p>
 
+      </div>
+      <p style={winningTextStyle}>{winningText}</p>
   
   
             </>
