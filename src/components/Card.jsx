@@ -86,6 +86,7 @@ const Card = ({ imageSrc,
      boxShadow:correct && altShown ? '0 0 30px 30px green':
       incorrect && altShown ? '0 0 30px 30px red' :  isHovered  && !selectedImage? '0 0 50px 25px gold': 'none', 
      transform:
+      
       isHovered  && !selectedImage && correct === null? 'scale(1.2)' : 
       isBig && selectedImage === Abu && gameOver? 'scale(3) translate(60%, 12%)' :
       isBig && selectedImage === MajinVegeta && gameOver? 'scale(3) translate(20%,12%)' :
@@ -99,19 +100,9 @@ const Card = ({ imageSrc,
      // zIndex: correct && altShown ? 1000 : 0,
 
      border: '2px solid black',
-     animation:imageSrc === Abu ? 'shake' : 'none',
-     animationDuration: '4s', 
-  animationTimingFunction: 'linear', 
-  animationIterationCount: 'infinite',
-  
-  /*animationName: 'shuffle1',
-  animationDuration: '2s',
-  animationTimingFunction: 'ease',
-  animationIterationCount: 'infinite',*/
-
-  /*  position: isBig ? 'fixed' : 'static',
-    top: isBig ? '35%' : 'auto',
-    left: isBig ? '40%' : "auto"*/
+     animation: gameOver && !isBig &&isHovered ? 'shake 2s infinite'
+     :'none' ,
+   
    
     }
 
@@ -125,12 +116,7 @@ const Card = ({ imageSrc,
 
   return (
 
-    // transform: imageSrc === Abu ? 'translateX(50%)' : null
-    //the above code can potentially fix the transportation issue,
-    //but you would have to set up a lot of the card style
-    //position properties in the card-container class
-    //with imageSrc === character, which could take lots
-    //of time
+   
 
     <div className='card-container'
     style=
@@ -223,9 +209,7 @@ const Card = ({ imageSrc,
         const [correct,setCorrect] = useState(null)
         const [incorrect, setIncorrect] = useState(null)
 
-        const handleClick = (altSrc, isBig, imageSrc) => {
-
-        
+        const handleClick = (altSrc, isBig) => {
 
         setAlternate(altSrc) 
         setProgress(0)
@@ -468,8 +452,8 @@ const winningImgStyle={
   transition: 'transform 0.8s ease, opacity 1.5s ease',
   width: '75vw',
   height: '40vw',
-  maxHeight: '401px',
-  maxWidth: '730px',
+  maxHeight: '430px',
+  maxWidth: '780px',
   opacity: win != null ? 1 : 0,
   animation: win ? 'explode 0.3s forwards' : 'none',
 

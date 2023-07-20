@@ -30,16 +30,15 @@ import Majikarp from '../images/pokemon-magikarp.gif'
 
 export const card_names =
 [
-    {imageSrc: Abu, altSrc: Sudo1},
-    {imageSrc: MajinVegeta, altSrc: Sudo2},
-    {imageSrc: Obito, altSrc: Sudo3},
-    {imageSrc: Saiyans, altSrc: Piplup},
-    {imageSrc: Sasuke, altSrc: Turtwig},
-    {imageSrc: Kakashi, altSrc: Hitmonlee},
-    {imageSrc: War_Obito, altSrc: Squirtle},
-    {imageSrc: Sainey, altSrc: Majikarp}
+    {imageSrc: Abu, altSrc: Sudo1, order : 0},
+    {imageSrc: MajinVegeta, altSrc: Sudo2, order : 1},
+    {imageSrc: Obito, altSrc: Sudo3, order : 2},
+    {imageSrc: Saiyans, altSrc: Piplup, order : 3},
+    {imageSrc: Sasuke, altSrc: Turtwig, order : 4},
+    {imageSrc: Kakashi, altSrc: Hitmonlee, order : 5},
+    {imageSrc: War_Obito, altSrc: Squirtle, order : 6},
+    {imageSrc: Sainey, altSrc: Majikarp, order : 7}
     ]
 
-    export const slatt = true
 
  
