@@ -70,8 +70,8 @@ const Card = ({ imageSrc,
     
 
   const cardStyle = {
-    height: '23vw',
-    width: '15vw',
+    height: '27vw',
+    width: '17vw',
     maxHeight: '250px',
     maxWidth: '160px',
 
@@ -345,12 +345,12 @@ const Card = ({ imageSrc,
                 shuffleCards();
                 setErrors(errors + 1);
 
-                errors === 4 ? (()=>{
+               /* errors === 4 ? (()=>{
                   endGame()
                   setWin(false)
                   setProgress(0)
                   return
-                 })() : null
+                 })() : null*/
                  
                  setTooSlow(true)
                 startTime = currentTime;  
@@ -507,12 +507,19 @@ const winningImgStyle={
   animation: win ? 'explode 0.3s forwards' : 'none',
 
   display: 'flex',
+  
+  // marginLeft: '3rem',
+  // marginRight: '3rem',
+  // transform: 'translateY(40rem)',
   justifyContent: 'center',
   alignItems: 'center',
   position: 'fixed',
-  top: '30%',
   
-  zIndex: win != null ? 1 : -1,
+  marginLeft: '2rem',
+  marginRight: '4rem',
+  zIndex: win != null ? 100 : -1,
+  marginTop: '20rem',
+ 
 
 }
 
@@ -535,13 +542,24 @@ const additionalCardStyle = {
         return (
             <>
 
+<div className={gameOver? 'object-card-gameOver' : 'object-card'}
+            >
+
+            <Card
+            additonalStyle={additionalCardStyle}
+            imageSrc={randomImage}
+            style={randomStyle}
+            gameOver={gameOver}
+            />
+          </div>
+
 <button className={win!== null ? 'home-button' : 'no-show'}
 onClick={()=>homeScreen()}>Home screen</button>
 
 <button onClick={()=>startGame()}
 className={!gameOver ? 'no-show' : 'start-button'}
                       >
-  Start game</button>
+  Start game!</button>
 
  
 
@@ -559,30 +577,17 @@ className={!gameOver ? 'no-show' : 'start-button'}
         <p>Score:{score}</p>
       </div>
 
-          <div className='result-screen'>
+          <div className='result-screen'
+          style={winningImgStyle}>
           <img
             src={win ? gokuVsJiren : !win && win !== null? clown : null}
             style={winningImgStyle}
                 />
+                   <p style={winningTextStyle}>{winningText}</p>
              
 </div>
 
-            <div className={gameOver? 'object-card-gameOver' : 'object-card'}
-            >
-
-             
-            
-            
-              
            
-             
-            <Card
-            additonalStyle={additionalCardStyle}
-            imageSrc={randomImage}
-            style={randomStyle}
-            gameOver={gameOver}
-            />
-          </div>
 
             <div className={matchCount >=limit + 1 || errors >=5 ? 'cardSetGameOver' : 'cardSet'}
             >
@@ -625,7 +630,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
         </p>
 
       </div>
-      <p style={winningTextStyle}>{winningText}</p>
+   
   
   
             </>
