@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import Abu from '../images/aboubacar4.png';
 import MajinVegeta from '../images/majin-vegeta.png';
@@ -101,7 +101,8 @@ const Card = ({ imageSrc,
 
      border: '2px solid black',
      animation: gameOver && !isBig &&isHovered ? 'shake 2s infinite'
-     : correct && altShown ? 'moveAndScale 1s 1' : 'none' ,
+     : correct && altShown && !gameOver? 'moveAndScale 1s 1' :
+     incorrect && altShown && !gameOver? 'shakeAndScale 0.5s 1' : 'none' ,
    
    
     }
@@ -149,6 +150,11 @@ const Card = ({ imageSrc,
         const [filling, setFilling] = useState(true)
         const [win, setWin] = useState(null)
         const[originalOrder, setOriginalOrder] = useState([...card_names.map((_,index)=>index)])
+        const [cardClickCount, setCardClickCount] = useState(0);
+
+        let limit = 4
+
+        const startTimeRef = useRef(Date.now());
         
       
 
@@ -200,8 +206,24 @@ const Card = ({ imageSrc,
 
         const [correct,setCorrect] = useState(null)
         const [incorrect, setIncorrect] = useState(null)
+        const [score,setScore] = useState(0)
 
         const handleClick = (altSrc, isBig) => {
+
+         const currentTime = Date.now();
+  const elapsedTime = currentTime - startTimeRef.current;
+  const maxIntervalDuration = 10000; // The maximum interval duration in milliseconds
+  const intervalReduction = Math.floor(cardClickCount / 5) * 2000;
+  const intervalDuration = Math.max(maxIntervalDuration - intervalReduction, 1000); // Minimum interval duration of 1000ms
+  const timePercentage = 1 - (elapsedTime / intervalDuration);
+  const maxPoints = 100; // The maximum points that can be earned for answering quickly
+
+  
+
+  let pointsEarned = Math.floor(maxPoints * timePercentage);
+  pointsEarned = Math.max(pointsEarned, 0);
+
+          setCardClickCount(cardClickCount + 1)
 
           gameOver ?(()=>{
             setAlternate(null) 
@@ -233,8 +255,10 @@ const Card = ({ imageSrc,
             ? (() => {
                 setMatchCount(matchCount + 1);
                 setCorrect(true)
+               setScore(score + pointsEarned)
+               console.log(pointsEarned)
                
-               matchCount === 4 ? (()=>{
+                matchCount === limit ? (()=>{
                 endGame()
                 setWin(true)
                 setProgress(0)
@@ -294,8 +318,12 @@ const Card = ({ imageSrc,
 
        
         useEffect(() => {
+          startTimeRef.current = Date.now();
+          const baseIntervalDuration = 10000;
+  const intervalReduction = Math.floor(cardClickCount / 5) * 2000;
+  const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000); // Minimum interval duration of 1000ms
        
-          const intervalDuration = 10000; // Interval duration in milliseconds
+           // Interval duration in milliseconds
         
           let startTime = Date.now(); // Track the start time
         
@@ -440,7 +468,7 @@ const randomStyle = {
   transform: gameOver ? 'scale(0)' : null,
 }
 
-const winningText = matchCount >= 5 ? "Congratulations! You won the game" : errors >= 5? "You have lost the game!" : null
+const winningText = matchCount >= limit + 1 ? "Congratulations! You won the game" : errors >= 5? "You have lost the game!" : null
 
 const winningTextStyle = {
   //animation: gameOver && win !== null ? 'flash 3s infinite' : 'none',
@@ -448,13 +476,16 @@ const winningTextStyle = {
   color: gameOver && win ? 'black' : errors >= 5 ? 'red' : 'black',
   transform: gameOver && win !== null ? 'scale(2)' : 'scale(0)',
   background:  'linear-gradient(45deg, #00FFFF, #0000FF)' ,
-  width: '15vw',
+  width: '8rem',
   height: '75px',
   animation: 'pulse 2s infinite',
   zIndex:20,
-  position: 'fixed',
-  top: '79%',
-  left: '43%',
+  display: 'flex',
+  marginTop: '-3rem'
+
+  //position: 'fixed',
+  //top: '79%',
+  //left: '43%',
   
 
 
@@ -512,13 +543,21 @@ className={!gameOver ? 'no-show' : 'start-button'}
                       >
   Start game</button>
 
+ 
+
   <div className="progress-bar"
   style={{transform: gameOver? 'scale(0)' : 'scale(1)'}}>
   <div
     className="progress-bar-filled"
     style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle, width: `${progress}%` }}
   ></div>
+
 </div>
+
+
+<div className={!gameOver || win !== null ? "score-container" : 'no-show'}>
+        <p>Score:{score}</p>
+      </div>
 
           <div className='result-screen'>
           <img
@@ -533,7 +572,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
 
              
             
-              <p style={resultStyle}>{resultText}</p>
+            
               
            
              
@@ -545,7 +584,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
             />
           </div>
 
-            <div className={matchCount >=5 || errors >=5 ? 'cardSetGameOver' : 'cardSet'}
+            <div className={matchCount >=limit + 1 || errors >=5 ? 'cardSetGameOver' : 'cardSet'}
             >
 
              
@@ -582,7 +621,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
 </div>
 <div className={`scoreboard-container ${gameOver ? 'gameOver' : ''}`}>
         <p className='scoreboard-text'>
-          {matchCount} &nbsp; {errors}
+          {matchCount} &nbsp; {errors} &nbsp; 
         </p>
 
       </div>
