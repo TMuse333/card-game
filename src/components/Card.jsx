@@ -21,9 +21,13 @@ import Squirtle from '../images/giphy.gif'
 import Majikarp from '../images/pokemon-magikarp.gif'
 import gokuVsJiren from '../images/goku-vs-jiren.jpg'
 import clown from '../images/Emoji_Icon_-_Clown_emoji_1024x1024.png.webp'
+import ResultScreen
+ from './ResultScreen';
 
 
 import { card_names } from './cardData';
+
+import { cardData} from './cardData'
 
 
 let previousRandomImage = null;
@@ -70,8 +74,8 @@ const Card = ({ imageSrc,
     
 
   const cardStyle = {
-    height: '27vw',
-    width: '17vw',
+    height: '30vw',
+    width: '19vw',
     maxHeight: '250px',
     maxWidth: '160px',
 
@@ -109,6 +113,20 @@ const Card = ({ imageSrc,
 
 
     const mergedStyle = { ...cardStyle, ...additonalStyle}
+
+    const textBoxStyle = {
+      position: 'absolute',
+      top: '235%', // Position the text box at the bottom of the card
+      left: '250%', // Center the text box horizontally relative to the image
+      transform: 'translateX(-50%)', // Center the text box horizontally relative to the image
+      padding: '8px',
+      background: 'linear-gradient(45deg, orange, red)',
+      color: 'white',
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      display: isBig ? 'block' : 'none',
+      width: '80vw', // Show the text box when the card is enlarged (isBig=true)
+    };
   
 
 //window.innerWidth, window.innerHeight for things based off screenSize
@@ -133,6 +151,11 @@ const Card = ({ imageSrc,
        
 
         />
+            {isBig && text && (
+        <div className="text-box" style={textBoxStyle}>
+          {text}
+        </div>
+            )}
         
     </div>
   )
@@ -168,6 +191,7 @@ const Card = ({ imageSrc,
           setIsClicked(false)
           setSelectedImage(null)
           setAlternate(null)
+          setScore(0)
           
           
         }
@@ -435,7 +459,7 @@ const [cards,setCards] = useState(
     
   const homeScreen = () => {
     setWin(null)
-   
+    setScore(0)
     setErrors(0)
     setWin(null)
     setMatchCount(0)
@@ -497,31 +521,7 @@ const winningTextStyle = {
 
 
 
-const winningImgStyle={
-  transition: 'transform 0.8s ease, opacity 1.5s ease',
-  width: '75vw',
-  height: '40vw',
-  maxHeight: '430px',
-  maxWidth: '780px',
-  opacity: win != null ? 1 : 0,
-  animation: win ? 'explode 0.3s forwards' : 'none',
 
-  display: 'flex',
-  
-  // marginLeft: '3rem',
-  // marginRight: '3rem',
-  // transform: 'translateY(40rem)',
-  justifyContent: 'center',
-  alignItems: 'center',
-  position: 'fixed',
-  
-  marginLeft: '2rem',
-  marginRight: '4rem',
-  zIndex: win != null ? 100 : -1,
-  marginTop: '20rem',
- 
-
-}
 
 
 const additionalCardStyle = {
@@ -529,6 +529,10 @@ const additionalCardStyle = {
   zIndex: correct ? 1000 : 0,
   boxShadow: correct ? '0 0 25px 25px green' : incorrect ? '0 0 25px 25px red' : null
 };
+
+const scoreText = gameOver && win === null ? null : win  || !win? null : "score: "+ score
+
+ 
 
 
 
@@ -551,10 +555,12 @@ const additionalCardStyle = {
             style={randomStyle}
             gameOver={gameOver}
             />
+            <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
           </div>
 
-<button className={win!== null ? 'home-button' : 'no-show'}
-onClick={()=>homeScreen()}>Home screen</button>
+ 
+
+
 
 <button onClick={()=>startGame()}
 className={!gameOver ? 'no-show' : 'start-button'}
@@ -562,6 +568,9 @@ className={!gameOver ? 'no-show' : 'start-button'}
   Start game!</button>
 
  
+
+      <button className={win!== null ? 'home-button' : 'no-show'}
+onClick={()=>homeScreen()}>Home screen</button>
 
   <div className="progress-bar"
   style={{transform: gameOver? 'scale(0)' : 'scale(1)'}}>
@@ -573,19 +582,10 @@ className={!gameOver ? 'no-show' : 'start-button'}
 </div>
 
 
-<div className={!gameOver || win !== null ? "score-container" : 'no-show'}>
-        <p>Score:{score}</p>
-      </div>
 
-          <div className='result-screen'
-          style={winningImgStyle}>
-          <img
-            src={win ? gokuVsJiren : !win && win !== null? clown : null}
-            style={winningImgStyle}
-                />
-                   <p style={winningTextStyle}>{winningText}</p>
-             
-</div>
+
+   
+        
 
            
 
@@ -614,6 +614,7 @@ className={!gameOver ? 'no-show' : 'start-button'}
                 gameOver={gameOver}
                 correct={correct}
                 incorrect={incorrect}
+                text={cardData[0]}
                
                 
                 
@@ -625,11 +626,24 @@ className={!gameOver ? 'no-show' : 'start-button'}
            
 </div>
 <div className={`scoreboard-container ${gameOver ? 'gameOver' : ''}`}>
-        <p className='scoreboard-text'>
-          {matchCount} &nbsp; {errors} &nbsp; 
-        </p>
+<p className='scoreboard-text'>
+  <span style={{ color: 'green' }}>{matchCount}</span>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <span style={{ color: 'red' }}>{errors}</span>
+  &nbsp;
+</p>
 
       </div>
+
+             <ResultScreen
+    win={win}
+    score={score}
+    />
    
   
   
@@ -650,7 +664,9 @@ const Game = () => {
   return (
     <>
     <CardSet/>
+   
     {console.log("skii")}
+    {console.log(window.innerWidth)}
 </>
     
   )
