@@ -12,7 +12,7 @@ import NavBar from './components/NavBar'
 
 import Game from './components/Card'
 import QuantumBackground from './components/QuantumBackground'
-// import CardSet from './components/Card'
+import CardSet from './components/CardSet'
 
 
 
@@ -44,7 +44,7 @@ function App() {
 
  <NavBar/>
  <QuantumBackground/>
-{/* <CardSet/> */}
+<CardSet/>
 
  
  

@@ -62,15 +62,25 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: lightgray;
-  height: 50px;
+
   color: black;
   padding: 5px;
-  width: 100%;
+  
+  
+}
+
+
+
+.banner.scrollable {
+  /* position: relative; */
+ 
+
+  
 }
 
 .banner-item {
@@ -172,6 +182,7 @@ ul.navLinks li a {
 .start-button {
   min-width: 50px;
   min-height:30px ;
+  max-width: fit-content;
   width:10vw;
   position: relative;
   color: white;
@@ -187,13 +198,14 @@ ul.navLinks li a {
   height: 2.3rem;
   z-index: 333;
   display: grid;
-  margin-top: 5vh;
+  
+  transform: translateY(7rem);
   
 }
 
 .start-button-gameOver {
   min-width: 50px;
-  min-height:30px ;
+  min-height:30px;
   width:10vw;
   position: relative;
   color: white;
@@ -213,7 +225,7 @@ ul.navLinks li a {
 }
 
 .start-button:hover {
-  transform: scale(1.33);
+  transform: scale(1.33) translateY(5rem);
 }
 
 .home-button {
@@ -293,5 +305,98 @@ ul.navLinks li a {
 .scoreboard-container.gameOver {
   transform: scale(0);
 }
+
+@keyframes quantum-animation {
+  0% {
+    background-position: -100% -100%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes shake {
+  0% { transform: translate(2px, 2px) scale(1); }
+  25% { transform: translate(6px, -6px) scale(1.5); }
+  50% { transform: translate(-2px, -2px) scale(1); }
+  75% { transform: translate(6px, 6px) scale(1.5); }
+  100% { transform: translate(2px, 2px) scale(1); }
+}
+
+@keyframes moveAndScale {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.5);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shakeAndScale {
+  /* 0%, 100% {
+    transform: translateX(0) scale(0.9);
+  } */
+  5%{
+    transform: translateX(-25px) scale(0.9);
+  }
+
+  15%{
+    transform: translateX(25px) scale(0.9);
+  }
+
+  25% {
+    transform: translateX(-25px) scale(0.9);
+  }
+
+  35%{
+    transform: translateX(25px) scale(0.9);
+  }  
+
+  45%{
+    transform: translateX(25px) scale(0.9);
+  }
+
+  55%{
+    transform: translateX(-25px) scale(0.9);
+  }
+
+  65%{
+    transform: translateX(25px) scale(0.9);
+  }
+
+  75% {
+    transform: translateX(-25px) scale(0.9);
+  }
+
+  85% {
+    transform: translateX(25px) scale(0.9);
+  }
+
+  95% {
+    transform: translateX(-25px) scale(0.9);
+  }
+
+  100%{
+    transform: translateX(25px) scale(0.9);
+  }
+
+
+}
+
+@keyframes animateGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 
