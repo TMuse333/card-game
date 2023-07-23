@@ -6,24 +6,29 @@ const ResultScreen = ({ win,score }) => {
 
 
 const styles = {
-    height:  win !== null ? '38vw' : '0vw',
-    width:  win !== null ? '75vw' : '0vw',
+    display: 'flex',
+    height:  win !== null ? '46vw' : '0vw',
+    width:  win !== null ? '93vw' : '0vw',
     marginTop: win !== null ? '5rem' : '0vw',
-    marginBottom: win !== null ? '5vw' : '0vw',
+    transform: 'translate(-7%,-5rem)',
+  // marginBottom: win !== null ? '5vw' : '0vw',
+    zIndex: 50,
+  
+ //  alignItems: "center", // Center the content vertically
+  //  justifyContent: "center",
+   
 
-    
 
 }
 
   return (
-    <div className="result-screen">
-      <img
-        src={win ? gokuVsJiren : !win ? clown : win === null ? null : null}
-       
-        style={styles}
-      />
-      <p>{win ? 'You Win!' : !win && win != null ? 'You Lose!': null}</p>
-    </div>
+   <>
+        <img
+          src={win ? gokuVsJiren : !win ? clown : null}
+          style={styles}
+        />
+        <p>{win ? "You Win!" : !win && win !== null ? "You Lose!" : null}</p>
+        </>
   );
 };
 

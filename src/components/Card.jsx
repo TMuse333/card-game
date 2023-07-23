@@ -185,7 +185,7 @@ const Card = ({ imageSrc,
           setGameOver(false)
           setErrors(0)
           setWin(null)
-          setMatchCount(0)
+          setMatchCount(4)
           setProgress(0)
           setFilling(true)
           setIsClicked(false)
@@ -563,7 +563,7 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
 
 
 <button onClick={()=>startGame()}
-className={!gameOver ? 'no-show' : 'start-button'}
+className={!gameOver ? 'no-show' : win !== null ? 'start-button-gameOver' : 'start-button'}
                       >
   Start game!</button>
 
@@ -653,7 +653,7 @@ onClick={()=>homeScreen()}>Home screen</button>
 
 
 
-// export default CardSet;
+ export default CardSet;
 
 
 
@@ -672,4 +672,3 @@ const Game = () => {
   )
 
 }
-export default Game
