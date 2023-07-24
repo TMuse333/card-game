@@ -374,6 +374,7 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
         style={randomStyle}
         gameOver={gameOver}
         />
+        <p className={!gameOver && win === null ? null : 'no-show'}>{score}</p>
         <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
       </div>
 
