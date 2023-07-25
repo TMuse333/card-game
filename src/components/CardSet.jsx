@@ -17,6 +17,10 @@ import { card_names } from './cardData';
 
 import { cardData} from './cardData'
 
+import StartButton from './StartButton'
+
+
+
 
 let previousRandomImage = null;
 
@@ -34,6 +38,11 @@ let previousRandomImage = null;
     const [win, setWin] = useState(null)
     const[originalOrder, setOriginalOrder] = useState([...card_names.map((_,index)=>index)])
     const [cardClickCount, setCardClickCount] = useState(0);
+    const [countdown, setCountdown] = useState(3);
+    const [startClicked, setStartClicked] = useState(false);
+    const [showCorrect, setShowCorrect] = useState(false);
+    const [showIncorrect, setShowIncorrect] = useState(false);
+    const [showSlow,setShowSlow] = useState(false)
 
     let limit = 4
 
@@ -41,20 +50,27 @@ let previousRandomImage = null;
     
   
 
-    const startGame = () =>{
-      setGameOver(false)
-      setErrors(0)
-      setWin(null)
-      setMatchCount(0)
-      setProgress(0)
-      setFilling(true)
-      setIsClicked(false)
-      setSelectedImage(null)
-      setAlternate(null)
-      setScore(0)
-      
-      
-    }
+    const startGame = () => {
+      // Set the gameOver state to false after a 3-second delay
+      setStartClicked(true)
+      setTimeout(() => {
+        setGameOver(false);
+      }, 3000);
+    
+      // Other functions with a 3-second delay
+      setTimeout(() => {
+        setErrors(0);
+        setWin(null);
+        setMatchCount(0);
+        setProgress(0);
+        setFilling(true);
+        setIsClicked(false);
+        setSelectedImage(null);
+        setAlternate(null);
+        setScore(0);
+      }, 3000);
+    };
+    
 
 
     const shiftClick = (imageSrc) => {
@@ -139,8 +155,12 @@ pointsEarned = Math.max(pointsEarned, 0);
         ? (() => {
             setMatchCount(matchCount + 1);
             setCorrect(true)
-           setScore(score + pointsEarned)
-           console.log(pointsEarned)
+            setScore(score + pointsEarned)
+            setShowCorrect(true); // Show "Correct" message
+            setTimeout(() => {
+              setShowCorrect(false); // Hide "Correct" message after 1 second
+            }, 2000);
+
            
             matchCount === limit ? (()=>{
             endGame()
@@ -167,9 +187,15 @@ pointsEarned = Math.max(pointsEarned, 0);
         : !isClicked  && !gameOver ?(()=>{
           setIsClicked(true)
           setErrors(errors + 1);
-          setIncorrect(true)
+          
+          setShowIncorrect(true); // Show "Incorrect" message
+      setTimeout(() => {
+        setShowIncorrect(false); // Hide "Incorrect" message after 1 second
+      }, 1000);
+          
           errors === 4 ? (()=>{
             setGameOver(true)
+            
             setWin(false)
             setProgress(0)
            })() : null
@@ -253,6 +279,25 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
       setOriginalOrder([...originalOrder]);
      
     };
+
+
+    useEffect(() => {
+      if (startClicked) {
+        let timeLeft = 3;
+        const countdownInterval = setInterval(() => {
+          timeLeft -= 1;
+          setCountdown(timeLeft);
+  
+          if (timeLeft === 0) {
+            clearInterval(countdownInterval);
+            startGame(); // Call the startGame function after the countdown
+          }
+        }, 1000);
+  
+        // Clean up the interval when the component unmounts or when the countdown reaches zero
+        return () => clearInterval(countdownInterval);
+      }
+    }, [startClicked]); 
 
     const progressStyle = {
 
@@ -378,14 +423,20 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
         <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
       </div>
 
+ {/* Display "Correct" message */}
+ {matchCount < 5 && showCorrect && <div className="correct">Correct!</div>}
+      {/* Display "Incorrect" message */}
+      {showIncorrect && <div className="incorrect">Incorrect!</div>}
 
+      { startClicked && countdown > 0  && <div className="countdown-text">{countdown}</div>}
 
-
-
-<button onClick={()=>startGame()}
-className={!gameOver ? 'no-show' : win !== null ? 'start-button-gameOver' : 'start-button'}
-                  >
-Start game!</button>
+      <button
+       onClick={
+        ()=>startGame()}
+       className={!gameOver ? 'no-show' : win !== null ? 'start-button-gameOver' : 'start-button'}
+     >
+       Start game!
+     </button>
 
 
 
@@ -404,7 +455,7 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
 
 
 
-
+ 
     
 
        

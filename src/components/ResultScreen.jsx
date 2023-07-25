@@ -30,9 +30,11 @@ const ResultScreen = ({ win, score }) => {
       screenWidth >= 768 ? 'translate(-0.5rem, -2rem)' :
       'translate(-1.5rem, -5rem)',
     zIndex: 50,
+    animation: !win ? 'moveAndScale 2.33s infinite ease' : null
   };
 
   const textStyle = {
+    fontFamily: 'Bangers, cursive',
     background: 'linear-gradient(45deg, #ff0000, #ff6f00, #ffd700, #ff0000)',
     backgroundSize: '400% 400%',
     color: 'transparent',
@@ -40,8 +42,8 @@ const ResultScreen = ({ win, score }) => {
     backgroundClip: 'text',
     animation: 'animateGradient 10s linear infinite',
     width: 'fit-content',
-  
-    fontSize: '2rem',
+    
+    fontSize: '3rem',
     marginTop:screenWidth >= 1919 ? '-4rem' : '3rem',
     marginLeft: screenWidth >= 1919 ? '25rem' : screenWidth >= 767 ? '9rem' : '-1.5344rem',
   };
