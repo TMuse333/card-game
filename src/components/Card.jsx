@@ -77,11 +77,11 @@ const Card = ({ imageSrc,
       isBig && selectedImage === Kakashi && gameOver? 'scale(3) translate(20%,-25%)' :
       isBig && selectedImage === War_Obito && gameOver? 'scale(3) translate(-19%,-25%)' :
       isBig && selectedImage === Sainey && gameOver? 'scale(3) translate(-61%,-25%)'  :
-      correct && altShown ? 'scale(1.5)' : null,
-     // zIndex: correct && altShown ? 1000 : 0,
+      correct && altShown ? 'scale(1.5)' : 'scale(1)',
+
 
      border: '2px solid black',
-     animation: gameOver && !isBig &&isHovered ? 'shake 2s infinite'
+     animation: gameOver && !isBig &&isHovered  && selectedImage === null? 'shake 2s infinite'
      : correct && altShown && !gameOver? 'moveAndScale 1s 1' :
      incorrect && altShown && !gameOver? 'shakeAndScale 0.5s 1' : 'none' ,
    
@@ -93,16 +93,26 @@ const Card = ({ imageSrc,
 
     const textBoxStyle = {
       position: 'absolute',
-      top: '235%', // Position the text box at the bottom of the card
-      left: '250%', // Center the text box horizontally relative to the image
-      transform: 'translateX(-50%)', // Center the text box horizontally relative to the image
+      top:  selectedImage === Abu ||selectedImage === MajinVegeta ||selectedImage === Obito ||
+      selectedImage === Saiyans? '235%' : '125%', 
+       
+      marginLeft: selectedImage === Abu ? '1.5vw' :
+      selectedImage === MajinVegeta? '-3.5vw' :
+      selectedImage === Obito? '-7.5vw' :
+      selectedImage === Saiyans? '-11.5vw' :
+      selectedImage === Sasuke? '1rvw' :
+      selectedImage === Kakashi? '-3.5vw' :
+      selectedImage === War_Obito? '-40.5vw' :
+      selectedImage === Sainey? '-11.5vw' : null, // Center the text box horizontally relative to the image
+     // Center the text box horizontally relative to the image
       padding: '8px',
       background: 'linear-gradient(45deg, orange, red)',
       color: 'white',
-      fontSize: '1rem',
+      fontSize: '0.55rem',
       fontWeight: 'bold',
       display: isBig ? 'block' : 'none',
-      width: '80vw', // Show the text box when the card is enlarged (isBig=true)
+      width: '80vw',
+      height: '4rem',
     };
   
 
@@ -116,7 +126,7 @@ const Card = ({ imageSrc,
 
     <div className='card-container'
     style=
-    {{ position: 'relative', zIndex: isBig || isHovered && selectedImage === imageSrc || (correct && altShown) ? 1 : 0 ,
+    {{ position: 'relative', zIndex: isHovered ? 100 : 0 ,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {

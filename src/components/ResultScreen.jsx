@@ -18,19 +18,21 @@ const ResultScreen = ({ win, score }) => {
   }, [updateScreenWidth]);
 
   const styles = {
-    display: 'flex',
-    height: win !== null ? '46vw' : '0vw',
-    width: win !== null ? '93vw' : '0vw',
+    display: win === null ? 'none' : 'flex',
+    height:  '46vw'  ,
+    width:  '93vw'  ,
     maxWidth: '1500px',
     maxHeight: '750px',
     marginTop: win !== null ? '5rem' : '0vw',
     transform:
-      screenWidth >= 1919 ? 'translate(-5rem,-5rem)' :
-      screenWidth >= 1575 ? 'translate(-8rem, 1rem)' :
-      screenWidth >= 768 ? 'translate(-0.5rem, -2rem)' :
-      'translate(-1.5rem, -5rem)',
+    win === null ? 'scale(0.1)' :
+      screenWidth >= 1919 ? 'translate(-5rem,-5rem) scale(1)' :
+      screenWidth >= 1575 ? 'translate(-8rem, 1rem) scale(1)' :
+      screenWidth >= 767 ? 'translate(-0.5rem, -1.5rem) scale(1)' :
+      'translate(-1.3rem, -1rem) scale(1)',
     zIndex: 50,
-    animation: !win ? 'moveAndScale 2.33s infinite ease' : null
+  //  animation: !win ? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 0.3s ease',
+    transition: ' transform 1s ease'
   };
 
   const textStyle = {
@@ -50,7 +52,7 @@ const ResultScreen = ({ win, score }) => {
 
   return (
     <>
-      <img src={win ? gokuVsJiren : !win ? clown : null} style={styles} alt="Result" />
+      <img src={win ? gokuVsJiren : !win  && win !== null? clown : null} style={styles} alt="Result" />
       <div style={textStyle}>
         <p>{win ? `You Win! Your score was ${score}` : !win && win !== null ? `You Lose! Your score was ${score}` : null}</p>
       </div>

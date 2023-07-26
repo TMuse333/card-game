@@ -50,15 +50,30 @@ let previousRandomImage = null;
     
   
 
-    const startGame = () => {
-      // Set the gameOver state to false after a 3-second delay
-      setStartClicked(true)
+     const startGame = () => {
+    //   // Set the gameOver state to false after a 3-second delay
+      setStartClicked(true);
       setTimeout(() => {
         setGameOver(false);
       }, 3000);
     
-      // Other functions with a 3-second delay
-      setTimeout(() => {
+      // Check if win is not null
+      if (win !== null) {
+        setCountdown(4)
+        setTimeout(() => {
+          setErrors(0);
+          setWin(null);
+          setMatchCount(0);
+          setProgress(0);
+          setFilling(true);
+          setIsClicked(false);
+          setSelectedImage(null);
+          setAlternate(null);
+          setScore(0);
+          setStartClicked(true)
+        }, 3000);
+      } else {
+        // If win is null
         setErrors(0);
         setWin(null);
         setMatchCount(0);
@@ -68,8 +83,9 @@ let previousRandomImage = null;
         setSelectedImage(null);
         setAlternate(null);
         setScore(0);
-      }, 3000);
+      }
     };
+    
     
 
 
@@ -88,7 +104,6 @@ let previousRandomImage = null;
 
     const shuffleCards = () => {
 
-      // if (changeVar && !selectedImage){
 
       
       const shuffledCards = [...cards];
@@ -101,14 +116,23 @@ let previousRandomImage = null;
       setIncorrect(null)
       
       setOriginalOrder([...originalOrder])
+
+
         
     };
+
+
 
     const [correct,setCorrect] = useState(null)
     const [incorrect, setIncorrect] = useState(null)
     const [score,setScore] = useState(0)
 
+
+    const [points, setPoints] = useState(0)
+
     const handleClick = (altSrc, isBig) => {
+
+  
 
      const currentTime = Date.now();
 const elapsedTime = currentTime - startTimeRef.current;
@@ -120,15 +144,13 @@ const maxPoints = 100; // The maximum points that can be earned for answering qu
 
 
 
-let pointsEarned = Math.floor(maxPoints * timePercentage);
-pointsEarned = Math.max(pointsEarned, 0);
+let pointsEarned =  Math.floor(maxPoints * timePercentage)
+pointsEarned = Math.max(pointsEarned, 0)
+
 
       setCardClickCount(cardClickCount + 1)
 
-      gameOver ?(()=>{
-        setAlternate(null) 
-        return
-      })() : null 
+   
 
     setAlternate(altSrc) 
     setProgress(0)
@@ -156,6 +178,8 @@ pointsEarned = Math.max(pointsEarned, 0);
             setMatchCount(matchCount + 1);
             setCorrect(true)
             setScore(score + pointsEarned)
+            setPoints(pointsEarned)
+          
             setShowCorrect(true); // Show "Correct" message
             setTimeout(() => {
               setShowCorrect(false); // Hide "Correct" message after 1 second
@@ -166,6 +190,7 @@ pointsEarned = Math.max(pointsEarned, 0);
             endGame()
             setWin(true)
             setProgress(0)
+            
             })() : null
            
 
@@ -175,7 +200,7 @@ pointsEarned = Math.max(pointsEarned, 0);
               setRandomImage(getRandomImage()); // Change the random image
               shuffleCards()
               setSelectedImage(null)
-              console.log("Shuffle because of click")
+              
               setAlternate(null)
               setIsClicked(false)
               
@@ -201,8 +226,8 @@ pointsEarned = Math.max(pointsEarned, 0);
            })() : null
           setTimeout(()=>{
             setRandomImage(getRandomImage());
-             // Change the random image
-            shuffleCards()
+             
+           shuffleCards()
             setSelectedImage(null)
             console.log("Shuffle because of click")
             setAlternate(null)
@@ -214,7 +239,13 @@ pointsEarned = Math.max(pointsEarned, 0);
          
       setIsClicked(true);
 
+   
+
+      
+
     };
+
+    
 
 
     useEffect(() => {
@@ -299,6 +330,10 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
       }
     }, [startClicked]); 
 
+
+
+
+
     const progressStyle = {
 
       height: '100%',
@@ -346,6 +381,7 @@ return randomImage;
 };
 
 const homeScreen = () => {
+ 
 setWin(null)
 setScore(0)
 setErrors(0)
@@ -355,10 +391,18 @@ setProgress(0)
 setFilling(true)
 
 setAlternate(null)
-resetToOriginalOrder()
+setTimeout(()=>{
+  resetToOriginalOrder()
+},1000)
+
+
+
+
 }
 
 const [randomImage, setRandomImage] = useState(getRandomImage());
+
+// const points = handleClick(selectedImage,false)
 
 const resultStyle = {
 transform: gameOver ? 'translate(450px,200px) scale(0)' : 'translate(450px,200px)',
@@ -407,6 +451,19 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
 
 
 
+
+
+
+
+// useEffect(() => {
+//   let shuffleInterval;
+
+  
+//     // Set an interval to shuffle the cards every 3 seconds
+
+
+
+
     return (
         <>
 
@@ -418,17 +475,18 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
         imageSrc={randomImage}
         style={randomStyle}
         gameOver={gameOver}
+        isBig={false}
         />
         <p className={!gameOver && win === null ? null : 'no-show'}>{score}</p>
         <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
       </div>
 
- {/* Display "Correct" message */}
- {matchCount < 5 && showCorrect && <div className="correct">Correct!</div>}
-      {/* Display "Incorrect" message */}
+
+ {matchCount < 5 && showCorrect &&  <div className="correct">Correct! + {points}</div>}
+     
       {showIncorrect && <div className="incorrect">Incorrect!</div>}
 
-      { startClicked && countdown > 0  && <div className="countdown-text">{countdown}</div>}
+      { (startClicked && countdown > 0)  && <div className="countdown-text">{countdown}</div>}
 
       <button
        onClick={
@@ -464,7 +522,7 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
         >
 
          
-          {cards.map((card) => (
+          {cards.map((card,i) => (
            
             <Card
           
@@ -485,12 +543,14 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
             gameOver={gameOver}
             correct={correct}
             incorrect={incorrect}
-            text={cardData[0]}
+            text={cardData[i]}
            
             
             
             />
           ))}
+
+       
 
 
 
