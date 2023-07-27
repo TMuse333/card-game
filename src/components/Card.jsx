@@ -126,7 +126,7 @@ const Card = ({ imageSrc,
 
     <div className='card-container'
     style=
-    {{ position: 'relative', zIndex: isHovered ? 100 : 0 ,
+    {{ position: 'relative', zIndex: (isHovered && selectedImage === null ) || isBig? 100 : 0 ,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {
