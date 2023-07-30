@@ -152,7 +152,7 @@ pointsEarned = Math.max(pointsEarned, 0)
 
    
 
-    setAlternate(altSrc) 
+   selectedImage === null ?  setAlternate(altSrc) : null
     setProgress(0)
 
     setCorrect(null);
@@ -481,10 +481,15 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
         <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
       </div>
 
+    
 
- {matchCount < 5 && showCorrect &&  <div className="correct">Correct! + {points}</div>}
+ {matchCount < 5 && showCorrect &&  <div className="correct"
+ style={{zIndex:9000}}>Correct! + {points}</div>}
+
+{showIncorrect && <div className="incorrect"
+style={{zIndex:9000}}>Incorrect!</div>}
      
-      {showIncorrect && <div className="incorrect">Incorrect!</div>}
+   
 
       { (startClicked && countdown > 0)  && <div className="countdown-text">{countdown}</div>}
 

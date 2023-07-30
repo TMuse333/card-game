@@ -8,6 +8,7 @@ import Sasuke from '../images/sasuke.jpg';
 import Kakashi from '../images/kakashi_susanoo.jpg';
 import Sainey from '../images/ss2_sainey.jpg';
 import War_Obito from '../images/war_obito.jpg';
+import Vegeta from '../images/vegeta-battle.png'
 
 const Card = ({ imageSrc,
    onClick, 
@@ -76,14 +77,15 @@ const Card = ({ imageSrc,
       isBig && selectedImage === Sasuke && gameOver? 'scale(3) translate(60%,-25%)' :
       isBig && selectedImage === Kakashi && gameOver? 'scale(3) translate(20%,-25%)' :
       isBig && selectedImage === War_Obito && gameOver? 'scale(3) translate(-19%,-25%)' :
-      isBig && selectedImage === Sainey && gameOver? 'scale(3) translate(-61%,-25%)'  :
+      isBig && selectedImage === Vegeta && gameOver? 'scale(3) translate(-61%,-25%)'  :
       correct && altShown ? 'scale(1.5)' : 'scale(1)',
 
 
      border: '2px solid black',
      animation: gameOver && !isBig &&isHovered  && selectedImage === null? 'shake 2s infinite'
-     : correct && altShown && !gameOver? 'moveAndScale 1s 1' :
-     incorrect && altShown && !gameOver? 'shakeAndScale 0.5s 1' : 'none' ,
+     :   incorrect && altShown && !gameOver? 'shakeAndScale 0.5s 1' :
+     correct && altShown && !gameOver? 'moveAndScale 1s 1' :
+     'none' ,
    
    
     }
@@ -97,13 +99,13 @@ const Card = ({ imageSrc,
       selectedImage === Saiyans? '235%' : '125%', 
        
       marginLeft: selectedImage === Abu ? '1.5vw' :
-      selectedImage === MajinVegeta? '-3.5vw' :
-      selectedImage === Obito? '-7.5vw' :
+      selectedImage === MajinVegeta? '-15.5vw' :
+      selectedImage === Obito? '-35.5vw' :
       selectedImage === Saiyans? '-11.5vw' :
       selectedImage === Sasuke? '1rvw' :
-      selectedImage === Kakashi? '-3.5vw' :
+      selectedImage === Kakashi? '-15.5vw' :
       selectedImage === War_Obito? '-40.5vw' :
-      selectedImage === Sainey? '-11.5vw' : null, // Center the text box horizontally relative to the image
+      selectedImage === Vegeta? '-60.5vw' : null, // Center the text box horizontally relative to the image
      // Center the text box horizontally relative to the image
       padding: '8px',
       background: 'linear-gradient(45deg, orange, red)',
@@ -126,7 +128,7 @@ const Card = ({ imageSrc,
 
     <div className='card-container'
     style=
-    {{ position: 'relative', zIndex: (isHovered && selectedImage === null ) || isBig? 100 : 0 ,
+    {{ position: 'relative', zIndex:( (isHovered && selectedImage === null ) || isBig ) && (correct === null && incorrect === null)? 100 : (correct != null || incorrect !== null) && !altShown ? -1 : 0 ,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {

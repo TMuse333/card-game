@@ -8,6 +8,7 @@ import Sasuke from '../images/sasuke.jpg';
 import Kakashi from '../images/kakashi_susanoo.jpg';
 import Sainey from '../images/ss2_sainey.jpg';
 import War_Obito from '../images/war_obito.jpg';
+import Vegeta from '../images/vegeta-battle.png'
 
 import Sudo1 from '../images/pokemon-sudowoodo.gif'
 import Sudo2 from '../images/3b82c72924a818c910bd4fd3b8557dc8fed0f14d_hq.gif'
@@ -25,7 +26,7 @@ import Majikarp from '../images/pokemon-magikarp.gif'
    
   "This is Majin Vegeta","This is obito as ten tails jinchurkiki",
   "This is goku and vegeta", "this is Sasuke",
-  "This is Kakashi Hatake", "this is Obito", "this is Sainey!"
+  "This is Kakashi Hatake", "this is Obito", "this is Vegeta!"
 ]
 
 export const card_names =
@@ -37,7 +38,7 @@ export const card_names =
     {imageSrc: Sasuke, altSrc: Turtwig, order : 4},
     {imageSrc: Kakashi, altSrc: Hitmonlee, order : 5},
     {imageSrc: War_Obito, altSrc: Squirtle, order : 6},
-    {imageSrc: Sainey, altSrc: Majikarp, order : 7}
+    {imageSrc: Vegeta, altSrc: Majikarp, order : 7}
     ]
 
 

@@ -7,10 +7,25 @@ const NavBar = () => {
 
   // Array containing your rules explanation
   const rules = [
-    'Rule 1: ...',
-    'Rule 2: ...',
-    'Rule 3: ...',
-    'Rule 4: ...'
+    'In this card game, there are 8 cards, each card'+
+    " has an alternative picture on the back of it, which can "+
+    "be accessed by simply clicking on the desired card and can be "+
+    "flipped back by reclicking it.",
+
+
+    'When you click on the start button, the alternative image '+
+    "that you must find will be displayed above the rows of cards. "+
+    "Your task is to find the card that has that image on the back",
+
+
+    "The quicker you correctly match the cards, the more points you get"+
+    "taking too long to answer or an incorect selection 5 times "+
+    "will result in you losing the game",
+
+
+    'You have 1 minute to get as many matches as possible and the order of '+
+    "the cards is randomized every turn. Every 5 turns you will also "+
+    "have less time to make a selection, good luck!"
     // Add more rules as needed
   ];
 

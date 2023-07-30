@@ -340,8 +340,10 @@ ul.navLinks li a {
   border-radius: 15px; /* Adjust the value as needed to control the smoothness */
   padding: 10px 20px;
   box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
-
+  margin-bottom: -4rem;
   animation: correctText 2s ease forwards;
+  z-index: 5000;
+  transform: translate(0,-3rem);
 }
 
 .incorrect {
@@ -353,7 +355,9 @@ ul.navLinks li a {
   padding: 10px 20px;
   box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
   transform: translateY(5rem);
-  animation: correctText 2s ease forwards;
+  /* animation: correctText 3s ease forwards; */
+  margin-bottom: -4rem;
+  z-index: 5000;
 }
 
 .popup {
@@ -374,10 +378,13 @@ ul.navLinks li a {
 
 .popup-content {
   background-color: rgb(168, 78, 78);
-  padding: 20px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  transform: translateY(1rem);
   
 }
 
@@ -415,52 +422,8 @@ ul.navLinks li a {
   border: 2px solid gold
 }
 
-
-@keyframes fadeIn {
-  0%{
-    transform: scale(0);
-    opacity: 0;
-  }
-  100%{
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-
-@keyframes quantum-animation {
-  0% {
-    background-position: -100% -100%;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-@keyframes shake {
-  0% { transform: translate(2px, 2px) scale(1); }
-  25% { transform: translate(6px, -6px) scale(1.5); }
-  50% { transform: translate(-2px, -2px) scale(1); }
-  75% { transform: translate(6px, 6px) scale(1.5); }
-  100% { transform: translate(2px, 2px) scale(1); }
-}
-
-@keyframes moveAndScale {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.5);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-
 @keyframes shakeAndScale {
-  /* 0%, 100% {
-    transform: translateX(0) scale(0.9);
-  } */
+  
   5%{
     transform: translateX(-25px) scale(0.9);
   }
@@ -507,6 +470,50 @@ ul.navLinks li a {
 
 
 }
+
+
+@keyframes fadeIn {
+  0%{
+    transform: scale(0);
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+@keyframes quantum-animation {
+  0% {
+    background-position: -100% -100%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes shake {
+  0% { transform: translate(2px, 2px) scale(1); }
+  25% { transform: translate(6px, -6px) scale(1.5); }
+  50% { transform: translate(-2px, -2px) scale(1); }
+  75% { transform: translate(6px, 6px) scale(1.5); }
+  100% { transform: translate(2px, 2px) scale(1); }
+}
+
+@keyframes moveAndScale {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.5);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+
 
 @keyframes animateGradient {
   0% {
