@@ -82,8 +82,8 @@ const Card = ({ imageSrc,
 
 
      border: '2px solid black',
-     animation: gameOver && !isBig &&isHovered  && selectedImage === null? 'shake 2s infinite'
-     :   incorrect && altShown && !gameOver? 'shakeAndScale 0.5s 1' :
+     animation: gameOver && !isBig &&isHovered  && selectedImage === null
+     ? 'shake 2s infinite':   incorrect ? 'shakeAndScale 0.5s 1' :
      correct && altShown && !gameOver? 'moveAndScale 1s 1' :
      'none' ,
    

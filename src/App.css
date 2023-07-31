@@ -144,6 +144,8 @@ ul.navLinks li a {
   grid-gap: 0.5em;
   margin-top: 10rem;
   margin-left: -1rem;
+  margin-bottom: 3rem;
+  transition: ease 0.3s;
 
 }
 
@@ -201,7 +203,7 @@ ul.navLinks li a {
   z-index: 333;
   display: grid;
   
-  transform: translateY(5rem);
+  transform: translateY(4rem);
   
 }
 
@@ -224,11 +226,11 @@ ul.navLinks li a {
   height: auto;
  height: 2.3rem;
   display: grid;
-  transform: translate(0,4rem);
+  transform: translate(-1rem,4rem);
 }
 
 .start-button:hover {
-  transform: scale(1.33) translateY(4rem);
+  transform: scale(1.33) translateY(3rem);
 }
 
 .home-button {
@@ -243,7 +245,7 @@ ul.navLinks li a {
   height: 2rem;
   width:10vw;
   font-size: 0.75rem;
-  transform: translate(4rem,2rem);
+  transform: translate(7rem,2rem);
   height: 2.3rem;
 
 
@@ -281,7 +283,7 @@ ul.navLinks li a {
   transform: scale(1);
   transition: all 0.7s ease-in;
   z-index: -2;
-  margin-top: 2rem;
+  margin-top: -2rem;
 }
 
 .score-container {
@@ -344,6 +346,7 @@ ul.navLinks li a {
   animation: correctText 2s ease forwards;
   z-index: 5000;
   transform: translate(0,-3rem);
+  position: relative;
 }
 
 .incorrect {
@@ -409,18 +412,36 @@ ul.navLinks li a {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   transform: translateY(8.5rem);
-  
+  }
 
- 
 
-  
- 
+  .countdown-text{
+      transform: translateY(3rem);
+      background: linear-gradient(45deg, #ff00cc, #3333ff);
+      -webkit-background-clip: text;
+      background-clip: text; 
+      color: transparent;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-size: 5rem;
+      margin-bottom: -7.5rem;
 }
+     
+      
+  
 
 .popup-buttons button {
   margin: 5px;
   border: 2px solid gold
 }
+
+.points-text {
+  color:green;
+  font-size: 2rem;
+  margin-bottom: 3em;
+}
+
+
+
 
 @keyframes shakeAndScale {
   
@@ -529,27 +550,33 @@ ul.navLinks li a {
 
 @keyframes correctText {
   0% {
-    transform: scale(1.5) translateY(5rem);
+    transform: scale(1.25) translateY(5rem);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
   }
 
   20% {
     transform: scale(1)  translateY(5rem);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
   }
 
   40% {
-    transform: scale(1.5)  translateY(5rem);
+    transform: scale(1.25)  translateY(5rem);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
   }
 
   60% {
     transform: scale(1)  translateY(5rem);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
   }
 
   80% {
-    transform: scale(1.5)  translateY(5rem);
+    transform: scale(1.25)  translateY(5rem);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
   }
 
   100% {
     transform: scale(1)  translateY(5rem);
+    text-shadow: 0 0 20px rgba(0, 255, 0, 1);
   }
 
   

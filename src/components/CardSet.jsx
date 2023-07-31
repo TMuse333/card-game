@@ -59,7 +59,7 @@ let previousRandomImage = null;
     
       // Check if win is not null
       if (win !== null) {
-        setCountdown(4)
+       
         setTimeout(() => {
           setErrors(0);
           setWin(null);
@@ -212,7 +212,7 @@ pointsEarned = Math.max(pointsEarned, 0)
         : !isClicked  && !gameOver ?(()=>{
           setIsClicked(true)
           setErrors(errors + 1);
-          
+          setIncorrect(true)
           setShowIncorrect(true); // Show "Incorrect" message
       setTimeout(() => {
         setShowIncorrect(false); // Hide "Incorrect" message after 1 second
@@ -276,12 +276,12 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
             shuffleCards();
             setErrors(errors + 1);
 
-           /* errors === 4 ? (()=>{
+            errors === 4 ? (()=>{
               endGame()
               setWin(false)
               setProgress(0)
               return
-             })() : null*/
+             })() : null
              
              setTooSlow(true)
             startTime = currentTime;  
@@ -393,7 +393,7 @@ setFilling(true)
 setAlternate(null)
 setTimeout(()=>{
   resetToOriginalOrder()
-},1000)
+},800)
 
 
 
@@ -477,7 +477,7 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
         gameOver={gameOver}
         isBig={false}
         />
-        <p className={!gameOver && win === null ? null : 'no-show'}>{score}</p>
+        <p className={!gameOver && win === null ? 'points-text' : 'no-show'}>{score}</p>
         <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
       </div>
 

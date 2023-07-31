@@ -20,12 +20,14 @@ const ResultScreen = ({ win, score }) => {
   }, [updateScreenWidth]);
 
   const styles = {
-    display: win === null ? 'none' : 'flex',
-    height: '80vw',
+    display: win === null ? 'none' : 'block',
+    height: '70vw',
     width: '50vw',
-  
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '3rem',
     zIndex: 50,
-  //  animation: !win ? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 0.3s ease',
+    animation: !win ? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
     transition: ' transform 1s ease',
 
   };
@@ -40,9 +42,9 @@ const ResultScreen = ({ win, score }) => {
     animation: 'animateGradient 10s linear infinite',
     width: 'fit-content',
     
-    fontSize: '3rem',
-    marginTop:screenWidth >= 1919 ? '-4rem' : '1rem',
-    marginLeft: screenWidth >= 1919 ? '25rem' : screenWidth >= 767 ? '9rem' : '-1.5344rem',
+    fontSize: '2.5rem',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   };
 
   return (
