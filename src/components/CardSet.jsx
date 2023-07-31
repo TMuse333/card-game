@@ -190,6 +190,7 @@ pointsEarned = Math.max(pointsEarned, 0)
             endGame()
             setWin(true)
             setProgress(0)
+           
             
             })() : null
            
@@ -220,6 +221,7 @@ pointsEarned = Math.max(pointsEarned, 0)
           
           errors === 4 ? (()=>{
             setGameOver(true)
+           
             
             setWin(false)
             setProgress(0)
@@ -470,6 +472,11 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
 <div className={gameOver? 'object-card-gameOver' : 'object-card'}
         >
 
+{matchCount < 5 && showCorrect &&  <div className="correct"
+ style={{zIndex:9000}}>Correct! + {points}</div>}
+ {showIncorrect && <div className="incorrect"
+style={{zIndex:9000}}>Incorrect!</div>}
+
         <Card
         additonalStyle={additionalCardStyle}
         imageSrc={randomImage}
@@ -483,11 +490,9 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
 
     
 
- {matchCount < 5 && showCorrect &&  <div className="correct"
- style={{zIndex:9000}}>Correct! + {points}</div>}
 
-{showIncorrect && <div className="incorrect"
-style={{zIndex:9000}}>Incorrect!</div>}
+
+
      
    
 

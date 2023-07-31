@@ -101,7 +101,7 @@ const Card = ({ imageSrc,
       marginLeft: selectedImage === Abu ? '1.5vw' :
       selectedImage === MajinVegeta? '-15.5vw' :
       selectedImage === Obito? '-35.5vw' :
-      selectedImage === Saiyans? '-11.5vw' :
+      selectedImage === Saiyans? '-60.5vw' :
       selectedImage === Sasuke? '1rvw' :
       selectedImage === Kakashi? '-15.5vw' :
       selectedImage === War_Obito? '-40.5vw' :
@@ -128,7 +128,7 @@ const Card = ({ imageSrc,
 
     <div className='card-container'
     style=
-    {{ position: 'relative', zIndex:( (isHovered && selectedImage === null ) || isBig ) && (correct === null && incorrect === null)? 100 : (correct != null || incorrect !== null) && !altShown ? -1 : 0 ,
+    {{ position: 'relative', zIndex:( (isHovered && selectedImage === null ) || isBig ) && (correct === null && incorrect === null)? 900 : (correct != null || incorrect !== null) && !altShown ? -1 : 0 ,
    }}>
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {
@@ -137,6 +137,7 @@ const Card = ({ imageSrc,
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseleave}
         style={mergedStyle}
+        onDoubleClick={() => {shiftClick()}}
        
 
         />

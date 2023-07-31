@@ -342,10 +342,11 @@ ul.navLinks li a {
   border-radius: 15px; /* Adjust the value as needed to control the smoothness */
   padding: 10px 20px;
   box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
-  margin-bottom: -4rem;
+  margin-bottom: -10rem;
+  margin-top: 1rem;
   animation: correctText 2s ease forwards;
-  z-index: 5000;
-  transform: translate(0,-3rem);
+  z-index: 0;
+  /* transform: translate(0,-100rem); */
   position: relative;
 }
 
@@ -409,9 +410,13 @@ ul.navLinks li a {
 }
 
 .popup-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  transform: translateY(8.5rem);
+  /* display: grid;
+  grid-template-columns: repeat(2, 4fr); */
+  transform: translateY(5.5rem);
+  width: auto;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
   }
 
 
@@ -435,10 +440,21 @@ ul.navLinks li a {
 }
 
 .points-text {
-  color:green;
+  background-image: linear-gradient(to right, #ff0000, #ff6a00, #ffbb00, #ff6a00, #ff0000);
+  /* Set the text color to white for better visibility */
+  color: white;
   font-size: 2rem;
   margin-bottom: 3em;
 }
+
+
+
+
+.fade-out {
+  opacity: 0; /* Set the opacity to 0 to create the fade-out effect */
+  transition: opacity 0.5s ease-out; /* Define the transition properties (adjust the duration and timing function as needed) */
+}
+
 
 
 
