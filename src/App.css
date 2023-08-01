@@ -359,9 +359,25 @@ ul.navLinks li a {
   padding: 10px 20px;
   box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
   transform: translateY(5rem);
-  /* animation: correctText 3s ease forwards; */
+   animation: incorrectText 2s ease forwards; 
   margin-bottom: -4rem;
   z-index: 5000;
+}
+
+.too-slow {
+ 
+    font-family: 'Pacifico', cursive;
+    color: white;
+    font-size: 36px;
+    background: linear-gradient(135deg, #826865, #35096e); /* Gradient background */
+    border-radius: 15px; /* Adjust the value as needed to control the smoothness */
+    padding: 10px 20px;
+    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    transform: translateY(5rem);
+     animation: incorrectText 3s ease forwards; 
+    margin-bottom: -4rem;
+    z-index: 5000;
+  
 }
 
 .popup {
@@ -451,7 +467,7 @@ ul.navLinks li a {
 
 
 .fade-out {
-  opacity: 0; /* Set the opacity to 0 to create the fade-out effect */
+  opacity: 0.1; /* Set the opacity to 0 to create the fade-out effect */
   transition: opacity 0.5s ease-out; /* Define the transition properties (adjust the duration and timing function as needed) */
 }
 
@@ -519,6 +535,18 @@ ul.navLinks li a {
     transform: scale(1);
   }
 }
+
+@keyframes fadeOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
 
 
 @keyframes quantum-animation {
@@ -593,6 +621,42 @@ ul.navLinks li a {
   100% {
     transform: scale(1)  translateY(5rem);
     text-shadow: 0 0 20px rgba(0, 255, 0, 1);
+  }
+
+  
+  
+}
+
+
+@keyframes incorrectText {
+  0% {
+    transform: scale(1.25) translateY(5rem);
+    text-shadow: 0 0 20px rgb(251, 27, 27);
+  }
+
+  20% {
+    transform: scale(1)  translateY(5rem);
+    text-shadow: 0 0 20px rgb(251, 27, 27);
+  }
+
+  40% {
+    transform: scale(1.25)  translateY(5rem);
+    text-shadow: 0 0 20px rgb(251, 27, 27);
+  }
+
+  60% {
+    transform: scale(1)  translateY(5rem);
+    text-shadow: 0 0 20px rgb(251, 27, 27);
+  }
+
+  80% {
+    transform: scale(1.25)  translateY(5rem);
+    text-shadow: 0 0 20px rgb(251, 27, 27);
+  }
+
+  100% {
+    transform: scale(1)  translateY(5rem);
+    text-shadow: 0 0 20px rgb(251, 27, 27);
   }
 
   

@@ -89,8 +89,10 @@ const NavBar = () => {
     backgroundSize: '200% 200%',
     animation: 'quantum-animation 5s linear infinite',
     width: '100%',
-    height: '25%',
+    height: '50%',
     paddingTop: '20px',
+    zIndex: '2099200',
+    position: 'relative'
   };
 
 
@@ -98,7 +100,10 @@ const NavBar = () => {
     marginTop: '2rem',
     marginLeft: 'auto',
     marginRight: 'auto',
+    animation: fadeOutAnimation ? 'fadeOut 1s ease' : null,
   };
+
+ 
 
   return (
     <>
@@ -141,19 +146,20 @@ const NavBar = () => {
       )}
 
       {/* About pop-up */}
-    {showAbout && (
-    <div className={showAbout ? `popup-show ${fadeOutAnimation ? 'fade-out' : ''}` : 'popup'}>
-        <div className='about-content'
-        style={aboutContentStyle}>
-        <p>
-       This is a simple card game to help develop my web developing skills.
-       This is my first project and any feedback is greatly appreciated.
-       </p>
-       <button onClick={handleBackToHome}
-       className="about-button"
-       style={aboutButtonStyle}>Back to Home</button>
-       </div>
-      </div>
+      {showAbout && (
+  <div className="popup-show">
+    <div className='about-content' style={aboutContentStyle}>
+      <p>
+        This is a simple card game to help develop my web developing skills.<br/>
+        This is my first project and any feedback is greatly appreciated.<br/>
+        You can look at the cards that happen to be my own art or play the game.<br/>
+        The rules of the game can been seen by click on show rules
+      </p>
+      <button onClick={handleBackToHome} className="about-button">
+        Back to Home
+      </button>
+    </div>
+  </div>
     )}
 
       <header>{/* Your header content */}</header>

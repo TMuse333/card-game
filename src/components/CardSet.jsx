@@ -9,6 +9,7 @@ import Hitmonlee from '../images/pokémon-hitmonlee.gif'
 import Squirtle from '../images/giphy.gif'
 import Majikarp from '../images/pokemon-magikarp.gif'
 import ResultScreen from './ResultScreen';
+import CountdownTimer from './CountDown';
 
  import Card from './Card';
 
@@ -43,6 +44,8 @@ let previousRandomImage = null;
     const [showCorrect, setShowCorrect] = useState(false);
     const [showIncorrect, setShowIncorrect] = useState(false);
     const [showSlow,setShowSlow] = useState(false)
+    const [remainingTime, setRemainingTime] = useState(30);
+    const [timer,setTimer] = useState(false)
 
     let limit = 4
 
@@ -50,17 +53,35 @@ let previousRandomImage = null;
     
   
 
-     const startGame = () => {
-    //   // Set the gameOver state to false after a 3-second delay
-      setStartClicked(true);
-      setTimeout(() => {
-        setGameOver(false);
-      }, 3000);
-    
-      // Check if win is not null
-      if (win !== null) {
-       
+    const startGame = () => {
+      //   // Set the gameOver state to false after a 3-second delay
+        setStartClicked(true);
         setTimeout(() => {
+          setGameOver(false);
+          setTimer(true)
+        }, 3000);
+
+
+     
+      
+        // Check if win is not null
+        if (win !== null) {
+         
+          setTimeout(() => {
+            setErrors(0);
+            setWin(null);
+            setMatchCount(0);
+            setProgress(0);
+            setFilling(true);
+            setIsClicked(false);
+            setSelectedImage(null);
+            setAlternate(null);
+            setScore(0);
+            setStartClicked(true)
+            
+          }, 3000);
+        } else {
+          // If win is null
           setErrors(0);
           setWin(null);
           setMatchCount(0);
@@ -70,21 +91,18 @@ let previousRandomImage = null;
           setSelectedImage(null);
           setAlternate(null);
           setScore(0);
-          setStartClicked(true)
-        }, 3000);
-      } else {
-        // If win is null
-        setErrors(0);
-        setWin(null);
-        setMatchCount(0);
-        setProgress(0);
-        setFilling(true);
-        setIsClicked(false);
-        setSelectedImage(null);
-        setAlternate(null);
-        setScore(0);
-      }
-    };
+          
+         
+        }
+
+        setTimeout(()=>{
+          setWin(true)
+          endGame()
+          setProgress(0)
+          setTimer(false)
+        }, 60000)
+      };
+    
     
     
 
@@ -186,13 +204,7 @@ pointsEarned = Math.max(pointsEarned, 0)
             }, 2000);
 
            
-            matchCount === limit ? (()=>{
-            endGame()
-            setWin(true)
-            setProgress(0)
-           
-            
-            })() : null
+        
            
 
             
@@ -217,7 +229,7 @@ pointsEarned = Math.max(pointsEarned, 0)
           setShowIncorrect(true); // Show "Incorrect" message
       setTimeout(() => {
         setShowIncorrect(false); // Hide "Incorrect" message after 1 second
-      }, 1000);
+      }, 2000);
           
           errors === 4 ? (()=>{
             setGameOver(true)
@@ -248,7 +260,7 @@ pointsEarned = Math.max(pointsEarned, 0)
     };
 
     
-
+//progress bar
 
     useEffect(() => {
       startTimeRef.current = Date.now();
@@ -262,8 +274,8 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
     
       const interval = setInterval(() => {
         if (!isClicked && !gameOver) {
-          
-          setFilling(true)
+          setShowSlow(false)
+         // setFilling(true)
           const currentTime = Date.now();
           const elapsedTime = currentTime - startTime;
           const progress = (elapsedTime / intervalDuration) * 100;
@@ -271,7 +283,7 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
 
      
     
-          if (elapsedTime >= intervalDuration+1000) {
+          if ((elapsedTime >= intervalDuration+1000)) {
             
             setRandomImage(getRandomImage());
             setAlternate(null);
@@ -286,12 +298,14 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
              })() : null
              
              setTooSlow(true)
+             setShowSlow(true)
             startTime = currentTime;  
             setFilling(false) 
             setProgress(0); 
           }
           // setTooSlow(false)
           setProgress(progress);
+          setFilling(true)
           
          
         }
@@ -337,10 +351,10 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
 
 
     const progressStyle = {
-
+      //width 1s linear
       height: '100%',
       backgroundColor: 'green',
-      transition: 'width 1s linear',
+      transition: filling? 'width 1s linear' : 'width 1s linear',
       overflow: 'hidden'
     }
   
@@ -469,13 +483,20 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
     return (
         <>
 
+        <CountdownTimer
+        gameOver={timer}/>
+
 <div className={gameOver? 'object-card-gameOver' : 'object-card'}
         >
 
-{matchCount < 5 && showCorrect &&  <div className="correct"
+
+
+{showCorrect &&  <div className="correct"
  style={{zIndex:9000}}>Correct! + {points}</div>}
  {showIncorrect && <div className="incorrect"
 style={{zIndex:9000}}>Incorrect!</div>}
+
+{showSlow && <div className="too-slow" style={{ zIndex: 9000 }}>Too Slow!</div>}
 
         <Card
         additonalStyle={additionalCardStyle}
@@ -487,6 +508,10 @@ style={{zIndex:9000}}>Incorrect!</div>}
         <p className={!gameOver && win === null ? 'points-text' : 'no-show'}>{score}</p>
         <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
       </div>
+
+      <div className="time-text">
+  {startClicked && !gameOver && remainingTime > 0 && remainingTime}
+</div>
 
     
 
@@ -528,7 +553,7 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
 
        
 
-        <div className={matchCount >=limit + 1 || errors >=5 ? 'cardSetGameOver' : 'cardSet'}
+        <div className={ errors >=5 || win? 'cardSetGameOver' : 'cardSet'}
         >
 
          
