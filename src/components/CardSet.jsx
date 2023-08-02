@@ -46,6 +46,7 @@ let previousRandomImage = null;
     const [showSlow,setShowSlow] = useState(false)
     const [remainingTime, setRemainingTime] = useState(30);
     const [timer,setTimer] = useState(false)
+    const [loss,setLoss] = useState(null)
 
     let limit = 4
 
@@ -65,23 +66,23 @@ let previousRandomImage = null;
      
       
         // Check if win is not null
-        if (win !== null) {
+        // if (win !== null) {
          
-          setTimeout(() => {
-            setErrors(0);
-            setWin(null);
-            setMatchCount(0);
-            setProgress(0);
-            setFilling(true);
-            setIsClicked(false);
-            setSelectedImage(null);
-            setAlternate(null);
-            setScore(0);
-            setStartClicked(true)
+        //   setTimeout(() => {
+        //     setErrors(0);
+        //     setWin(null);
+        //     setMatchCount(0);
+        //     setProgress(0);
+        //     setFilling(true);
+        //     setIsClicked(false);
+        //     setSelectedImage(null);
+        //     setAlternate(null);
+        //     setScore(0);
+        //     setStartClicked(true)
             
-          }, 3000);
-        } else {
-          // If win is null
+        //   }, 3000);
+        // } 
+        
           setErrors(0);
           setWin(null);
           setMatchCount(0);
@@ -93,14 +94,19 @@ let previousRandomImage = null;
           setScore(0);
           
          
-        }
+        
+
+       
+
+        
 
         setTimeout(()=>{
           setWin(true)
           endGame()
           setProgress(0)
           setTimer(false)
-        }, 60000)
+        }, 63500)
+      
       };
     
     
@@ -458,7 +464,7 @@ marginTop: '-3rem'
 
 
 const additionalCardStyle = {
-transform: correct  ? 'scale(1.5)' : incorrect ? 'scale(0.5)' : 'scale(1)',
+transform: correct  ? 'scale(1.2)' : incorrect ? 'scale(0.5)' : 'scale(1)',
 zIndex: correct ? 1000 : 0,
 boxShadow: correct ? '0 0 25px 25px green' : incorrect ? '0 0 25px 25px red' : null
 };
@@ -483,11 +489,13 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
     return (
         <>
 
-        <CountdownTimer
-        gameOver={timer}/>
+        
 
 <div className={gameOver? 'object-card-gameOver' : 'object-card'}
         >
+          <CountdownTimer
+        gameOver={timer}
+        win={win}/>
 
 
 
@@ -509,9 +517,7 @@ style={{zIndex:9000}}>Incorrect!</div>}
         <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
       </div>
 
-      <div className="time-text">
-  {startClicked && !gameOver && remainingTime > 0 && remainingTime}
-</div>
+
 
     
 
@@ -536,14 +542,14 @@ style={{zIndex:9000}}>Incorrect!</div>}
   <button className={win!== null ? 'home-button' : 'no-show'}
 onClick={()=>homeScreen()}>Home screen</button>
 
-<div className="progress-bar"
+{/* <div className="progress-bar"
 style={{transform: gameOver? 'scale(0)' : 'scale(1)'}}>
 <div
 className="progress-bar-filled"
 style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle, width: `${progress}%` }}
 ></div>
 
-</div>
+</div> */}
 
 
 

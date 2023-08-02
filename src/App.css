@@ -258,9 +258,9 @@ ul.navLinks li a {
   height: 5px;
   background-color: red;
   overflow: hidden;
-  position: fixed;
-  top: 20%;
-  left: 5%;
+  position: relative;
+  /* top: 20%;
+  left: 5%; */
 }
 
 .quantum-background {
@@ -342,7 +342,7 @@ ul.navLinks li a {
   border-radius: 15px; /* Adjust the value as needed to control the smoothness */
   padding: 10px 20px;
   box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
-  margin-bottom: -10rem;
+  margin-bottom: -5rem;
   margin-top: 1rem;
   animation: correctText 2s ease forwards;
   z-index: 0;

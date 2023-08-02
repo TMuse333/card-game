@@ -27,7 +27,7 @@ const ResultScreen = ({ win, score }) => {
     marginRight: 'auto',
     marginTop: '3rem',
     zIndex: 50,
-    animation: !win ? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
+    animation: !win || (score === 0  )? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
     transition: ' transform 1s ease',
 
   };
@@ -49,9 +49,9 @@ const ResultScreen = ({ win, score }) => {
 
   return (
     <>
-      <img src={win ? saiyans : !win  && win !== null? clown : null} style={styles} alt="Result" />
+      <img src={score === 0 ? clown :win ? saiyans : !win  && win !== null? clown : null} style={styles} alt="Result" />
       <div style={textStyle}>
-        <p>{win ? `You Win! Your score was ${score}` : !win && win !== null ? `You Lose! Your score was ${score}` : null}</p>
+        <p>{score === 0 && win !== null? `you scored zero, you're too slow` :win ? ` Your score was ${score}` : !win && win !== null ? `You Lose! Your score was ${score}` : null}</p>
       </div>
     </>
   );

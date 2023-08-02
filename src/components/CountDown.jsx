@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const CountdownTimer = ({gameOver}) => {
+const CountdownTimer = ({gameOver,win}) => {
   const [remainingTime, setRemainingTime] = useState(60);
 
 
@@ -24,17 +24,25 @@ const CountdownTimer = ({gameOver}) => {
   }, [gameOver,remainingTime]);
 
   useEffect(() => {
-    if (remainingTime === 0) {
-      // Handle actions to be performed after the countdown is finished
-      // For example, setWinGame(true) if you want the player to win after 1 minute
+    if (remainingTime === 0 || (!win && win !== null)) {
+     setTimeout(()=>{
+        setRemainingTime(60)
+     },4000)
     }
-  }, [remainingTime]);
+  }, [remainingTime,win]);
+
+  const timerStyle={
+    fontSize: '1rem',
+    marginTop: '-1.5rem',
+  // marginRight: '2rem',
+  }
 
 
   return (
     <div>
       {remainingTime > 0 ? (
-        <div>{`Time Remaining: ${remainingTime} seconds`}</div>
+        <div
+        style={timerStyle}>{`Time Remaining: ${remainingTime} seconds`}</div>
       ) : (
         <div>Time's up!</div>
       )}
