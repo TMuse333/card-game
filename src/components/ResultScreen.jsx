@@ -20,7 +20,7 @@ const ResultScreen = ({ win, score, showResult }) => {
   }, [updateScreenWidth]);
 
   const styles = {
-    display: win === null  && !showResult? 'none' : 'block',
+    display: win === null || !showResult? 'none' : 'block',
     height: '70vw',
     width: '50vw',
     marginLeft: 'auto',

@@ -21,8 +21,8 @@ import Majikarp from '../images/pokemon-magikarp.gif'
  
  export const cardData = [
   "This is Aboubacar. he is my own custom character " 
-  +"that I designed based off my own physique who I plan"
-  +" to have as the main character in his own video game one day",
+  +"that I designed based off my own physique "
+  ,
    
   "This is Majin Vegeta","This is obito as ten tails jinchurkiki",
   "This is goku and vegeta", "this is Sasuke",

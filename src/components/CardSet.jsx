@@ -32,7 +32,7 @@ let previousRandomImage = null;
     const [matchCount,setMatchCount] = useState(0)
     const [errors, setErrors] = useState(0)
     const [isClicked, setIsClicked] = useState(false)
- 
+    const [transition, setTransition] = useState(false)
     const [gameOver, setGameOver] = useState(true)
     const [progress, setProgress] = useState(0)
     const [filling, setFilling] = useState(true)
@@ -44,12 +44,9 @@ let previousRandomImage = null;
     const [showCorrect, setShowCorrect] = useState(false);
     const [showIncorrect, setShowIncorrect] = useState(false);
     const [showSlow,setShowSlow] = useState(false)
-    const [remainingTime, setRemainingTime] = useState(30);
+    const [remainingTime, setRemainingTime] = useState(20);
     const [timer,setTimer] = useState(false)
-    const [showResult,setShowResult] = useState(false)
-    const [exp,setExp] = useState(true)
-    const [home,setHome] = useState(null)
-    
+    const [showResult,setShowResult] = useState(true)
 
     let limit = 4
 
@@ -58,36 +55,61 @@ let previousRandomImage = null;
   
 
     const startGame = () => {
-      setStartClicked(true);
-    
-      setTimeout(() => {
-        setGameOver(false);
-        setTimer(true);
-      }, 3000);
-    
-      setErrors(0);
-      setWin(null);
-      setMatchCount(0);
-      setProgress(0);
-      setFilling(true);
-      setIsClicked(false);
-      setSelectedImage(null);
-      setAlternate(null);
-      setScore(0);
+      //   // Set the gameOver state to false after a 3-second delay
+        setStartClicked(true);
+        setRemainingTime(20)
+        setTimeout(() => {
+          setGameOver(false);
+          setTimer(true)
+        }, 3000);
 
-      if(exp){
-    
-     setTimeout(() => {
-          setWin(true);
-          endGame();
+
+     
+      
+        // Check if win is not null
+        // if (win !== null) {
+         
+        //   setTimeout(() => {
+        //     setErrors(0);
+        //     setWin(null);
+        //     setMatchCount(0);
+        //     setProgress(0);
+        //     setFilling(true);
+        //     setIsClicked(false);
+        //     setSelectedImage(null);
+        //     setAlternate(null);
+        //     setScore(0);
+        //     setStartClicked(true)
+            
+        //   }, 3000);
+        // } 
+        
+          setErrors(0);
+          setWin(null);
+          setMatchCount(0);
           setProgress(0);
-          setTimer(false);
-        }, 33500);
-      }
-      }
-    
-    
-    
+          setFilling(true);
+          setIsClicked(false);
+          setSelectedImage(null);
+          setAlternate(null);
+          setScore(0);
+          
+         
+        
+
+       
+
+        
+
+        setTimeout(()=>{
+          setWin(true)
+          endGame()
+          setProgress(0)
+          setTimer(false)
+          console.log("timer went off!")
+        }, 63500)
+      
+      };
     
     
     
@@ -112,37 +134,19 @@ let previousRandomImage = null;
       showCorrect: false,
       showIncorrect: false,
       showSlow: false,
-      remainingTime: 60,
+      remainingTime: 30,
       timer: false,
       loss: null,
       // Add other initial state values here
     };
 
-    // useEffect(() => {
-    //   if (win !== null && gameOver) {
-    //     setShowResult();
-    //   } else {
-    //     setShowResult(false);
-    //   }
-    // }, [win, gameOver,showResult]);
-
     
 
-    const endGame = (result) =>{
+    const endGame = () =>{
     
-      setProgress(0)
+      // If you have additional states to reset, add them here
     
-      setGameOver(true)
-
-     // setShowResult(true)
-
-     // setRemainingTime(60)
-
-       result === 'loss' ? setWin(false) : setWin(true)
-
-
-
-      
+     setGameOver(true)
      
 
     }
@@ -259,19 +263,13 @@ pointsEarned = Math.max(pointsEarned, 0)
       setTimeout(() => {
         setShowIncorrect(false); // Hide "Incorrect" message after 1 second
       }, 2000);
-
-
-
-     
-      
-
-      
           
           errors === 4 ? (()=>{
-             setExp( (prevExp) => !prevExp)
-            endGame('loss')
-          
+            setGameOver(true)
            
+            
+            setWin(false)
+            setProgress(0)
            })() : null
           setTimeout(()=>{
             setRandomImage(getRandomImage());
@@ -326,9 +324,9 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
             setErrors(errors + 1);
 
             errors === 4 ? (()=>{
-              endGame(slow)
-              setExp((prevExp) => !prevExp);
-              
+              endGame()
+              setWin(false)
+              setProgress(0)
               return
              })() : null
              
@@ -432,15 +430,15 @@ return randomImage;
 };
 
 const homeScreen = () => {
- setHome(true)
-  setWin(null)
-// setShowResult(false)
+ 
+setWin(null)
 setScore(0)
 setErrors(0)
 setWin(null)
 setMatchCount(0)
 setProgress(0)
 setFilling(true)
+setShowResult(false)
 
 setAlternate(null)
 setTimeout(()=>{
@@ -474,7 +472,7 @@ boxShadow:  '0 0 50px 25px red' ,
 transform: gameOver ? 'scale(0)' : null,
 }
 
-
+const winningText = matchCount >= limit + 1 ? "Congratulations! You won the game" : errors >= 5? "You have lost the game!" : null
 
 const winningTextStyle = {
 //animation: gameOver && win !== null ? 'flash 3s infinite' : 'none',
@@ -646,7 +644,7 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
          <ResultScreen
 win={win}
 score={score}
-showResult={showResult && home === false}
+showResult={showResult}
 />
 
 

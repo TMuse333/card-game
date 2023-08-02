@@ -25,14 +25,14 @@ const CountdownTimer = ({gameOver,win,duration}) => {
     };
   }, [gameOver,remainingTime,duration]);
 
-//   useEffect(() => {
-//     if (remainingTime === 0 || (!win && win !== null) || !gameOver) {
-//      setTimeout(()=>{
-//         setRemainingTime(duration)
-//         setStart(false)
-//      },4000)
-//     }
-//   }, [remainingTime,win,duration]);
+  useEffect(() => {
+    if (remainingTime === 0 ) {
+     setTimeout(()=>{
+        setRemainingTime(2)
+        setStart(false)
+     },4000)
+    }
+  }, [remainingTime,win,duration]);
 
   const timerStyle={
     fontSize: '1rem',
