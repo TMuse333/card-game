@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const CountdownTimer = ({gameOver,win}) => {
-  const [remainingTime, setRemainingTime] = useState(60);
+const CountdownTimer = ({gameOver,win,duration}) => {
+  const [remainingTime, setRemainingTime] = useState(duration);
 
 
 
@@ -11,7 +11,7 @@ const CountdownTimer = ({gameOver,win}) => {
   useEffect(() => {
     
     let interval;
-    if (gameOver && remainingTime > 0) {
+    if (gameOver && remainingTime > 0 ) {
       interval = setInterval(() => {
         setRemainingTime((prevTime) => prevTime - 1);
       }, 1000);
@@ -21,15 +21,15 @@ const CountdownTimer = ({gameOver,win}) => {
     return () => {
       clearInterval(interval);
     };
-  }, [gameOver,remainingTime]);
+  }, [gameOver,remainingTime,duration]);
 
   useEffect(() => {
-    if (remainingTime === 0 || (!win && win !== null)) {
+    if (remainingTime === 0 || (!win && win !== null) || !gameOver) {
      setTimeout(()=>{
-        setRemainingTime(60)
+        setRemainingTime(duration)
      },4000)
     }
-  }, [remainingTime,win]);
+  }, [remainingTime,win,duration]);
 
   const timerStyle={
     fontSize: '1rem',

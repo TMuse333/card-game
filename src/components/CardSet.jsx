@@ -118,10 +118,35 @@ let previousRandomImage = null;
         setSelectedImage(null) : setSelectedImage(imageSrc)
     }
 
+    const initialState = {
+      gameOver: true,
+      win: null,
+      score: 0,
+      errors: 0,
+      matchCount: 0,
+      progress: 0,
+      filling: true,
+      selectedImage: null,
+      alternate: null,
+      isClicked: false,
+      showCorrect: false,
+      showIncorrect: false,
+      showSlow: false,
+      remainingTime: 30,
+      timer: false,
+      loss: null,
+      // Add other initial state values here
+    };
+
     
 
     const endGame = () =>{
-      setGameOver(true)
+    
+      // If you have additional states to reset, add them here
+    
+     setGameOver(true)
+     
+
     }
     const [slow, setTooSlow] = useState(false)
 
@@ -495,7 +520,8 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
         >
           <CountdownTimer
         gameOver={timer}
-        win={win}/>
+        win={win}
+        duration={60}/>
 
 
 

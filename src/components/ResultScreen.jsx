@@ -51,7 +51,7 @@ const ResultScreen = ({ win, score }) => {
     <>
       <img src={score === 0 ? clown :win ? saiyans : !win  && win !== null? clown : null} style={styles} alt="Result" />
       <div style={textStyle}>
-        <p>{score === 0 && win !== null? `you scored zero, you're too slow` :win ? ` Your score was ${score}` : !win && win !== null ? `You Lose! Your score was ${score}` : null}</p>
+        <p>{win ? ` Your score was ${score}` : !win && win !== null ? `You Lose! Your score was ${score}` : null}</p>
       </div>
     </>
   );
