@@ -4,7 +4,7 @@ import clown from '../images/Emoji_Icon_-_Clown_emoji_1024x1024.png.webp';
 import Vegeta from '../images/vegeta-battle.png'
 import saiyans from '../images/broly.jpg'
 
-const ResultScreen = ({ win, score }) => {
+const ResultScreen = ({ win, score, showResult }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const updateScreenWidth = useCallback(() => {
@@ -20,14 +20,14 @@ const ResultScreen = ({ win, score }) => {
   }, [updateScreenWidth]);
 
   const styles = {
-    display: win === null ? 'none' : 'block',
+    display: win === null  && !showResult? 'none' : 'block',
     height: '70vw',
     width: '50vw',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: '3rem',
     zIndex: 50,
-    animation: !win || (score === 0  )? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
+    animation: !win || (score === 0  ) && showResult? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
     transition: ' transform 1s ease',
 
   };
@@ -39,7 +39,7 @@ const ResultScreen = ({ win, score }) => {
     color: 'transparent',
     WebkitBackgroundClip: 'text',
     backgroundClip: 'text',
-    animation: 'animateGradient 10s linear infinite',
+    animation: showResult ? 'animateGradient 10s linear infinite' : null,
     width: 'fit-content',
     
     fontSize: '2.5rem',
@@ -49,9 +49,11 @@ const ResultScreen = ({ win, score }) => {
 
   return (
     <>
-      <img src={score === 0 ? clown :win ? saiyans : !win  && win !== null? clown : null} style={styles} alt="Result" />
+      <img src={ win ? saiyans : !win  && win !== null? clown : null} style={styles} alt="Result" />
+    {/* <img src={showResult ? clown : null}
+    style={styles}/> */}
       <div style={textStyle}>
-        <p>{win ? ` Your score was ${score}` : !win && win !== null ? `You Lose! Your score was ${score}` : null}</p>
+        <p>{win ? ` Your score was ${score}` : !win && win !== null && showResult? `You Lose! Your score was ${score}` : null}</p>
       </div>
     </>
   );
