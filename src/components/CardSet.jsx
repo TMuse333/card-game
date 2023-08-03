@@ -66,23 +66,9 @@ let previousRandomImage = null;
 
      
       
-        // Check if win is not null
-        // if (win !== null) {
-         
-        //   setTimeout(() => {
-        //     setErrors(0);
-        //     setWin(null);
-        //     setMatchCount(0);
-        //     setProgress(0);
-        //     setFilling(true);
-        //     setIsClicked(false);
-        //     setSelectedImage(null);
-        //     setAlternate(null);
-        //     setScore(0);
-        //     setStartClicked(true)
+        
             
-        //   }, 3000);
-        // } 
+        
         
           setErrors(0);
           setWin(null);
@@ -95,21 +81,31 @@ let previousRandomImage = null;
           setScore(0);
           
          
-        
+        endGameTimer()
 
        
 
-        
-
-        setTimeout(()=>{
-          setWin(true)
-          endGame()
-          setProgress(0)
-          setTimer(false)
-          console.log("timer went off!")
-        }, 63500)
+      
       
       };
+
+      const endGameTimer = () => {
+
+
+      
+
+        setTimeout(() => {
+         
+           setGameOver(true);
+           setWin(true);
+            setProgress(0);
+          
+          
+         
+        }, 23500); // 60 seconds
+      };
+
+      
     
     
     
@@ -257,20 +253,22 @@ pointsEarned = Math.max(pointsEarned, 0)
           })()
         : !isClicked  && !gameOver ?(()=>{
           setIsClicked(true)
-          setErrors(errors + 1);
+          setErrors(prevErrors => prevErrors + 1);
+          setScore(score - 100)
+          console.log(errors)
           setIncorrect(true)
           setShowIncorrect(true); // Show "Incorrect" message
       setTimeout(() => {
         setShowIncorrect(false); // Hide "Incorrect" message after 1 second
       }, 2000);
           
-          errors === 4 ? (()=>{
-            setGameOver(true)
+          // errors === 4 ? (()=>{
+          //   setGameOver(true)
            
             
-            setWin(false)
-            setProgress(0)
-           })() : null
+          //   setWin(false)
+          //   setProgress(0)
+          //  })() : null
           setTimeout(()=>{
             setRandomImage(getRandomImage());
              
@@ -316,7 +314,7 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
 
      
     
-          if ((elapsedTime >= intervalDuration+1000)) {
+          if ((elapsedTime >= intervalDuration+1000) && gameOver) {
             
             setRandomImage(getRandomImage());
             setAlternate(null);
@@ -434,7 +432,7 @@ const homeScreen = () => {
 setWin(null)
 setScore(0)
 setErrors(0)
-setWin(null)
+//setWin(null)
 setMatchCount(0)
 setProgress(0)
 setFilling(true)
@@ -531,7 +529,7 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
 {showCorrect &&  <div className="correct"
  style={{zIndex:9000}}>Correct! + {points}</div>}
  {showIncorrect && <div className="incorrect"
-style={{zIndex:9000}}>Incorrect!</div>}
+style={{zIndex:9000}}>Incorrect! -100</div>}
 
 {showSlow && <div className="too-slow" style={{ zIndex: 9000 }}>Too Slow!</div>}
 
@@ -588,7 +586,7 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
 
        
 
-        <div className={ errors >=5 || win? 'cardSetGameOver' : 'cardSet'}
+        <div className={ win !== null ? 'cardSetGameOver' : 'cardSet'}
         >
 
          
