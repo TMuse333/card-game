@@ -4,7 +4,7 @@ import clown from '../images/Emoji_Icon_-_Clown_emoji_1024x1024.png.webp';
 import Vegeta from '../images/vegeta-battle.png'
 import saiyans from '../images/broly.jpg'
 
-const ResultScreen = ({ win, score, showResult }) => {
+const ResultScreen = ({ win, score, startClicked,loss }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const updateScreenWidth = useCallback(() => {
@@ -20,14 +20,14 @@ const ResultScreen = ({ win, score, showResult }) => {
   }, [updateScreenWidth]);
 
   const styles = {
-    display: win === null || !showResult? 'none' : 'block',
+    display: win === null ? 'none' : 'block',
     height: '70vw',
     width: '50vw',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: '3rem',
     zIndex: 50,
-    animation: win && score <=100? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
+    animation: win && score <=100 && !startClicked? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
     transition: ' transform 1s ease',
 
   };
@@ -39,7 +39,7 @@ const ResultScreen = ({ win, score, showResult }) => {
     color: 'transparent',
     WebkitBackgroundClip: 'text',
     backgroundClip: 'text',
-    animation: showResult ? 'animateGradient 10s linear infinite' : null,
+    animation:!startClicked ? 'animateGradient 10s linear infinite' : null,
     width: 'fit-content',
     
     fontSize: '2.5rem',
@@ -49,11 +49,11 @@ const ResultScreen = ({ win, score, showResult }) => {
 
   return (
     <>
-      <img src={showResult && win && score > 100? saiyans : win && score <= 100 ? clown : null} style={styles} alt="Result" />
+      <img src={ win && score > 100? saiyans : loss? clown : null} style={styles} alt="Result" />
     {/* <img src={showResult ? clown : null}
     style={styles}/> */}
       <div style={textStyle}>
-        <p>{win && score > 100 ? ` Your score was ${score}` : win && score <= 100? `Get your points up playa! You only scored ${score}` : null}</p>
+        <p>{win && score > 100 ? ` Your score was ${score}` : loss ? `Get your points up playa! You only scored ${score}` : null}</p>
       </div>
     </>
   );

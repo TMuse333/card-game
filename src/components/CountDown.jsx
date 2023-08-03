@@ -11,9 +11,10 @@ const CountdownTimer = ({gameOver,win,duration}) => {
 
   useEffect(() => {
     
+    
     let interval;
-    if (gameOver && remainingTime > 0 ) {
-        setStart(true)
+    if (!gameOver && remainingTime > 0 ) {
+       
       interval = setInterval(() => {
         setRemainingTime((prevTime) => prevTime - 1);
       }, 1000);
@@ -26,11 +27,11 @@ const CountdownTimer = ({gameOver,win,duration}) => {
   }, [gameOver,remainingTime,duration]);
 
   useEffect(() => {
-    if (remainingTime === 0 && !gameOver) {
+    if (remainingTime === 0 ) {
      setTimeout(()=>{
         setRemainingTime(duration)
         setStart(false)
-     },4000)
+     },1000)
     }
   }, [remainingTime,win,duration]);
 
