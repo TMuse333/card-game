@@ -49,11 +49,11 @@ const ResultScreen = ({ win, score, startClicked,loss }) => {
 
   return (
     <>
-      <img src={ win && score > 100? saiyans : loss? clown : null} style={styles} alt="Result" />
+      <img src={ win && score > 100? saiyans : win && score < 101? clown : null} style={styles} alt="Result" />
     {/* <img src={showResult ? clown : null}
     style={styles}/> */}
       <div style={textStyle}>
-        <p>{win && score > 100 ? ` Your score was ${score}` : loss ? `Get your points up playa! You only scored ${score}` : null}</p>
+        <p>{win && score > 100 ? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
       </div>
     </>
   );

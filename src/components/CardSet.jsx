@@ -57,7 +57,7 @@ let previousRandomImage = null;
     const startGame = () => {
       //   // Set the gameOver state to false after a 3-second delay
         setStartClicked(true);
-        //setWin(null)
+        setWin(null)
         setRemainingTime(20)
         setTimeout(() => {
           setGameOver(false);
@@ -68,7 +68,7 @@ let previousRandomImage = null;
 
         if (win !== null) {
 
-          setTimeout(() => {
+         
             setErrors(0);
            
             setTimer(false)
@@ -84,7 +84,7 @@ let previousRandomImage = null;
             setRemainingTime(20)
             setLoss(null)
 
-          }, 2200);
+        
         } 
 
 
@@ -124,7 +124,15 @@ let previousRandomImage = null;
         setTimeout(() => {
          setStartClicked(false)
            setGameOver(true);
-          score >= 100 ? setLoss(true) : setWin(true);
+           setWin(true)
+          //  if(score < 101){
+          //   setLoss(true)
+          //  }
+          //   else{
+          //     setWin(true);
+          //   }
+           
+        
             setProgress(0);
           
           
@@ -251,6 +259,9 @@ pointsEarned = Math.max(pointsEarned, 0)
         ? (() => {
             setMatchCount(matchCount + 1);
             setCorrect(true)
+
+            pointsEarned === 0 ? pointsEarned = 1: null
+
             setScore(score + pointsEarned)
             setPoints(pointsEarned)
           
@@ -531,7 +542,7 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
 
         
 
-<div className={gameOver? 'object-card-gameOver' : 'object-card'}
+<div className={gameOver || loss? 'object-card-gameOver' : 'object-card'}
         >
           <CountdownTimer
         gameOver={gameOver}
