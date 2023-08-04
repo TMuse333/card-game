@@ -9,6 +9,9 @@ const cors = require('cors')
 const mysql = require('mysql')
 
 app.use(express.json())
+app.use(cors())
+
+
 
 const db = mysql.createPool({
     host: "localhost",      // <-- Host Name
@@ -16,7 +19,7 @@ const db = mysql.createPool({
     password: "shiftTeam902",   // <-- Password
     database: "card_dataBase",
 })
-app.use(cors())
+
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.post("/api/insert",(req, res)=> {
@@ -35,6 +38,15 @@ const username = req.body.username
         }
     });
 });
+
+app.get("/api/get",(req,res)=> {
+    const sqlSelect = 
+    "SELECT * FROM game_stats";
+    db.query(sqlSelect,(err, result) => {
+        console.log(result.data)
+        res.send(result)
+    })
+})
 
 
 app.listen(5174, () => {

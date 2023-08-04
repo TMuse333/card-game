@@ -655,10 +655,12 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
 win={win}
 score={score}
 startClicked={startClicked}
-loss={loss}
+
 />
 
-<InputBar/>
+<InputBar
+win={win}
+gameOver={gameOver}/>
 
 
 

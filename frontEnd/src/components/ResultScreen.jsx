@@ -3,21 +3,28 @@ import gokuVsJiren from '../images/goku-vs-jiren.jpg';
 import clown from '../images/Emoji_Icon_-_Clown_emoji_1024x1024.png.webp';
 import Vegeta from '../images/vegeta-battle.png'
 import saiyans from '../images/broly.jpg'
+import Axios from 'axios'
 
-const ResultScreen = ({ win, score, startClicked,loss }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  const updateScreenWidth = useCallback(() => {
-    setScreenWidth(window.innerWidth);
-  }, []);
 
-  useEffect(() => {
-    window.addEventListener('resize', updateScreenWidth);
+const ResultScreen = ({ win, score, startClicked}) => {
+  const [statsList, setStatsList] = useState([])
+  const [showStats, setShowStats] = useState(false);
 
-    return () => {
-      window.removeEventListener('resize', updateScreenWidth);
-    };
-  }, [updateScreenWidth]);
+ 
+  useEffect(()=>{
+    Axios.get("http://localhost:5174/api/get")
+    .then((response)=>{
+      setStatsList(response.data)
+    })
+}, [])
+
+const toggleShowStats = () => {
+  setShowStats(!showStats);
+};
+
+
+
 
   const styles = {
     display: win === null ? 'none' : 'block',
@@ -47,13 +54,42 @@ const ResultScreen = ({ win, score, startClicked,loss }) => {
     marginRight: 'auto',
   };
 
+  const dataStyle = {
+    display: !showStats ? 'none' : 'block',
+    fontSize: '1rem',
+    color: 'black',
+  }
+
+  const buttonStyle = {
+    display: win === null ? 'none' : 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  }
+
+
+
   return (
     <>
+
+    <button onClick={toggleShowStats}
+   style={buttonStyle}>
+      show stats slatt
+    </button>
       <img src={ win && score > 100? saiyans : win && score < 101? clown : null} style={styles} alt="Result" />
     {/* <img src={showResult ? clown : null}
     style={styles}/> */}
       <div style={textStyle}>
         <p>{win && score > 100 ? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
+        {win !== null && (
+          <div>
+            {statsList.map((val, index) => (
+              <h1 key={index}
+              style={dataStyle}>
+                username: {val.username} | score : {val.score}
+              </h1>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
