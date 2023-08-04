@@ -5,8 +5,9 @@ import './App.css';
 import NavBar from './components/NavBar';
 import QuantumBackground from './components/QuantumBackground';
 import CardSet from './components/CardSet';
-import Axios from 'axios'
-import InputBar from './components/inputBar';
+import Axios from 'axios';
+
+
 
 
 function App() {

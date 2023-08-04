@@ -1,9 +1,14 @@
+
+
 const express = require("express")
 
+const bodyParser = require('body-parser')
 
 const app = express()
-
+const cors = require('cors')
 const mysql = require('mysql')
+
+app.use(express.json())
 
 const db = mysql.createPool({
     host: "localhost",      // <-- Host Name
@@ -11,20 +16,29 @@ const db = mysql.createPool({
     password: "shiftTeam902",   // <-- Password
     database: "card_dataBase",
 })
+app.use(cors())
+app.use(bodyParser.urlencoded({extended: true}))
 
-app.get("/",(req,res) => {
-    
+app.post("/api/insert",(req, res)=> {
+
+const username = req.body.username
 
 
-
-
-
-
-})
+    const sqlInsert = "INSERT INTO game_stats (username) VALUES (?)"
+    db.query(sqlInsert,[username], (err,result)=> {
+        if (err) {
+            console.error("Error inserting data:", err);
+            res.status(500).send("Error inserting data");
+        } else {
+            console.log(result);
+            res.status(200).send("Data inserted successfully");
+        }
+    });
+});
 
 
 app.listen(5174, () => {
-    console.log("running on port 5174 playa")
+    console.log("running on port 5174 playa lets get it")
 
 })
 
