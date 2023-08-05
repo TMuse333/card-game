@@ -30,10 +30,10 @@ const username = req.body.username
     const sqlInsert = "INSERT INTO game_stats (username) VALUES (?)"
     db.query(sqlInsert,[username], (err,result)=> {
         if (err) {
-            console.error("Error inserting data:", err);
+        //    console.error("Error inserting data:", err);
             res.status(500).send("Error inserting data");
         } else {
-            console.log(result);
+         //   console.log(result);
             res.status(200).send("Data inserted successfully");
         }
     });

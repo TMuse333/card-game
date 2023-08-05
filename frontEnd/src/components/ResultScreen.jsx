@@ -55,10 +55,23 @@ const toggleShowStats = () => {
   };
 
   const dataStyle = {
+    fontFamily: 'Roboto, sans-serif',
     display: !showStats ? 'none' : 'block',
     fontSize: '1rem',
     color: 'black',
-  }
+    background: 'grey',
+   // background: 'linear-gradient(45deg, #ff00ff, #33cc33, #0000ff)',
+    backgroundSize: '200% 200%',
+   /// borderRadius: '10px',
+    width: '80%',
+    height: '2rem',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    transform: 'translateY(10rem)',
+    //animation: 'animateGradient 10s linear infinite',
+    paddingTop: '5px'
+  };
+  
 
   const buttonStyle = {
     display: win === null ? 'none' : 'block',
@@ -75,20 +88,29 @@ const toggleShowStats = () => {
    style={buttonStyle}>
       show stats slatt
     </button>
-      <img src={ win && score > 100? saiyans : win && score < 101? clown : null} style={styles} alt="Result" />
+      <img src={ win && score > 100 ? saiyans : win && score < 101? clown : null} style={styles} alt="Result" />
     {/* <img src={showResult ? clown : null}
     style={styles}/> */}
       <div style={textStyle}>
-        <p>{win && score > 100 ? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
+        <p>{win && score > 100 && !showStats? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
         {win !== null && (
-          <div>
+          <div className={showStats ? 'popup-show-result' : null}>
+          <div  className="player-score-header">
+            <span className="player-header">Player
+                </span>
+            <span className="score-header">Score</span>
+          </div>
+          <div className="player-score-list">
             {statsList.map((val, index) => (
-              <h1 key={index}
-              style={dataStyle}>
-                username: {val.username} | score : {val.score}
-              </h1>
+              <div key={index}  className="player-score-item">
+                <span className="player-name">{val.username} 
+               </span>
+                <span className="player-score">{val.score}</span>
+              </div>
             ))}
           </div>
+        </div>
+        
         )}
       </div>
     </>
