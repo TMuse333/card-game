@@ -11,6 +11,7 @@ import Majikarp from '../images/pokemon-magikarp.gif'
 import ResultScreen from './ResultScreen';
 import CountdownTimer from './CountDown';
 import InputBar from './inputBar';
+import  Axios  from 'axios';
 
  import Card from './Card';
 
@@ -126,16 +127,19 @@ let previousRandomImage = null;
          setStartClicked(false)
            setGameOver(true);
            setWin(true)
-          //  if(score < 101){
-          //   setLoss(true)
-          //  }
-          //   else{
-          //     setWin(true);
-          //   }
-           
-        
             setProgress(0);
+
+            Axios.post("http://localhost:5174/api/insert", {
+              score: score  // Add the score to the data being sent
+            })
+              .then(() => {
+                alert("Score inserted successfully");
+              })
+              .catch((error) => {
+                console.error("Error inserting score:", error);
+              });
           
+
           
          
         }, 23300); // 60 seconds

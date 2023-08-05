@@ -23,6 +23,10 @@ const toggleShowStats = () => {
   setShowStats(!showStats);
 };
 
+const toggleHideStats = () => {
+  setShowStats(false);
+};
+
 
 
 
@@ -72,14 +76,38 @@ const toggleShowStats = () => {
     paddingTop: '5px'
   };
   
-
   const buttonStyle = {
     display: win === null ? 'none' : 'block',
     marginLeft: 'auto',
-    marginRight: 'auto'
-  }
+    marginRight: 'auto',
+    background: 'linear-gradient(to right, #6c4f55, #e42d0d)', // Add linear gradient
+    padding: '10px 20px', // Add padding to give the button some space
+    borderRadius: '5px',  // Add rounded corners
+    color: 'white',      // Set text color to white
+    border: 'none',      // Remove border
+    cursor: 'pointer',   // Change cursor style to indicate interactivity
+  };
+  
+
+  const button2 = {
+    display: win === null ? 'none' : 'block',
+    transform: 'translateY(9rem)',
+    fontSize: '20px',       // Adjust the font size to make the text smaller
+    padding: '5px 10px',      // Adjust padding to reduce the button size
+    borderRadius: '5px',      // Apply border radius for rounded corners
+    background: 'linear-gradient(to right, #6c4f55, #e42d0d)', 
+    border: 'none',          // Remove border
+    cursor: 'pointer',  
+    marginLeft: 'auto',
+    marginRight: 'auto', 
+    fontFamily: 'Roboto, sans-serif',    // Change cursor style to indicate interactivity
+  };
 
 
+  const resultContainerStyle = {
+    height: '500px', // Set the desired fixed height
+    overflow: 'auto', // Enable scrolling when content overflows
+  };
 
   return (
     <>
@@ -93,8 +121,14 @@ const toggleShowStats = () => {
     style={styles}/> */}
       <div style={textStyle}>
         <p>{win && score > 100 && !showStats? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
-        {win !== null && (
+        {win !== null && showStats &&( 
+          
+
+          
           <div className={showStats ? 'popup-show-result' : null}>
+                 <button onClick={toggleHideStats} style={button2}>
+          Hide Stats
+        </button>
           <div  className="player-score-header">
             <span className="player-header">Player
                 </span>
@@ -102,16 +136,25 @@ const toggleShowStats = () => {
           </div>
           <div className="player-score-list">
             {statsList.map((val, index) => (
+             
               <div key={index}  className="player-score-item">
                 <span className="player-name">{val.username} 
                </span>
                 <span className="player-score">{val.score}</span>
               </div>
             ))}
+           
+    
           </div>
+
+     
+         
         </div>
+         
+        
         
         )}
+        
       </div>
     </>
   );
