@@ -2,20 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 
-const InputBar = ({gameOver, win}) => {
+const InputBar = ({gameOver, win,score}) => {
     const [username, setUserName] = useState('');
-    const [statsList, setStatsList] = useState([])
+  
 
     const handleNameChange = (event) => {
         setUserName(event.target.value);
     }
 
-    // useEffect(()=>{
-    //     Axios.get("http://localhost:5174/api/get")
-    //     .then((response)=>{
-    //       setStatsList(response.data)
-    //     })
-    // }, [])
+    
     
     const submitReview = () => {
         console.log(username)
@@ -26,7 +21,9 @@ const InputBar = ({gameOver, win}) => {
         }
 
         Axios.post("http://localhost:5174/api/insert", {
-            username: username
+           username: username,
+           score: score
+           
         })
         .then(() => {
             alert("Data inserted successfully");
@@ -36,14 +33,14 @@ const InputBar = ({gameOver, win}) => {
         });
     }
 
-    const styles = {
+    const inputStyles = {
         display: !gameOver && win === null ?
          'none' : win !== null ? 'none' :'block'
     }
 
     return (
         <div className="name-input"
-        style={styles}>
+        style={inputStyles}>
             <label htmlFor="name">Enter Your Name: </label>
             <input
                 type="text"
@@ -57,9 +54,7 @@ const InputBar = ({gameOver, win}) => {
                 Submit!
             </button>
 
-            {/* {statsList.map((val)=>{
-                return <h1>username: {val.username} | score : {val.score}</h1>
-            })} */}
+           
 
         </div>
     );

@@ -22,16 +22,15 @@ const NavBar = () => {
 
 
     "The quicker you correctly match the cards, the more points you get"+
-    "taking too long to answer or an incorect selection 5 times "+
-    "will result in you losing the game",
+    "Selecting an incorrect card will result in losing 100 points, be careful!",
 
 
     'You have 1 minute to get as many matches as possible and the order of '+
-    "the cards is randomized every turn. Every 5 turns you will also "+
-    "have less time to make a selection, good luck!",
+    "the cards is randomized every turn. Good luck!",
 
     "If you want to view the cards in more detail, you can hold shift and click or"+
-    " double click on a card for it to be enlarged"
+    " double click on a card for it to be enlarged, remember to enter your name "+
+    "so you can be on the leaderboard and get the highest score!"
     // Add more rules as needed
   ];
 

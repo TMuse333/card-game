@@ -11,7 +11,7 @@ import Majikarp from '../images/pokemon-magikarp.gif'
 import ResultScreen from './ResultScreen';
 import CountdownTimer from './CountDown';
 import InputBar from './inputBar';
-import  Axios  from 'axios';
+import Axios from 'axios';
 
  import Card from './Card';
 
@@ -53,6 +53,8 @@ let previousRandomImage = null;
     let limit = 4
 
     const startTimeRef = useRef(Date.now());
+
+ 
     
   
 
@@ -119,33 +121,18 @@ let previousRandomImage = null;
       };
 
       const endGameTimer = () => {
-
-
-      
-
         setTimeout(() => {
          setStartClicked(false)
            setGameOver(true);
            setWin(true)
             setProgress(0);
-
-            Axios.post("http://localhost:5174/api/insert", {
-              score: score  // Add the score to the data being sent
-            })
-              .then(() => {
-                alert("Score inserted successfully");
-              })
-              .catch((error) => {
-                console.error("Error inserting score:", error);
-              });
-          
-
-          
-         
+        
         }, 23300); // 60 seconds
       };
 
       
+    
+     
     
     
     
@@ -422,7 +409,7 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
     }, [startClicked]); 
 
 
-
+   
 
 
     const progressStyle = {
@@ -487,9 +474,15 @@ setTimeout(()=>{
   resetToOriginalOrder()
 },800)
 
+}
 
+const [username, setUserName] = useState('');
+const [submitted, setSubmitted] = useState(false);
 
+  
 
+const handleNameChange = (event) => {
+   !submitted ? setUserName(event.target.value) : null
 }
 
 const [randomImage, setRandomImage] = useState(getRandomImage());
@@ -528,7 +521,31 @@ boxShadow: correct ? '0 0 25px 25px green' : incorrect ? '0 0 25px 25px red' : n
 const scoreText = gameOver && win === null ? null : win  || !win? null : "score: "+ score
 
 
+const inputStyles = {
+  display: !gameOver && win === null ?
+   'none' : win !== null ? 'none' :'block'
+}
 
+useEffect(() => {
+  if (gameOver && win !== null) {
+    console.log('Game Over! Final Score:', score);
+
+
+    Axios.post("http://localhost:5174/api/insert", {
+      username: username,
+      score: score
+      
+   })
+   .then(() => {
+       alert("Data inserted successfully");
+   })
+   .catch((error) => {
+       console.error("Error inserting data:", error); 
+   });
+
+
+  }
+}, [gameOver, score, win,username]);
 
 
 
@@ -545,7 +562,7 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
     return (
         <>
 
-        
+     
 
 <div className={gameOver || loss? 'object-card-gameOver' : 'object-card'}
         >
@@ -662,9 +679,24 @@ startClicked={startClicked}
 
 />
 
-<InputBar
-win={win}
-gameOver={gameOver}/>
+<div className="name-input"
+        style={inputStyles}>
+            <label htmlFor="name">Enter Your Name: </label>
+            <input
+                type="text"
+                id="name"
+                onChange={handleNameChange}
+                value={username}
+            />
+            <p>Hello, {username || 'Stranger'}!</p>
+
+            <button onClick={() => setSubmitted(true)} disabled={submitted}>
+        Submit!
+    </button>
+
+           
+
+        </div>
 
 
 

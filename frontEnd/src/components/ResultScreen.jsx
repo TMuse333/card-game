@@ -11,11 +11,23 @@ const ResultScreen = ({ win, score, startClicked}) => {
   const [statsList, setStatsList] = useState([])
   const [showStats, setShowStats] = useState(false);
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  // Update screenWidth when the window is resized
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
  
   useEffect(()=>{
     Axios.get("http://localhost:5174/api/get")
     .then((response)=>{
       setStatsList(response.data)
+      console.log(response.data)
     })
 }, [])
 
@@ -77,7 +89,9 @@ const toggleHideStats = () => {
   };
   
   const buttonStyle = {
-    display: win === null ? 'none' : 'block',
+    // display:  'block',
+    position: 'relative',
+    top: '-25rem',
     marginLeft: 'auto',
     marginRight: 'auto',
     background: 'linear-gradient(to right, #6c4f55, #e42d0d)', // Add linear gradient
@@ -85,12 +99,14 @@ const toggleHideStats = () => {
     borderRadius: '5px',  // Add rounded corners
     color: 'white',      // Set text color to white
     border: 'none',      // Remove border
-    cursor: 'pointer',   // Change cursor style to indicate interactivity
+    cursor: 'pointer', 
+    //transform: win === null ? 'translateY(-28rem)' : null 
+    
   };
   
 
   const button2 = {
-    display: win === null ? 'none' : 'block',
+    display:  'block',
     transform: 'translateY(9rem)',
     fontSize: '20px',       // Adjust the font size to make the text smaller
     padding: '5px 10px',      // Adjust padding to reduce the button size
@@ -109,25 +125,26 @@ const toggleHideStats = () => {
     overflow: 'auto', // Enable scrolling when content overflows
   };
 
+
+
   return (
     <>
 
     <button onClick={toggleShowStats}
    style={buttonStyle}>
-      show stats slatt
+      Leaderboard
     </button>
       <img src={ win && score > 100 ? saiyans : win && score < 101? clown : null} style={styles} alt="Result" />
-    {/* <img src={showResult ? clown : null}
-    style={styles}/> */}
+    
       <div style={textStyle}>
         <p>{win && score > 100 && !showStats? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
-        {win !== null && showStats &&( 
+        {showStats &&( 
           
 
           
-          <div className={showStats ? 'popup-show-result' : null}>
+          <div className='popup-show-result' >
                  <button onClick={toggleHideStats} style={button2}>
-          Hide Stats
+          Hide Leaderboard
         </button>
           <div  className="player-score-header">
             <span className="player-header">Player
@@ -135,9 +152,11 @@ const toggleHideStats = () => {
             <span className="score-header">Score</span>
           </div>
           <div className="player-score-list">
+            
             {statsList.map((val, index) => (
              
               <div key={index}  className="player-score-item">
+                
                 <span className="player-name">{val.username} 
                </span>
                 <span className="player-score">{val.score}</span>

@@ -25,10 +25,10 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.post("/api/insert",(req, res)=> {
 
 const username = req.body.username
+const score = req.body.score;
 
-
-    const sqlInsert = "INSERT INTO game_stats (username) VALUES (?)"
-    db.query(sqlInsert,[username], (err,result)=> {
+    const sqlInsert = "INSERT INTO game_stats (username, score) VALUES (?,?)"
+    db.query(sqlInsert,[username,score], (err,result)=> {
         if (err) {
         //    console.error("Error inserting data:", err);
             res.status(500).send("Error inserting data");
@@ -37,13 +37,18 @@ const username = req.body.username
             res.status(200).send("Data inserted successfully");
         }
     });
-});
+ });
+
+ 
+
+
+ 
 
 app.get("/api/get",(req,res)=> {
     const sqlSelect = 
     "SELECT * FROM game_stats";
     db.query(sqlSelect,(err, result) => {
-        console.log(result.data)
+     //   console.log(result.data)
         res.send(result)
     })
 })

@@ -433,9 +433,7 @@ ul.navLinks li a {
   width: 100%;
   height: 100%;
   background-color: rgba(1, 0, 0, 0.5);
- /* display: flex;
-   justify-content: center;
-  align-items: center;  */
+
   z-index: 1000;
   opacity: 1;
 
@@ -443,22 +441,22 @@ ul.navLinks li a {
   animation: fadeIn 1s 1;
 }
 
-.player-score-header {
+/* .player-score-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px;
-  font-weight: bold; /* Add bold font for header */
-}
+  font-weight: bold; 
+} */
 
 .player-score-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px;
-}
+} 
 
-.player-name {
+ .player-name {
   flex: 1;
 }
 
