@@ -162,7 +162,7 @@ ul.navLinks li a {
 
 .object-card {
   margin-top: 80px;;
-  margin-bottom: -9.3rem;
+  margin-bottom: -5.3rem;
   z-index: 0;
 }
 
@@ -200,7 +200,7 @@ ul.navLinks li a {
   background-size: 200% 200%;
   transition: 0.3s ease;
   height: 2.3rem;
-  z-index: 333;
+  z-index: -1;
   display: grid;
   
   transform: translateY(2rem);
@@ -283,7 +283,7 @@ ul.navLinks li a {
   transform: scale(1);
   transition: all 0.7s ease-in;
   z-index: -2;
-  margin-top: -2rem;
+  margin-top: -2.5rem;
 }
 
 .score-container {
@@ -502,6 +502,7 @@ ul.navLinks li a {
 
 
   .countdown-text{
+    position: relative;
       transform: translateY(3rem);
       background: linear-gradient(45deg, #ff00cc, #3333ff);
       -webkit-background-clip: text;
@@ -509,7 +510,8 @@ ul.navLinks li a {
       color: transparent;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       font-size: 5rem;
-      margin-bottom: -7.5rem;
+      margin-bottom: -5.5rem;
+      z-index: 99999999999;
 }
      
       

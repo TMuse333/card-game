@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Axios from 'axios'
 
 
-const Leaderboard = ({win,gameOver}) => {
+const Leaderboard = ({win,gameOver,selectedImage}) => {
     const [statsList, setStatsList] = useState([])
     const [showStats, setShowStats] = useState(false);
 
@@ -24,7 +24,8 @@ const Leaderboard = ({win,gameOver}) => {
       };
 
       const buttonStyle = {
-        display: !gameOver && win === null ? 'none' : 'block',
+        display: !gameOver && win === null ? 'none' :
+        selectedImage !== null ? 'blur(5px)':  'block',
         // position: 'relative',
         // top: '-25rem',
         transform: "translateY(4.5rem)",
@@ -36,6 +37,8 @@ const Leaderboard = ({win,gameOver}) => {
         color: 'white',      // Set text color to white
         border: 'none',      // Remove border
         cursor: 'pointer', 
+        filter: selectedImage !== null ? 'blur(5px)' : null
+
         //transform: win === null ? 'translateY(-28rem)' : null 
         
       };

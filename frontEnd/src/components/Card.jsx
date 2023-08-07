@@ -53,40 +53,32 @@ const Card = ({ imageSrc,
     
 
   const cardStyle = {
+    position:  'relative',
     height: '30vw',
     width: '19vw',
     maxHeight: '250px',
     maxWidth: '160px',
 
-    filter: selectedImage !== null && selectedImage != imageSrc && gameOver? 'blur(5px)' : null,
+   
 
-   // correct && altShown ? '0 0 50px 50px green'
+   // left: isBig? '100%' : 'auto',
 
+    filter: selectedImage !== null && gameOver? 'blur(5px)' : null,
   
      transition: 'transform 0.3s ease, opacity 0.2s ease, top 0.3s ease, left 0.3s ease, right 0.3s ease',
    
+    transform: isHovered ? 'scale(1.3)' : 'scale(1)',
+
      opacity: isDissolving &&altShown? 0 : 1,
      boxShadow:correct && altShown ? '0 0 30px 30px green':
       incorrect && altShown ? '0 0 30px 30px red' :  isHovered  && !selectedImage? '0 0 50px 25px gold': 'none', 
-     transform:
-      
-      isHovered  && !selectedImage && correct === null? 'scale(1.2)' : 
-      isBig && selectedImage === Abu && gameOver? 'scale(3) translate(60%, 12%)' :
-      isBig && selectedImage === MajinVegeta && gameOver? 'scale(3) translate(20%,12%)' :
-      isBig && selectedImage === Obito && gameOver? 'scale(3) translate(-20%,12%)' :
-      isBig && selectedImage === Saiyans && gameOver? 'scale(3) translate(-60%,12%)' :
-      isBig && selectedImage === Sasuke && gameOver? 'scale(3) translate(60%,-25%)' :
-      isBig && selectedImage === Kakashi && gameOver? 'scale(3) translate(20%,-25%)' :
-      isBig && selectedImage === War_Obito && gameOver? 'scale(3) translate(-19%,-25%)' :
-      isBig && selectedImage === Vegeta && gameOver? 'scale(3) translate(-61%,-25%)'  :
-      correct && altShown ? 'scale(1.5)' : 'scale(1)',
-
-
+  
      border: '2px solid black',
      animation: gameOver && !isBig &&isHovered  && selectedImage === null
      ? 'shake 2s infinite':   incorrect ? 'shakeAndScale 0.5s 1' :
      correct && altShown && !gameOver? 'moveAndScale 1s 1' :
      'none' ,
+     zIndex:( (isHovered && selectedImage === null )  ) && (correct === null && incorrect === null)? 900 : (correct != null || incorrect !== null) && !altShown ? -1 : 0 
    
    
     }
@@ -117,9 +109,7 @@ const Card = ({ imageSrc,
    
 
     <div className='card-container'
-    style=
-    {{ position: 'relative', zIndex:( (isHovered && selectedImage === null ) || isBig ) && (correct === null && incorrect === null)? 900 : (correct != null || incorrect !== null) && !altShown ? -1 : 0 ,
-   }}>
+    >
         <img src={!altShown?imageSrc:altSrc}
         onClick={() => {
             handleClick(event);

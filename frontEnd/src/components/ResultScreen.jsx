@@ -4,7 +4,7 @@ import clown from '../images/Emoji_Icon_-_Clown_emoji_1024x1024.png.webp';
 import Vegeta from '../images/vegeta-battle.png'
 import saiyans from '../images/broly.jpg'
 import Axios from 'axios'
-
+import styled, { keyframes } from 'styled-components';
 
 
 const ResultScreen = ({ win, score, startClicked}) => {
@@ -37,9 +37,12 @@ const ResultScreen = ({ win, score, startClicked}) => {
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: '3rem',
-    zIndex: 50,
+    zIndex: -5,
     animation: win && score <=100 && !startClicked? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
     transition: ' transform 1s ease',
+    maxHeight: '600px',
+    maxWidth: '400px',
+  //  position: 'relative'
 
   };
 
@@ -53,9 +56,14 @@ const ResultScreen = ({ win, score, startClicked}) => {
     animation:!startClicked ? 'animateGradient 10s linear infinite' : null,
     width: 'fit-content',
     
-    fontSize: '2.5rem',
+   // fontSize: '2.5rem',
     marginLeft: 'auto',
     marginRight: 'auto',
+
+    fontSize: screenWidth <= 320 ? '1.5rem' :
+    screenWidth >= 1575 ? '5rem' : '2rem',
+    marginTop: screenWidth >= 1575 ? '5rem' : '0.5rem'
+    
   };
 
   const dataStyle = {
@@ -69,6 +77,8 @@ const ResultScreen = ({ win, score, startClicked}) => {
    /// borderRadius: '10px',
     width: '80%',
     height: '2rem',
+    maxHeight: '300px',
+    maxWidth: '200px',
     marginLeft: 'auto',
     marginRight: 'auto',
     transform: 'translateY(10rem)',

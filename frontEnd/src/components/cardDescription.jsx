@@ -12,9 +12,11 @@ import Vegeta from '../images/vegeta-battle.png'
 import { cardData} from './cardData'
 
 
-const CardDescription = ({src,isBig}) => {
+const CardDescription = ({selectedImage,isBig,scaleDown}) => {
 
     const textBoxStyle = {
+        marginTop: '-5rem',
+        position: 'relative',
         marginLeft: 'auto',
         marginRight: 'auto',
         padding: '8px',
@@ -25,6 +27,9 @@ const CardDescription = ({src,isBig}) => {
         display: isBig ? 'block' : 'none',
         width: '80vw',
         height: '4rem',
+        Zindex: 9999999,
+       
+       
       };
 
     const text = selectedImage === Abu ? cardData[0] :
@@ -37,8 +42,38 @@ const CardDescription = ({src,isBig}) => {
     selectedImage === Vegeta? cardData[7] : null
 
 
+    const cardStyle = {
+        transform: isBig? 'scale(3) translateY(-4rem)' : 'scale(0)',
+        position:  'relative',
+        height: '30vw',
+        width: '19vw',
+        maxHeight: '250px',
+        maxWidth: '160px',
+        Zindex: 100000,
+        display: !isBig ? 'none' : 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        
+        
+        transition: 'transform 0.5s ease',
+        // marginBottom: '-7rem'
+    }
+
+    
+
+
     return (
+
+        <div>
+
+        <img src={selectedImage}
+        style={cardStyle}
+        onClick={()=>{scaleDown()}}
+     />
+
         <div style={textBoxStyle}>{text}</div>
+        </div>
+  
     )
 
 }

@@ -37,7 +37,10 @@ const CountdownTimer = ({gameOver,win,duration}) => {
 
   const timerStyle={
     fontSize: '1rem',
-    marginTop: '-1.5rem',
+    position: 'relative',
+    zIndex: 99999990000000,
+   // transform: 'translateY(-6rem)'
+   // marginTop: '10rem',
   // marginRight: '2rem',
   }
 

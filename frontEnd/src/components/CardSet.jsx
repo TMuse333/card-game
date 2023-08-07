@@ -533,7 +533,19 @@ const scoreText = gameOver && win === null ? null : win  || !win? null : "score:
 
 const inputStyles = {
   display: !gameOver && win === null ?
-   'none' : win !== null ? 'none' :'block'
+   'none' : win !== null ? 'none' :'block',
+
+   filter: selectedImage !== null ? 'blur(5px)' : null,
+
+   transform: selectedImage !== null ? 'scale(0.5)' : 'scale(1)',
+
+   transition: 'transform 0.3s ease',
+
+position: 'relative',
+
+   //zIndex:-1,
+
+  
 }
 
 useEffect(() => {
@@ -557,6 +569,12 @@ useEffect(() => {
   }
 }, [gameOver, score, win,username]);
 
+const scaleDown = () =>{
+  setSelectedImage(null)
+}
+
+
+
 
 
 
@@ -572,9 +590,12 @@ useEffect(() => {
     return (
         <>
 
+
+
      <Leaderboard
      gameOver={gameOver}
-     win={win}/>
+     win={win}
+     selectedImage={selectedImage}/>
 
 <div className={gameOver || loss? 'object-card-gameOver' : 'object-card'}
         >
@@ -610,6 +631,7 @@ style={{zIndex:9000}}>Incorrect! -100</div>}
        onClick={
         ()=>startGame()}
        className={!gameOver ? 'no-show' : win !== null ? 'start-button-gameOver' : 'start-button'}
+       style={{filter: selectedImage !== null ? 'blur(5px)' : null}}
      >
        Start game!
      </button>
@@ -681,12 +703,23 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
 
   </div>
 
+
+
          <ResultScreen
 win={win}
 score={score}
 startClicked={startClicked}
 
 />
+
+
+<CardDescription
+  selectedImage={selectedImage}
+  isBig={selectedImage !== null}
+  scaleDown={scaleDown}
+  />
+
+
 
 <div className="name-input"
         style={inputStyles}>
