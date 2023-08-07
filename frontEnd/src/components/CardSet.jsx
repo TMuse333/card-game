@@ -14,6 +14,7 @@ import InputBar from './inputBar';
 import Axios from 'axios';
 
  import Card from './Card';
+ import Leaderboard from './leaderboard';
 
 
 import { card_names } from './cardData';
@@ -21,6 +22,8 @@ import { card_names } from './cardData';
 import { cardData} from './cardData'
 
 import StartButton from './StartButton'
+
+import CardDescription from './cardDescription';
 
 
 
@@ -59,7 +62,14 @@ let previousRandomImage = null;
   
 
     const startGame = () => {
-      //   // Set the gameOver state to false after a 3-second delay
+     
+
+      if (!username) {
+        alert("Please enter a username before starting the game.");
+        return;
+
+      }
+
         setStartClicked(true);
         setWin(null)
         setRemainingTime(20)
@@ -562,7 +572,9 @@ useEffect(() => {
     return (
         <>
 
-     
+     <Leaderboard
+     gameOver={gameOver}
+     win={win}/>
 
 <div className={gameOver || loss? 'object-card-gameOver' : 'object-card'}
         >
@@ -645,14 +657,11 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
             correct={correct}
             incorrect={incorrect}
             text={cardData[i]}
-           
-            
-            
+         
             />
           ))}
 
        
-
 
 
        

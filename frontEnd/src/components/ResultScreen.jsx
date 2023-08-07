@@ -23,21 +23,9 @@ const ResultScreen = ({ win, score, startClicked}) => {
   }, []);
 
  
-  useEffect(()=>{
-    Axios.get("http://localhost:5174/api/get")
-    .then((response)=>{
-      setStatsList(response.data)
-      console.log(response.data)
-    })
-}, [])
+ 
 
-const toggleShowStats = () => {
-  setShowStats(!showStats);
-};
 
-const toggleHideStats = () => {
-  setShowStats(false);
-};
 
 
 
@@ -130,49 +118,12 @@ const toggleHideStats = () => {
   return (
     <>
 
-    <button onClick={toggleShowStats}
-   style={buttonStyle}>
-      Leaderboard
-    </button>
+  
       <img src={ win && score > 100 ? saiyans : win && score < 101? clown : null} style={styles} alt="Result" />
     
       <div style={textStyle}>
-        <p>{win && score > 100 && !showStats? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
-        {showStats &&( 
-          
-
-          
-          <div className='popup-show-result' >
-                 <button onClick={toggleHideStats} style={button2}>
-          Hide Leaderboard
-        </button>
-          <div  className="player-score-header">
-            <span className="player-header">Player
-                </span>
-            <span className="score-header">Score</span>
-          </div>
-          <div className="player-score-list">
-            
-            {statsList.map((val, index) => (
-             
-              <div key={index}  className="player-score-item">
-                
-                <span className="player-name">{val.username} 
-               </span>
-                <span className="player-score">{val.score}</span>
-              </div>
-            ))}
-           
-    
-          </div>
-
-     
-         
-        </div>
-         
+        <p>{win && score > 100 ? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
         
-        
-        )}
         
       </div>
     </>

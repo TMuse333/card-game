@@ -142,7 +142,7 @@ ul.navLinks li a {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 0.5em;
-  margin-top: 10rem;
+  margin-top: 3rem;
   margin-left: -1rem;
   margin-bottom: 3rem;
   transition: ease 0.3s;
@@ -203,7 +203,7 @@ ul.navLinks li a {
   z-index: 333;
   display: grid;
   
-  transform: translateY(4rem);
+  transform: translateY(2rem);
   
 }
 
@@ -535,6 +535,11 @@ ul.navLinks li a {
   opacity: 0.1; /* Set the opacity to 0 to create the fade-out effect */
   transition: opacity 0.5s ease-out; /* Define the transition properties (adjust the duration and timing function as needed) */
 }
+
+.name-input{
+  margin-top:-2.5rem;
+}
+
 
 
 

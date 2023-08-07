@@ -30,7 +30,10 @@ const NavBar = () => {
 
     "If you want to view the cards in more detail, you can hold shift and click or"+
     " double click on a card for it to be enlarged, remember to enter your name "+
-    "so you can be on the leaderboard and get the highest score!"
+    "so you can be on the leaderboard and get the highest score!",
+
+    "Once you complete a round, you will have to refresh the webstie "+
+    "to see your score on the leaderboard, apologies for this minor inconvinience!"
     // Add more rules as needed
   ];
 

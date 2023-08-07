@@ -6,9 +6,10 @@ import Obito from '../images/obito_10TJ.jpg';
 import Saiyans from '../images/ssb_k20_goku_and_bssb_vegeta.jpg';
 import Sasuke from '../images/sasuke.jpg';
 import Kakashi from '../images/kakashi_susanoo.jpg';
-import Sainey from '../images/ss2_sainey.jpg';
 import War_Obito from '../images/war_obito.jpg';
 import Vegeta from '../images/vegeta-battle.png'
+
+
 
 const Card = ({ imageSrc,
    onClick, 
@@ -94,19 +95,8 @@ const Card = ({ imageSrc,
     const mergedStyle = { ...cardStyle, ...additonalStyle}
 
     const textBoxStyle = {
-      position: 'absolute',
-      top:  selectedImage === Abu ||selectedImage === MajinVegeta ||selectedImage === Obito ||
-      selectedImage === Saiyans? '235%' : '125%', 
-       
-      marginLeft: selectedImage === Abu ? '1.5vw' :
-      selectedImage === MajinVegeta? '-15.5vw' :
-      selectedImage === Obito? '-35.5vw' :
-      selectedImage === Saiyans? '-60.5vw' :
-      selectedImage === Sasuke? '1rvw' :
-      selectedImage === Kakashi? '-15.5vw' :
-      selectedImage === War_Obito? '-40.5vw' :
-      selectedImage === Vegeta? '-60.5vw' : null, // Center the text box horizontally relative to the image
-     // Center the text box horizontally relative to the image
+      marginLeft: 'auto',
+      marginRight: 'auto',
       padding: '8px',
       background: 'linear-gradient(45deg, orange, red)',
       color: 'white',
@@ -141,11 +131,10 @@ const Card = ({ imageSrc,
        
 
         />
-            {isBig && text && (
-        <div className="text-box" style={textBoxStyle}>
-          {text}
-        </div>
-            )}
+       
+
+
+           
         
     </div>
   )
