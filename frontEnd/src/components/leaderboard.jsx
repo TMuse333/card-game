@@ -82,8 +82,7 @@ const Leaderboard = ({win,gameOver,selectedImage}) => {
                 Hide Leaderboard
               </button>
               <div className="player-score-header">
-                <span className="player-header">Player</span>
-                <span className="score-header">Score</span>
+
               </div>
               <div className="player-score-list">
                 {statsList.map((val, index) => (

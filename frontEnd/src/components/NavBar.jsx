@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { card_names, cardData } from './cardData';
 
-const NavBar = () => {
+const NavBar = ({gameOver}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [currentRuleIndex, setCurrentRuleIndex] = useState(0);
@@ -20,7 +20,7 @@ const NavBar = () => {
   };
 
   const toggleProjects = () => {
-    setShowProjects((prevState) => !prevState);
+   gameOver ? setShowProjects((prevState) => !prevState) : null
   };
 
   // Array containing your rules explanation
@@ -60,7 +60,7 @@ const NavBar = () => {
 
   // Function to handle clicking "Show Rules" button and toggle the rules pop-up
   const toggleRules = () => {
-    setShowRules((prevState) => !prevState);
+  gameOver ?  setShowRules((prevState) => !prevState) : null
   };
 
   // Function to handle clicking on "Next Rule" button
@@ -74,7 +74,7 @@ const NavBar = () => {
   };
 
   const toggleAbout = () => {
-    setShowAbout(!showAbout);
+  gameOver ?  setShowAbout(!showAbout) : null
   };
 
   const handleBackToHome = () => {
@@ -106,10 +106,12 @@ const NavBar = () => {
     backgroundSize: '200% 200%',
     animation: 'quantum-animation 5s linear infinite',
     width: '100%',
-    height: '50%',
+    height: '50vh',
+    maxHeight: '400px',
     paddingTop: '20px',
     zIndex: '2099200',
     position: 'relative'
+   
   };
 
 
@@ -121,14 +123,14 @@ const NavBar = () => {
   };
 
   const cardStyle = {
-    // transform:  cardTransform,
     
-  
+    marginTop: '3rem',
+  transform: 'translateY(0rem)',
        position:  'relative',
-       height: '30vw',
-       width: '19vw',
-       maxHeight: '250px',
-       maxWidth: '160px',
+       height: '80vw',
+       width: '47vw',
+       maxHeight: '750px',
+       maxWidth: '480px',
        Zindex: 100000,
      
        marginLeft: 'auto',
@@ -138,6 +140,22 @@ const NavBar = () => {
        transition: 'transform 0.5s ease',
        // marginBottom: '-7rem'
    }
+   const textBoxStyle = {
+    transform: 'translateY(0rem)',
+    position: 'relative',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: '8px',
+    background: 'linear-gradient(45deg, orange, red)',
+    color: 'white',
+    fontSize: 'auto',
+    fontWeight: 'bold',
+  
+    width: '80%',
+    maxWidth: '700px',
+    height: '15%',
+    Zindex: 999,
+  };
 
 
  
@@ -149,7 +167,7 @@ const NavBar = () => {
         <ul className="navLinks">
           <li>Thomas' card game</li>
           <li><a href="#" onClick={toggleAbout}>About</a></li>
-          <li><a href="#" onClick={toggleProjects}>Other projects </a></li>
+          <li><a href="#" onClick={toggleProjects}>View cards </a></li>
           <li>
             <button onClick={toggleRules}>Show Rules</button>
           </li>
@@ -185,7 +203,7 @@ const NavBar = () => {
       {/* About pop-up */}
       {showAbout && (
   <div className="popup-show">
-    <div className='about-content' style={aboutContentStyle}>
+    <div className='about-content' >
       <p>
         This is a simple card game to help develop my web developing skills.<br/>
         This is my first project and any feedback is greatly appreciated.<br/>
@@ -202,19 +220,24 @@ const NavBar = () => {
     {/* Projects pop-up */}
     {showProjects && (
         <div className="popup-show">
-          <div className="popup-content">
+          <div className='about-content'
+          >
             <img src={card_names[currentCardIndex].imageSrc} alt={`Project ${currentCardIndex + 1}`}
             style={cardStyle} />
-            <p>{cardData[currentCardIndex]}</p>
-            <div className="popup-buttons">
-              <button onClick={handlePrevCard} disabled={currentCardIndex === 0}>
+            <p className='card-text-box'
+           >{cardData[currentCardIndex]}</p>
+            <div className="view-card-buttons">
+              <button onClick={handlePrevCard} disabled={currentCardIndex === 0}
+              style={{transform:'translateX(-3rem)'}}>
                 Previous
               </button>
-              <button onClick={handleNextCard} disabled={currentCardIndex === card_names.length - 1}>
+              <button onClick={handleNextCard} disabled={currentCardIndex === card_names.length - 1}
+              style={{transform:'translateX(2rem)'}}>
                 Next
               </button>
             </div>
-            <button onClick={toggleProjects} style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+            <button onClick={toggleProjects}
+            className="card-close-button">
               Close
             </button>
           </div>

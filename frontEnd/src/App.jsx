@@ -20,10 +20,7 @@ function App() {
 
 
 
-      <NavBar />
-
-   
-      <QuantumBackground />
+      
       <CardSet />
    
       

@@ -83,6 +83,37 @@
   
 }
 
+.card-text-box {
+  transform: translateY(0rem);
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px;
+  background: linear-gradient(45deg, orange, red);
+  color: white;
+  font-size: auto;
+  font-weight: bold;
+  
+  width: 80%;
+  max-width: 700px;
+  height: 20%;
+  z-index: 999;
+}
+
+
+.about-content {
+  background-image: radial-gradient(circle, #a3a3a3, #37643d, #800080, #0e860e);
+  background-size: 200% 200%;
+  animation: quantum-animation 5s linear infinite;
+  width: 100%;
+  height: 100%;
+
+  padding-top: 20px;
+  z-index: 2099200;
+  position: relative;
+}
+
+
 .banner-item {
   padding: 10px;
   border: 3px solid gray;
@@ -200,10 +231,10 @@ ul.navLinks li a {
   background-size: 200% 200%;
   transition: 0.3s ease;
   height: 2.3rem;
-  z-index: 1;
+  z-index: 0;
   display: grid;
   
-  transform: translateY(2rem);
+  transform: translateY(1rem);
   
 }
 
@@ -414,7 +445,7 @@ ul.navLinks li a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(1, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -528,6 +559,24 @@ ul.navLinks li a {
   color: white;
   font-size: 2rem;
   margin-bottom: 3em;
+}
+
+.view-card-buttons{
+  transform: translateY(2rem);
+  width: auto;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+ 
+  
+ 
+  
+}
+
+
+
+.card-close-button{
+  transform: translateY(2rem);
 }
 
 

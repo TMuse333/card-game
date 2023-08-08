@@ -12,41 +12,16 @@ import Vegeta from '../images/vegeta-battle.png'
 import { cardData} from './cardData'
 
 
-const CardDescription = ({selectedImage,isBig,scaleDown}) => {
+const CardDescription = ([index]) => {
 
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-    const [cardTransform, setCardTransform] = useState('');
+    
 
   
-    useEffect(() => {
-      const handleResize = () => {
-        setScreenWidth(window.innerWidth);
-        setScreenHeight(window.innerHeight);
-        console.log('ScreenWidth:', screenWidth, 'ScreenHeight:', screenHeight);
-      };
-  
-      window.addEventListener('resize', handleResize);
-  
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
+    
 
 
 
-    useEffect(() => {
-      // Apply your conditional transformations here
-      if ( screenWidth <= 414) {
-        setCardTransform('translateY(-14rem) scale(3)');
-      } else if (screenWidth >= 1575) {
-        setCardTransform('translateY(-25rem) scale(3)');
-      } else if (screenWidth === 1366 && screenHeight <= 768) {
-        setCardTransform('translateY(-10rem) scale(3)');
-      } else {
-        setCardTransform('scale(0)');
-      }
-    }, [screenWidth, screenHeight]);
+   
 
     const textBoxStyle = {
         marginTop: '-5rem',
@@ -66,14 +41,7 @@ const CardDescription = ({selectedImage,isBig,scaleDown}) => {
        
       };
 
-    const text = selectedImage === Abu ? cardData[0] :
-    selectedImage === MajinVegeta? cardData[1] :
-    selectedImage === Obito? cardData[2] :
-    selectedImage === Saiyans? cardData[3] :
-    selectedImage === Sasuke? cardData[4] :
-    selectedImage === Kakashi? cardData[5] :
-    selectedImage === War_Obito? cardData[6] :
-    selectedImage === Vegeta? cardData[7] : null
+    
 
 
     const cardStyle = {
@@ -104,7 +72,7 @@ const CardDescription = ({selectedImage,isBig,scaleDown}) => {
 
         <img src={selectedImage}
         style={cardStyle}
-        onClick={()=>{scaleDown()}}
+       
      />
 
         <div style={textBoxStyle}>{text}</div>

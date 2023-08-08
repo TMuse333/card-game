@@ -25,6 +25,9 @@ import StartButton from './StartButton'
 
 import CardDescription from './cardDescription';
 
+import NavBar from './NavBar'
+import QuantumBackground from './QuantumBackground';
+
 
 
 
@@ -582,7 +585,11 @@ const scaleDown = () =>{
     return (
         <>
 
+<NavBar 
+gameOver={gameOver}/>
 
+   
+      <QuantumBackground />
 
      <Leaderboard
      gameOver={gameOver}
