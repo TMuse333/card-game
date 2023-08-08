@@ -14,6 +14,40 @@ import { cardData} from './cardData'
 
 const CardDescription = ({selectedImage,isBig,scaleDown}) => {
 
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+    const [cardTransform, setCardTransform] = useState('');
+
+  
+    useEffect(() => {
+      const handleResize = () => {
+        setScreenWidth(window.innerWidth);
+        setScreenHeight(window.innerHeight);
+        console.log('ScreenWidth:', screenWidth, 'ScreenHeight:', screenHeight);
+      };
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
+
+
+    useEffect(() => {
+      // Apply your conditional transformations here
+      if ( screenWidth <= 414) {
+        setCardTransform('translateY(-14rem) scale(3)');
+      } else if (screenWidth >= 1575) {
+        setCardTransform('translateY(-25rem) scale(3)');
+      } else if (screenWidth === 1366 && screenHeight <= 768) {
+        setCardTransform('translateY(-10rem) scale(3)');
+      } else {
+        setCardTransform('scale(0)');
+      }
+    }, [screenWidth, screenHeight]);
+
     const textBoxStyle = {
         marginTop: '-5rem',
         position: 'relative',
@@ -22,12 +56,12 @@ const CardDescription = ({selectedImage,isBig,scaleDown}) => {
         padding: '8px',
         background: 'linear-gradient(45deg, orange, red)',
         color: 'white',
-        fontSize: '0.55rem',
+        fontSize: 'auto',
         fontWeight: 'bold',
         display: isBig ? 'block' : 'none',
-        width: '80vw',
+        width: 'auto',
         height: '4rem',
-        Zindex: 9999999,
+        Zindex: 999,
        
        
       };
@@ -43,7 +77,9 @@ const CardDescription = ({selectedImage,isBig,scaleDown}) => {
 
 
     const cardStyle = {
-        transform: isBig? 'scale(3) translateY(-4rem)' : 'scale(0)',
+     // transform:  cardTransform,
+     
+   
         position:  'relative',
         height: '30vw',
         width: '19vw',

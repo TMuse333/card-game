@@ -200,7 +200,7 @@ ul.navLinks li a {
   background-size: 200% 200%;
   transition: 0.3s ease;
   height: 2.3rem;
-  z-index: -1;
+  z-index: 1;
   display: grid;
   
   transform: translateY(2rem);
@@ -230,7 +230,7 @@ ul.navLinks li a {
 }
 
 .start-button:hover {
-  transform: scale(1.33) translateY(3rem);
+  transform: scale(1.33) translateY(1.5rem);
 }
 
 .home-button {

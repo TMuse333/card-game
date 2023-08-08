@@ -499,15 +499,7 @@ const [randomImage, setRandomImage] = useState(getRandomImage());
 
 // const points = handleClick(selectedImage,false)
 
-const resultStyle = {
-transform: gameOver ? 'translate(450px,200px) scale(0)' : 'translate(450px,200px)',
-background: correct  && !gameOver?'green': incorrect ? 'red':'grey',
-width: '200px',
-height: '150px',
-animation: !gameOver? 'shake 0.5s' : 'none',
-animationIterationCount: 'infinite',
 
-}
 
 
  
@@ -524,7 +516,7 @@ transform: gameOver ? 'scale(0)' : null,
 
 const additionalCardStyle = {
 transform: correct  ? 'scale(1.2)' : incorrect ? 'scale(0.5)' : 'scale(1)',
-zIndex: correct ? 1000 : 0,
+// zIndex: correct ? 1000 : 0,
 boxShadow: correct ? '0 0 25px 25px green' : incorrect ? '0 0 25px 25px red' : null
 };
 
@@ -543,7 +535,7 @@ const inputStyles = {
 
 position: 'relative',
 
-   //zIndex:-1,
+  // zIndex:1,
 
   
 }
@@ -662,14 +654,11 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
             <Card
           
             imageSrc={card.imageSrc}
-         //  onClick={()=>cardClick(card.imageSrc)}
+        
             isBig={selectedImage === card.imageSrc}
             selectedImage={selectedImage}
             altSrc={card.altSrc}
-           // hoverEnterFunction={()=>handleHover(card.imageSrc)}
-         /*   additonalStyle={{
-            transform: cardHovered ? 'scale(1.2)' : 'scale(1)',
-                         boxShadow: correct && alternate === card.altSrc ? '0 0 25px 25px green' : 'auto'}}*/
+         
             onClick={()=>handleClick(card.altSrc,selectedImage === card.imageSrc)}
             altShown={alternate === card.altSrc && selectedImage != card.imageSrc}
             alternate={alternate}
@@ -710,14 +699,10 @@ win={win}
 score={score}
 startClicked={startClicked}
 
-/>
+/> 
 
 
-<CardDescription
-  selectedImage={selectedImage}
-  isBig={selectedImage !== null}
-  scaleDown={scaleDown}
-  />
+
 
 
 

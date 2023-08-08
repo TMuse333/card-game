@@ -35,6 +35,7 @@ const Card = ({ imageSrc,
 
 
   const handleMouseEnter = () => {
+    console.log("mouse entered")
     setIsHovered(true)
    
   }
@@ -61,8 +62,6 @@ const Card = ({ imageSrc,
 
    
 
-   // left: isBig? '100%' : 'auto',
-
     filter: selectedImage !== null && gameOver? 'blur(5px)' : null,
   
      transition: 'transform 0.3s ease, opacity 0.2s ease, top 0.3s ease, left 0.3s ease, right 0.3s ease',
@@ -78,7 +77,7 @@ const Card = ({ imageSrc,
      ? 'shake 2s infinite':   incorrect ? 'shakeAndScale 0.5s 1' :
      correct && altShown && !gameOver? 'moveAndScale 1s 1' :
      'none' ,
-     zIndex:( (isHovered && selectedImage === null )  ) && (correct === null && incorrect === null)? 900 : (correct != null || incorrect !== null) && !altShown ? -1 : 0 
+   zIndex:( (isHovered && selectedImage === null )  ) && (correct === null && incorrect === null)? 900 : (correct != null || incorrect !== null) && !altShown ? -1 : 0
    
    
     }
@@ -86,18 +85,7 @@ const Card = ({ imageSrc,
 
     const mergedStyle = { ...cardStyle, ...additonalStyle}
 
-    const textBoxStyle = {
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      padding: '8px',
-      background: 'linear-gradient(45deg, orange, red)',
-      color: 'white',
-      fontSize: '0.55rem',
-      fontWeight: 'bold',
-      display: isBig ? 'block' : 'none',
-      width: '80vw',
-      height: '4rem',
-    };
+  
   
 
 //window.innerWidth, window.innerHeight for things based off screenSize

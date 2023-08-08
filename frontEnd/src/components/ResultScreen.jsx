@@ -13,7 +13,7 @@ const ResultScreen = ({ win, score, startClicked}) => {
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  // Update screenWidth when the window is resized
+  
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);

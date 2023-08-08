@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { card_names, cardData } from './cardData';
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -6,7 +7,21 @@ const NavBar = () => {
   const [currentRuleIndex, setCurrentRuleIndex] = useState(0);
   const [showAbout, setShowAbout] = useState(false);
   const [fadeOutAnimation, setFadeOutAnimation] = useState(false);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [showProjects, setShowProjects] = useState(false)
 
+
+  const handleNextCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % card_names.length);
+  };
+
+  const handlePrevCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + card_names.length) % card_names.length);
+  };
+
+  const toggleProjects = () => {
+    setShowProjects((prevState) => !prevState);
+  };
 
   // Array containing your rules explanation
   const rules = [
@@ -105,6 +120,26 @@ const NavBar = () => {
     animation: fadeOutAnimation ? 'fadeOut 1s ease' : null,
   };
 
+  const cardStyle = {
+    // transform:  cardTransform,
+    
+  
+       position:  'relative',
+       height: '30vw',
+       width: '19vw',
+       maxHeight: '250px',
+       maxWidth: '160px',
+       Zindex: 100000,
+     
+       marginLeft: 'auto',
+       marginRight: 'auto',
+       
+       
+       transition: 'transform 0.5s ease',
+       // marginBottom: '-7rem'
+   }
+
+
  
 
   return (
@@ -114,7 +149,7 @@ const NavBar = () => {
         <ul className="navLinks">
           <li>Thomas' card game</li>
           <li><a href="#" onClick={toggleAbout}>About</a></li>
-          <li><a href="#">Other projects</a></li>
+          <li><a href="#" onClick={toggleProjects}>Other projects </a></li>
           <li>
             <button onClick={toggleRules}>Show Rules</button>
           </li>
@@ -163,6 +198,29 @@ const NavBar = () => {
     </div>
   </div>
     )}
+
+    {/* Projects pop-up */}
+    {showProjects && (
+        <div className="popup-show">
+          <div className="popup-content">
+            <img src={card_names[currentCardIndex].imageSrc} alt={`Project ${currentCardIndex + 1}`}
+            style={cardStyle} />
+            <p>{cardData[currentCardIndex]}</p>
+            <div className="popup-buttons">
+              <button onClick={handlePrevCard} disabled={currentCardIndex === 0}>
+                Previous
+              </button>
+              <button onClick={handleNextCard} disabled={currentCardIndex === card_names.length - 1}>
+                Next
+              </button>
+            </div>
+            <button onClick={toggleProjects} style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
 
       <header>{/* Your header content */}</header>
     </>
