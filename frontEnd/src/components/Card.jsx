@@ -57,8 +57,8 @@ const Card = ({ imageSrc,
     position:  'relative',
     // height: '30vw',
     // width: '19vw',
-    maxHeight: '250px',
-    maxWidth: '160px',
+    // maxHeight: '250px',
+    // maxWidth: '160px',
 
    
 
@@ -106,6 +106,8 @@ const Card = ({ imageSrc,
         onMouseLeave={handleMouseleave}
         style={mergedStyle}
         onDoubleClick={() => {shiftClick()}}
+        className="slat"
+        
        
 
         />

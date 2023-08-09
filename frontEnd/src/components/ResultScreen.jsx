@@ -12,19 +12,25 @@ const ResultScreen = ({ win, score, startClicked}) => {
   const [showStats, setShowStats] = useState(false);
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
-  
   useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+      setScreenHeight(window.innerHeight);
+    };
+
     window.addEventListener('resize', handleResize);
+
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
- 
- 
-
+  useEffect(() => {
+    console.log('Screen Width:', screenWidth);
+    console.log('Screen Height:', screenHeight);
+  }, [screenWidth, screenHeight]);
 
 
 

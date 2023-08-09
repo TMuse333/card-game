@@ -618,6 +618,7 @@ style={{zIndex:9000}}>Incorrect! -100</div>}
         style={randomStyle}
         gameOver={gameOver}
         isBig={false}
+        className="random-card"
         />
         <p className={!gameOver && win === null ? 'points-text' : 'no-show'}>{score}</p>
         <p className={gameOver? 'object-card-gameOver' : 'object-text'}> {scoreText}</p>
