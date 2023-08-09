@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { card_names, cardData } from './cardData';
+import gokuVsJiren from '../images/goku-vs-jiren.jpg';
 
 const NavBar = ({gameOver}) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -125,7 +126,7 @@ const NavBar = ({gameOver}) => {
   const cardStyle = {
     
     marginTop: '3rem',
-  transform: 'translateY(0rem)',
+  transform: 'translateY(-3rem)',
        position:  'relative',
        height: '80vw',
        width: '47vw',
@@ -204,12 +205,14 @@ const NavBar = ({gameOver}) => {
       {showAbout && (
   <div className="popup-show">
     <div className='about-content' >
-      <p>
+      <p className='about-text'>
         This is a simple card game to help develop my web developing skills.<br/>
         This is my first project and any feedback is greatly appreciated.<br/>
         You can look at the cards that happen to be my own art or play the game.<br/>
         The rules of the game can been seen by click on show rules
       </p>
+      <img src={gokuVsJiren}
+      className="about-image"/>
       <button onClick={handleBackToHome} className="about-button">
         Back to Home
       </button>
@@ -223,7 +226,7 @@ const NavBar = ({gameOver}) => {
           <div className='about-content'
           >
             <img src={card_names[currentCardIndex].imageSrc} alt={`Project ${currentCardIndex + 1}`}
-            style={cardStyle} />
+            className="about-card" />
             <p className='card-text-box'
            >{cardData[currentCardIndex]}</p>
             <div className="view-card-buttons">

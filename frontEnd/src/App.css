@@ -84,7 +84,7 @@
 }
 
 .card-text-box {
-  transform: translateY(0rem);
+  transform: translateY(-3rem);
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -95,8 +95,9 @@
   font-weight: bold;
   
   width: 80%;
-  max-width: 700px;
-  height: 20%;
+  height: 15%;
+  
+
   z-index: 999;
 }
 
@@ -562,7 +563,7 @@ ul.navLinks li a {
 }
 
 .view-card-buttons{
-  transform: translateY(2rem);
+  /* transform: translateY(2rem); */
   width: auto;
   max-width: fit-content;
   margin-left: auto;
@@ -576,7 +577,7 @@ ul.navLinks li a {
 
 
 .card-close-button{
-  transform: translateY(2rem);
+  /* transform: translateY(2rem); */
 }
 
 
@@ -589,6 +590,31 @@ ul.navLinks li a {
 
 .name-input{
   margin-top:-2.5rem;
+}
+
+.about-card {
+  margin-top: 3rem;
+  transform: translateY(-3rem);
+  position: relative;
+  height: 80vw;
+  width: 47vw;
+ 
+  z-index: 100000;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.5s ease;
+  /* margin-bottom: -7rem; */
+}
+
+.about-text{
+  padding: 20px
+}
+
+.about-image{
+  width: 90vw;
+  height:55vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
@@ -805,8 +831,53 @@ ul.navLinks li a {
   }
 }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  
+@media only screen and (max-width: 320px){
+  .card-text-box{
+    font-size: 0.75rem;
+    height: 4.rem;
+    
+   }
+}
+
+@media only screen and (min-width: 1576px) {
+  .card-text-box {
+    font-size: 1.5rem;
+    height: 4rem;
+  }
+
+  .view-card-buttons {
+    transform: translateY(-2.5rem);
+  }
+
+  .card-close-button {
+    transform: translateY(-2rem);
+  }
+
+  .about-card {
+    height: 40vw;
+    width: 23vw;
+  }
+
+  .about-text {
+    padding: 20px;
+    font-size: 2rem;
+  }
+
+  .about-image {
+    width: 75rem;
+    height: 50rem;
+  }
+}
+
+@media only screen and (min-width: 1576px) and (max-height: 1080px) {
+  .about-text {
+    color: blue;
+  }
+
+  .about-image {
+    width: 100px;
+    height: 250px;
+  }
 }
 
 
