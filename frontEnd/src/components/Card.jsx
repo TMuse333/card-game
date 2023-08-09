@@ -55,8 +55,8 @@ const Card = ({ imageSrc,
 
   const cardStyle = {
     position:  'relative',
-    height: '30vw',
-    width: '19vw',
+    // height: '30vw',
+    // width: '19vw',
     maxHeight: '250px',
     maxWidth: '160px',
 

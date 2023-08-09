@@ -86,42 +86,13 @@ const ResultScreen = ({ win, score, startClicked}) => {
     paddingTop: '5px'
   };
   
-  const buttonStyle = {
-    // display:  'block',
-    position: 'relative',
-    top: '-25rem',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    background: 'linear-gradient(to right, #6c4f55, #e42d0d)', // Add linear gradient
-    padding: '10px 20px', // Add padding to give the button some space
-    borderRadius: '5px',  // Add rounded corners
-    color: 'white',      // Set text color to white
-    border: 'none',      // Remove border
-    cursor: 'pointer', 
-    //transform: win === null ? 'translateY(-28rem)' : null 
-    
-  };
+  
   
 
-  const button2 = {
-    display:  'block',
-    transform: 'translateY(9rem)',
-    fontSize: '20px',       // Adjust the font size to make the text smaller
-    padding: '5px 10px',      // Adjust padding to reduce the button size
-    borderRadius: '5px',      // Apply border radius for rounded corners
-    background: 'linear-gradient(to right, #6c4f55, #e42d0d)', 
-    border: 'none',          // Remove border
-    cursor: 'pointer',  
-    marginLeft: 'auto',
-    marginRight: 'auto', 
-    fontFamily: 'Roboto, sans-serif',    // Change cursor style to indicate interactivity
-  };
+ 
 
 
-  const resultContainerStyle = {
-    height: '500px', // Set the desired fixed height
-    overflow: 'auto', // Enable scrolling when content overflows
-  };
+
 
 
 

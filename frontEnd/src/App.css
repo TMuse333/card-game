@@ -839,7 +839,7 @@ ul.navLinks li a {
    }
 }
 
-@media only screen and (min-width: 1576px) {
+ @media only screen and (min-width: 1576px) { 
   .card-text-box {
     font-size: 1.5rem;
     height: 4rem;
@@ -867,17 +867,68 @@ ul.navLinks li a {
     width: 75rem;
     height: 50rem;
   }
-}
 
-@media only screen and (min-width: 1576px) and (max-height: 1080px) {
-  .about-text {
-    color: blue;
+  .object-card {
+    margin-top: 2rem;
+    margin-bottom: -5.3rem;
+    z-index: 0;
   }
+
+  .about-button{
+
+    transform: translate(-40rem,4rem);
+  }
+
+  
+
+ 
+}  
+
+ @media only screen and (min-width: 1576px) and (max-height: 1080px) {
+  
 
   .about-image {
-    width: 100px;
-    height: 250px;
+    width: 70vw;
+    height: 35vw;
+
+
   }
+
+  .about-button{
+  
+    transform: translate(-45rem,7rem);
+  }
+} 
+
+
+
+@media screen and (min-width:1023px)
+
+ and (max-height:1024px) {
+  
+
+
+.object-card{
+  margin-top: 1rem;
+}
+
+.card-container{
+  height: 20vw;
+  width: 12vw;
+}
+
+.cardSet{
+  margin-bottom: -2.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 50px;
+ 
+
+}
+
+.name-input{
+  margin-top: 6rem;
+}
+
 }
 
 
