@@ -240,10 +240,11 @@ ul.navLinks li a {
 }
 
 .start-button-gameOver {
-  padding: 0.5px;
+  padding: 1px;
   min-width: 50px;
   min-height:30px;
   width:10vw;
+  max-width: 70px;
   position: relative;
   color: white;
   font-size: 0.75rem;
@@ -258,7 +259,7 @@ ul.navLinks li a {
   height: auto;
  height: 2.3rem;
   display: grid;
-  transform: translate(-1rem,4rem);
+  transform: translate(-2rem,4rem);
 }
 
 .start-button:hover {
@@ -269,6 +270,8 @@ ul.navLinks li a {
   padding: 0.5px;
   min-width: 50px;
   min-height:30px;
+  max-width: 70px;
+  
   color: black;
   position: relative;
   transition: transform 0.3s ease;
@@ -624,6 +627,11 @@ ul.navLinks li a {
   width: 19vw;
 }
 
+.result-img{
+  height: 70vw;
+  width: 50vw;
+}
+
 
 
 
@@ -844,6 +852,10 @@ ul.navLinks li a {
     height: 4.rem;
     
    }
+
+   .start-button-gameOver{
+    transform: translate(-3rem,4rem);
+   }
 }
 
  @media only screen and (min-width: 1576px) { 
@@ -901,6 +913,8 @@ ul.navLinks li a {
     width: 8vw;
   }
 
+  
+
   .about-image {
     width: 70vw;
     height: 35vw;
@@ -922,11 +936,11 @@ ul.navLinks li a {
   } */
 } 
 
-
+/*ipad  screen */
 
  @media screen and (min-width:1023px) 
 
- and (max-height:1024px) {
+ and (max-height:834px) {
   
 
 
@@ -952,6 +966,25 @@ ul.navLinks li a {
   margin-top: -0.5rem;
 }
 
+.result-img{
+  height: 30rem;
+  width:21rem;
+  transform: translateY(-3rem);
+  margin-bottom: -2rem;
+  
+}
+
+.home-button{
+  margin-bottom: 3rem;
+  transform: translate(10rem,2rem);
+}
+
+.start-button-gameOver{
+ transform: translate(-4rem,4rem);
+}
+
+
+
 
 
 /* .cardSet{
@@ -968,7 +1001,68 @@ ul.navLinks li a {
 
 } 
 
+/*ipad pro */
 
+@media screen and (min-width:1023px) 
+
+ and (min-height:1023px) {
+  
+
+
+.object-card{
+  margin-top: 1rem;
+  margin-bottom: -5rem;
+}
+.slat{
+  height: 18vw;
+  width: 11vw;
+}
+
+.cardSet{
+  
+ transform: translateY(2rem);
+}
+
+.points-text{
+  margin-bottom: 2rem;
+}
+
+.scoreboard-container{
+  margin-top: -0.5rem;
+}
+
+.result-img{
+  height: 45rem;
+  width:32rem;
+  transform: translateY(-3rem);
+  margin-bottom: -2rem;
+  
+}
+
+.home-button{
+  margin-bottom: 3rem;
+  transform: translate(18rem,2rem);
+}
+
+
+
+
+
+/* .cardSet{
+  margin-bottom: -2.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+ 
+
+} */
+
+.name-input{
+  margin-top: 1rem;
+}
+
+} 
+
+/*my imac */
 
 @media screen and (min-width:1920px) and
 (min-height:684px) {
@@ -985,6 +1079,16 @@ ul.navLinks li a {
 .scoreboard-container{
   margin-top: 1rem;
 }
+
+.result-img{
+  height: 30vw;
+  width: 21vw;
+}
+
+.home-button{
+  transform: translate(14rem,2rem)
+}
+
 
 }
 
