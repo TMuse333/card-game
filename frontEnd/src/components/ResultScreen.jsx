@@ -41,34 +41,16 @@ const ResultScreen = ({ win, score, startClicked}) => {
     
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: '3rem',
+  
     zIndex: -5,
-    animation: win && score <=100 && !startClicked? 'moveAndScaleClown 1.5s infinite ease' : 'scaleUp 1.5s ease',
+    
     transition: ' transform 1s ease',
   
   //  position: 'relative'
 
   };
 
-  const textStyle = {
-    fontFamily: 'Bangers, cursive',
-    background: 'linear-gradient(45deg, #ff0000, #ff6f00, #ffd700, #ff0000)',
-    backgroundSize: '400% 400%',
-    color: 'transparent',
-    WebkitBackgroundClip: 'text',
-    backgroundClip: 'text',
-    animation:!startClicked ? 'animateGradient 10s linear infinite' : null,
-    width: 'fit-content',
-    
-   // fontSize: '2.5rem',
-    marginLeft: 'auto',
-    marginRight: 'auto',
 
-    fontSize: screenWidth <= 320 ? '1.5rem' :
-    screenWidth >= 1575 ? '5rem' : '2rem',
-    marginTop: screenWidth >= 1575 ? '5rem' : '0.5rem'
-    
-  };
 
   
   
@@ -88,8 +70,8 @@ const ResultScreen = ({ win, score, startClicked}) => {
       <img src={ win && score > 100 ? saiyans : win && score < 101? clown : null} style={styles} alt="Result"
       className='result-img' />
     
-      <div style={textStyle}>
-        <p>{win && score > 100 ? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}` : null}</p>
+      <div className={win && score < 101? 'result-text-loss' : 'result-text'}>
+        <p>{score < 0 && win? "ridiculous! you scored below zero" :win && score > 100 ? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}`  : null}</p>
         
         
       </div>

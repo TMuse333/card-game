@@ -259,7 +259,7 @@ ul.navLinks li a {
   height: auto;
  height: 2.3rem;
   display: grid;
-  transform: translate(-2rem,4rem);
+  transform: translate(2rem,4rem);
 }
 
 .start-button:hover {
@@ -630,6 +630,42 @@ ul.navLinks li a {
 .result-img{
   height: 70vw;
   width: 50vw;
+  animation: scaleUp 1.5s ease
+}
+
+.result-text {
+  font-family: 'Bangers', cursive;
+  background: linear-gradient(45deg, #ff0000, #ff6f00, #ffd700, #ff0000);
+  background-size: 400% 400%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: animateGradient 10s linear infinite;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+.result-text-loss{
+  font-family: 'Bangers', cursive;
+  background: linear-gradient(45deg, #ff0000, #ff6f00, #ffd700, #ff0000);
+  background-size: 400% 400%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: animateGradient 10s linear infinite;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+.result-img{
+  margin-top: 3rem;
+  animation: moveAndScaleClown 1.5s infinite ease
 }
 
 
@@ -839,22 +875,35 @@ ul.navLinks li a {
     transform: translateY(0) scale(1);
   }
   50% {
-    transform: translateY(-10px) scale(1.2);
+    transform: translateY(-10px) scale(1.1);
   }
   100% {
     transform: translateY(0) scale(1);
   }
 }
 
+@keyframes moveAndScaleClown2 {
+  0% {
+    transform: translateY(-3rem) scale(1);
+
+  }
+  50% {
+    transform: translateY(-4rem) scale(1.1);
+  }
+  100% {
+    transform: translateY(-3rem) scale(1);
+  }
+}
+
 @media only screen and (max-width: 320px){
   .card-text-box{
     font-size: 0.75rem;
-    height: 4.rem;
+    height: 4rem;
     
    }
 
    .start-button-gameOver{
-    transform: translate(-3rem,4rem);
+    transform: translate(-1rem,4rem);
    }
 }
 
@@ -941,8 +990,22 @@ ul.navLinks li a {
  @media screen and (min-width:1023px) 
 
  and (max-height:834px) {
-  
 
+
+.result-img{
+  margin-top: 3rem;
+  animation: moveAndScaleClown2 1.5s infinite ease
+}
+  
+.result-img{
+  transform: translateY(-1rem);
+
+}
+
+.about-card{
+  height: 30rem;
+  width:21rem;
+}
 
 .object-card{
   margin-top: 1rem;
@@ -967,6 +1030,14 @@ ul.navLinks li a {
 }
 
 .result-img{
+  height: 30rem;
+  width:21rem;
+  transform: translateY(-3rem);
+  margin-bottom: -2rem;
+  
+}
+
+.result-img-loss{
   height: 30rem;
   width:21rem;
   transform: translateY(-3rem);
@@ -1007,7 +1078,10 @@ ul.navLinks li a {
 
  and (min-height:1023px) {
   
-
+.about-card{
+  height: 40rem;
+  width:28rem;
+}
 
 .object-card{
   margin-top: 1rem;
@@ -1077,7 +1151,7 @@ ul.navLinks li a {
 }
 
 .scoreboard-container{
-  margin-top: 1rem;
+  margin-top: -3rem;
 }
 
 .result-img{
@@ -1090,6 +1164,13 @@ ul.navLinks li a {
 }
 
 
+}
+
+@media  screen and (min-width: 670px )
+and (min-height: 903px) {
+  .about-text{
+    color:blue;
+  }
 }
 
 
