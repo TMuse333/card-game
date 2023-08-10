@@ -38,14 +38,13 @@ const NavBar = ({gameOver}) => {
 
 
     "The quicker you correctly match the cards, the more points you get"+
-    "Selecting an incorrect card will result in losing 100 points, be careful!",
+    " Selecting an incorrect card will result in losing 100 points, be careful!",
 
 
     'You have 1 minute to get as many matches as possible and the order of '+
     "the cards is randomized every turn. Good luck!",
 
-    "If you want to view the cards in more detail, you can hold shift and click or"+
-    " double click on a card for it to be enlarged, remember to enter your name "+
+    "If you want to view the cards in more detail, click on the view card tab up top, remember to enter your name "+
     "so you can be on the leaderboard and get the highest score!",
 
     "Once you complete a round, you will have to refresh the webstie "+

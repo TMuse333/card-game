@@ -530,7 +530,7 @@ const inputStyles = {
   display: !gameOver && win === null ?
    'none' : win !== null ? 'none' :'block',
 
-   filter: selectedImage !== null ? 'blur(5px)' : null,
+  
 
    transform: selectedImage !== null ? 'scale(0.5)' : 'scale(1)',
 
@@ -631,7 +631,7 @@ style={{zIndex:9000}}>Incorrect! -100</div>}
        onClick={
         ()=>startGame()}
        className={!gameOver ? 'no-show' : win !== null ? 'start-button-gameOver' : 'start-button'}
-       style={{filter: selectedImage !== null ? 'blur(5px)' : null}}
+     
      >
        Start game!
      </button>

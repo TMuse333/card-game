@@ -37,7 +37,7 @@ const Leaderboard = ({win,gameOver,selectedImage}) => {
         selectedImage !== null ? 'blur(5px)':  'block',
         // position: 'relative',
         // top: '-25rem', //4.5
-        transform: isHovered? 'translateY(4.5rem) scale(1.33)' : 'translateY(4.5rem)',
+        transform: isHovered? 'translateY(3.5rem) scale(1.33)' : 'translateY(3.5rem)',
         marginLeft: 'auto',
         marginRight: 'auto',
         background: 'linear-gradient(to right, #6c4f55, #e42d0d)', // Add linear gradient
@@ -46,7 +46,7 @@ const Leaderboard = ({win,gameOver,selectedImage}) => {
         color: 'white',      // Set text color to white
         border: 'none',      // Remove border
         cursor: 'pointer', 
-        filter: selectedImage !== null ? 'blur(5px)' : null,
+      
         transition: 'transform 0.3s ease'
 
         //transform: win === null ? 'translateY(-28rem)' : null 
@@ -72,7 +72,9 @@ const Leaderboard = ({win,gameOver,selectedImage}) => {
           <button onClick={toggleShowStats}
            style={buttonStyle}
            onMouseEnter={mouseEnter}
-           onMouseLeave={mouseLeave}>
+           onMouseLeave={mouseLeave}
+           className="leader-button">
+            
             Leaderboard
           </button>
     

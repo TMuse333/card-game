@@ -432,7 +432,7 @@ ul.navLinks li a {
 }
 
 .popup-content {
-  background-color: rgb(168, 78, 78);
+  background-color: rgb(158, 78, 78);
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -663,7 +663,7 @@ ul.navLinks li a {
   margin-top: 0.5rem;
 }
 
-.result-img{
+.result-img-loss{
   margin-top: 3rem;
   animation: moveAndScaleClown 1.5s infinite ease
 }
@@ -895,6 +895,19 @@ ul.navLinks li a {
   }
 }
 
+@keyframes moveAndScaleClown3 {
+  0% {
+    transform: translateY(-3rem) scale(0.8);
+
+  }
+  50% {
+    transform: translateY(-4rem) scale(1);
+  }
+  100% {
+    transform: translateY(-3rem) scale(0.8);
+  }
+}
+
 @media only screen and (max-width: 320px){
   .card-text-box{
     font-size: 0.75rem;
@@ -992,7 +1005,7 @@ ul.navLinks li a {
  and (max-height:834px) {
 
 
-.result-img{
+.result-img-loss{
   margin-top: 3rem;
   animation: moveAndScaleClown2 1.5s infinite ease
 }
@@ -1012,8 +1025,8 @@ ul.navLinks li a {
   margin-bottom: -5rem;
 }
 .slat{
-  height: 18vw;
-  width: 11vw;
+  height: 184px;
+  width: 113px;
 }
 
 .cardSet{
@@ -1154,10 +1167,7 @@ ul.navLinks li a {
   margin-top: -3rem;
 }
 
-.result-img{
-  height: 30vw;
-  width: 21vw;
-}
+
 
 .home-button{
   transform: translate(14rem,2rem)
@@ -1166,11 +1176,64 @@ ul.navLinks li a {
 
 }
 
-@media  screen and (min-width: 670px )
+@media  screen 
 and (min-height: 903px) {
-  .about-text{
-    color:blue;
+ 
+
+  .object-card{
+    transform: translateY(-3rem);
+    margin-bottom: -8.5rem;
   }
+
+  /*4:03*/
+
+ .slat{
+  height:208px;
+  width:125px;
+ }
+
+  /* .start-button{
+    transform: translateY(-2rem);
+  } */
+
+  .leader-button{
+    transform: translate(-3rem);
+    
+  }
+
+  .result-img-loss{
+    animation: moveAndScaleClown3 1.5s infinite ease;
+  }
+
+  .result-text-loss{
+   margin-top: -3rem;
+  }
+
+  .about-card{
+    width: 377px;
+    height: 668px;
+  }
+
+  .card-text-box{
+    height: 85px;
+    width: 563px;
+    font-size: 15px;
+  }
+
+  .view-card-buttons{
+    transform: translateY(-35px);
+  }
+
+  .card-close-button{
+    transform: translate(0,-35px);
+  }
+
+  .popup-content{
+   width: 644px;
+   height: 172px;
+  }
+
+
 }
 
 

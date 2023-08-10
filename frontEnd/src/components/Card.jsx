@@ -62,7 +62,7 @@ const Card = ({ imageSrc,
 
    
 
-    filter: selectedImage !== null && gameOver? 'blur(5px)' : null,
+   
   
      transition: 'transform 0.3s ease, opacity 0.2s ease, top 0.3s ease, left 0.3s ease, right 0.3s ease',
    
@@ -105,7 +105,7 @@ const Card = ({ imageSrc,
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseleave}
         style={mergedStyle}
-        onDoubleClick={() => {shiftClick()}}
+        
         className="slat"
         
        
