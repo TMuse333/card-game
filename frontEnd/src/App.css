@@ -1087,7 +1087,7 @@ ul.navLinks li a {
 
 /*ipad pro */
 
-@media screen and (min-width:1023px) 
+ @media screen and (min-width:1023px)  
 
  and (min-height:1023px) {
   
@@ -1147,7 +1147,7 @@ ul.navLinks li a {
   margin-top: 1rem;
 }
 
-} 
+}  
 
 /*my imac */
 
@@ -1235,6 +1235,24 @@ and (min-height: 903px) {
    height: 172px;
   }
 
+
+}
+
+@media  screen 
+and (min-height: 230px) {
+
+
+
+.about-image{
+  width: 520px;
+  height: 316px;
+  margin-left: auto;
+  margin-right:auto;
+}
+
+.about-button{
+  transform: translate(-20rem,2rem);
+}
 
 }
 
