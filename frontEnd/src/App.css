@@ -1151,7 +1151,7 @@ ul.navLinks li a {
 
 /*my imac */
 
-@media screen and (min-width:1920px) and
+/* @media screen and (min-width:1920px) and
 (min-height:684px) {
   
 .about-text{
@@ -1174,7 +1174,9 @@ ul.navLinks li a {
 }
 
 
-}
+} */
+
+/*imac sizing*/
 
 @media  screen 
 and (min-height: 903px) {
