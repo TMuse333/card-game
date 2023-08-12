@@ -1144,16 +1144,85 @@ ul.navLinks li a {
 }
 
 }   
+*/
 
 
 
 
 
-/*imac sizing*/
+
+
+
 
 @media  screen 
-and (min-height: 600px) {
+and (min-height: 200px) 
+{
+
+.about-text{
+  color:#0b380b;
+}
+
+.about-image{
+  width: 520px;
+  height: 316px;
+  margin-left: auto;
+  margin-right:auto;
+}
+
+.slat{
+  height:135px;
+  width:98px;
+}
+
+.object-card{
+  margin-top: 4.5rem;
+  
+}
+
+.start-button-gameOver{
+  transform: translate(-5rem,4rem);
+}
+
+.home-button{
+  transform: translate(13rem,1.5rem);
+}
+
+.about-button{
+  transform: translate(0rem,5rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.about-card{
+  height: 400px;
+  width:285px
+
+}
+
+.result-img-loss{
+  height: 300px;
+}
+
+.popup-buttons{
+  margin-top: 1rem;
+  transform: translateY(7rem);
+  margin-bottom: 1rem;
+}
+
+
+}
+
+
+/*macbook full sizing*/
+
+@media  screen 
+and (min-height: 637px) {
  
+  .about-text{
+    color:red;
+  }
 
   .object-card{
     transform: translateY(-3rem);
@@ -1163,8 +1232,8 @@ and (min-height: 600px) {
   
 
  .slat{
-  height:208px;
-  width:125px;
+  height:155px;
+  width:110px;
  }
 
 
@@ -1206,50 +1275,31 @@ and (min-height: 600px) {
    height: 172px;
   }
 
+  .result-img{
+    height:500px;
+    width:356px;
+  }
+
+  .about-card{
+    height:500px;
+    width:356px;
+  }
+
+  .about-image{
+    height:450px;
+    width: 900px;
+  }
+
+  .about-button{
+    transform: translate(-30rem,3rem)
+  }
+
 
 } 
 
 
 
-@media  screen 
-and (max-height: 640px) {
 
-.about-text{
-  color:green;
-}
-
-.about-image{
-  width: 520px;
-  height: 316px;
-  margin-left: auto;
-  margin-right:auto;
-}
-
-.slat{
-  height:135px;
-  width:98px;
-}
-
-.object-card{
-  margin-top: 1rem;
-  
-}
-
-.start-button-gameOver{
-  transform: translate(-5rem,4rem);
-}
-
-.home-button{
-  transform: translate(13rem,1.5rem);
-}
-
-.result-text{
-  color:blue;
-}
-
-
-
-}
 
 
 
