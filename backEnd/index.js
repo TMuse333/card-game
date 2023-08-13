@@ -18,6 +18,7 @@ const db = mysql.createPool({
     user: "root",           // <-- User Name
     password: "shiftTeam902",   // <-- Password
     database: "card_dataBase",
+   
 })
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -45,12 +46,15 @@ const score = req.body.score;
  
 
 app.get("/api/get",(req,res)=> {
+
     const sqlSelect = 
     "SELECT * FROM game_stats ORDER BY score DESC";
     db.query(sqlSelect,(err, result) => {
      //   console.log(result.data)
         res.send(result)
     })
+
+ 
 })
 
 

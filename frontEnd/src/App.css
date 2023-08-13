@@ -1238,10 +1238,12 @@ and (min-height: 903px) {
 
 }
 
-@media  screen 
-and (min-height: 230px) {
+/* @media  screen 
+and (min-height: 230px) and (max-height: 902px) {
 
-
+.about-text{
+  color: green;
+}
 
 .about-image{
   width: 520px;
@@ -1254,7 +1256,7 @@ and (min-height: 230px) {
   transform: translate(-20rem,2rem);
 }
 
-}
+} */
 
 
 
