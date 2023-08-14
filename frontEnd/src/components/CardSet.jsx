@@ -52,7 +52,7 @@ let previousRandomImage = null;
     const [showCorrect, setShowCorrect] = useState(false);
     const [showIncorrect, setShowIncorrect] = useState(false);
     const [showSlow,setShowSlow] = useState(false)
-    const [remainingTime, setRemainingTime] = useState(20);
+    const [remainingTime, setRemainingTime] = useState(60);
     const [timer,setTimer] = useState(false)
     const [showResult,setShowResult] = useState(true)
   const [loss,setLoss] = useState(null)
@@ -140,7 +140,7 @@ let previousRandomImage = null;
            setWin(true)
             setProgress(0);
         
-        }, 23300); // 60 seconds
+        }, 63300); // 60 seconds
       };
 
       

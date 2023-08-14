@@ -224,6 +224,7 @@ const NavBar = ({gameOver}) => {
         <div className="popup-show">
           <div className='about-content'
           >
+            <div className="about-card-container">
             <img src={card_names[currentCardIndex].imageSrc} alt={`Project ${currentCardIndex + 1}`}
             className="about-card" />
             <p className='card-text-box'
@@ -242,6 +243,7 @@ const NavBar = ({gameOver}) => {
             className="card-close-button">
               Close
             </button>
+            </div>
           </div>
         </div>
       )}

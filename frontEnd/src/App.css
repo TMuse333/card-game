@@ -194,7 +194,7 @@ ul.navLinks li a {
 
 .object-card {
   margin-top: 80px;;
-  margin-bottom: -5.3rem;
+  margin-bottom: -4.3rem;
   z-index: 0;
 }
 
@@ -259,7 +259,7 @@ ul.navLinks li a {
   height: auto;
  height: 2.3rem;
   display: grid;
-  transform: translate(2rem,4rem);
+  transform: translate(0rem,4rem);
 }
 
 .start-button:hover {
@@ -610,7 +610,8 @@ ul.navLinks li a {
 }
 
 .about-text{
-  padding: 20px
+  padding: 20px;
+  color:yellow;
 }
 
 .about-image{
@@ -623,8 +624,8 @@ ul.navLinks li a {
 
 
 .slat{
-  height: 30vw;
-  width: 19vw;
+  height: 105px;
+  width: 60px;
 }
 
 .result-img{
@@ -665,7 +666,12 @@ ul.navLinks li a {
 
 .result-img-loss{
   margin-top: 3rem;
-  animation: moveAndScaleClown 1.5s infinite ease
+  animation: moveAndScaleClown 1.5s infinite ease;
+  height:120px
+}
+
+.name-input{
+  margin-top: 1rem;
 }
 
 
@@ -908,295 +914,104 @@ ul.navLinks li a {
   }
 }
 
-@media only screen and (max-width: 320px){
-  .card-text-box{
-    font-size: 0.75rem;
-    height: 4rem;
-    
-   }
-
-   .start-button-gameOver{
-    transform: translate(-1rem,4rem);
-   }
-}
-
- @media only screen and (min-width: 1576px) { 
-  .card-text-box {
-    font-size: 1.5rem;
-    height: 4rem;
-  }
-
-  .view-card-buttons {
-    transform: translateY(-2.5rem);
-  }
-
-  .card-close-button {
-    transform: translateY(-2rem);
-  }
-
-  .about-card {
-    height: 40vw;
-    width: 23vw;
-  }
-
-  .about-text {
-    padding: 20px;
-    font-size: 2rem;
-  }
-
-  .about-image {
-    width: 75rem;
-    height: 50rem;
-  }
-
-  .object-card {
-    margin-top: 2rem;
-    margin-bottom: -5.3rem;
-    z-index: 0;
-  }
-
-  .about-button{
-
-    transform: translate(-40rem,4rem);
-  }
-
-
 
   
 
  
-}  
-
- @media only screen and (min-width: 1576px) and (max-height: 1080px) {
-  
-  .slat{
-    
-    height: 14vw;
-    width: 8vw;
-  }
-
-  
-
-  .about-image {
-    width: 70vw;
-    height: 35vw;
 
 
-  }
-
-  .about-text{
-    color: blue;
-  }
-
-  .about-button{
-  
-    transform: translate(-45rem,2rem);
-  }
-
-  /* .object-card{
-    height: 1vw;
-  } */
-} 
-
-/*ipad  screen */
-
- @media screen and (min-width:1023px) 
-
- and (max-height:834px) {
 
 
-.result-img-loss{
-  margin-top: 3rem;
-  animation: moveAndScaleClown2 1.5s infinite ease
-}
-  
-.result-img{
-  transform: translateY(-1rem);
 
+
+
+/*macbook*/
+
+@media  screen 
+and (min-height: 200px) and (min-width: 740px)
+{
+
+.about-text{
+  color:#0b380b;
 }
 
-.about-card{
-  height: 30rem;
-  width:21rem;
+.about-image{
+  width: 520px;
+  height: 316px;
+  margin-left: auto;
+  margin-right:auto;
+}
+
+.slat{
+  height:30vw;
+  width:19vw;
 }
 
 .object-card{
-  margin-top: 1rem;
-  margin-bottom: -5rem;
-}
-.slat{
-  height: 184px;
-  width: 113px;
-}
-
-.cardSet{
+  margin-top: 1.5rem;
+  margin-bottom: -5.3rem;
   
- transform: translateY(2rem);
-}
-
-.points-text{
-  margin-bottom: 2rem;
-}
-
-.scoreboard-container{
-  margin-top: -0.5rem;
-}
-
-.result-img{
-  height: 30rem;
-  width:21rem;
-  transform: translateY(-3rem);
-  margin-bottom: -2rem;
-  
-}
-
-.result-img-loss{
-  height: 30rem;
-  width:21rem;
-  transform: translateY(-3rem);
-  margin-bottom: -2rem;
-  
-}
-
-.home-button{
-  margin-bottom: 3rem;
-  transform: translate(10rem,2rem);
 }
 
 .start-button-gameOver{
- transform: translate(-4rem,4rem);
+  transform: translate(-5rem,4rem);
 }
 
-
-
-
-
-/* .cardSet{
-  margin-bottom: -2.5rem;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 5px;
- 
-
-} */
-
-.name-input{
-  margin-top: 1rem;
+.home-button{
+  transform: translate(13rem,1.5rem);
 }
 
-} 
-
-/*ipad pro */
-
- @media screen and (min-width:1023px)  
-
- and (min-height:1023px) {
+.about-button{
   
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
 .about-card{
-  height: 40rem;
-  width:28rem;
+  height: 400px;
+  width:285px
+
 }
 
-.object-card{
+.result-img-loss{
+  height: 300px;
+}
+
+.popup-buttons{
   margin-top: 1rem;
-  margin-bottom: -5rem;
-}
-.slat{
-  height: 18vw;
-  width: 11vw;
-}
-
-.cardSet{
-  
- transform: translateY(2rem);
-}
-
-.points-text{
-  margin-bottom: 2rem;
-}
-
-.scoreboard-container{
-  margin-top: -0.5rem;
-}
-
-.result-img{
-  height: 45rem;
-  width:32rem;
-  transform: translateY(-3rem);
-  margin-bottom: -2rem;
-  
-}
-
-.home-button{
-  margin-bottom: 3rem;
-  transform: translate(18rem,2rem);
+  transform: translateY(7rem);
+  margin-bottom: 1rem;
 }
 
 
-
-
-
-/* .cardSet{
-  margin-bottom: -2.5rem;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 5px;
- 
-
-} */
-
-.name-input{
-  margin-top: 1rem;
-}
-
-}  
-
-/*my imac */
-
-/* @media screen and (min-width:1920px) and
-(min-height:684px) {
-  
-.about-text{
-  color:red;
-}
-
-.slat{
-  height: 13vw;
-  width:8vw;
-}
-
-.scoreboard-container{
-  margin-top: -3rem;
 }
 
 
-
-.home-button{
-  transform: translate(14rem,2rem)
-}
-
-
-} */
-
-/*imac sizing*/
+/*macbook full sizing*/
 
 @media  screen 
-and (min-height: 903px) {
+and (min-height: 637px) and (min-width:1025px){
  
+  .about-text{
+    color:red;
+  }
 
   .object-card{
+    margin-top: 80px;
     transform: translateY(-3rem);
     margin-bottom: -8.5rem;
   }
 
-  /*4:03*/
+  
 
  .slat{
-  height:208px;
-  width:125px;
+  height:155px;
+  width:110px;
  }
 
-  /* .start-button{
-    transform: translateY(-2rem);
-  } */
+
 
   .leader-button{
     transform: translate(-3rem);
@@ -1235,30 +1050,72 @@ and (min-height: 903px) {
    height: 172px;
   }
 
+  .result-img{
+    height:500px;
+    width:356px;
+  }
 
+  .about-card{
+    height:500px;
+    width:356px;
+  }
+
+  .about-image{
+    height:450px;
+    width: 900px;
+  }
+
+  .about-button{
+    transform: translate(-30rem,3rem)
+  }
+
+
+} 
+
+
+/*imac*/
+
+@media screen and (min-height: 500px)  and (min-width: 880px) {
+
+  .about-text{
+    color:wheat;
+  }
+
+  .about-button{
+    color:green;
+    transform: translateX(5rem);
+  
+  }
+
+  .about-image{
+    width: 800px;
+    height:500px;
+  }
+
+  .about-card{
+    
+    height: 500px;
+    width:355px;
+  }
+
+  .about-card-container{
+    transform: translateY(5rem);
+  }
+
+  .slat{
+    height:200px;
+    width: 142px;
+  }
+
+  .object-card{
+    margin-bottom: -5rem;
+    position: relative;
+    z-index: 99999999;
+    /* margin-top: 80px; */
+  }
+
+  .points-text{
+    margin-top: 0.5rem;
+  }
+  
 }
-
-/* @media  screen 
-and (min-height: 230px) and (max-height: 902px) {
-
-.about-text{
-  color: green;
-}
-
-.about-image{
-  width: 520px;
-  height: 316px;
-  margin-left: auto;
-  margin-right:auto;
-}
-
-.about-button{
-  transform: translate(-20rem,2rem);
-}
-
-} */
-
-
-
-
-
