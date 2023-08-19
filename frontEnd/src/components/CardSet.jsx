@@ -591,10 +591,10 @@ gameOver={gameOver}/>
    
       <QuantumBackground />
 
-     <Leaderboard
+     {/* <Leaderboard
      gameOver={gameOver}
      win={win}
-     selectedImage={selectedImage}/>
+     selectedImage={selectedImage}/> */}
 
 <div className={gameOver || loss? 'object-card-gameOver' : 'object-card'}
         >
