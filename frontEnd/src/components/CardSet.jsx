@@ -52,7 +52,7 @@ let previousRandomImage = null;
     const [showCorrect, setShowCorrect] = useState(false);
     const [showIncorrect, setShowIncorrect] = useState(false);
     const [showSlow,setShowSlow] = useState(false)
-    const [remainingTime, setRemainingTime] = useState(60);
+    const [remainingTime, setRemainingTime] = useState(45);
     const [timer,setTimer] = useState(false)
     const [showResult,setShowResult] = useState(true)
   const [loss,setLoss] = useState(null)
@@ -75,7 +75,7 @@ let previousRandomImage = null;
 
         setStartClicked(true);
         setWin(null)
-        setRemainingTime(20)
+        setRemainingTime(45)
         setTimeout(() => {
           setGameOver(false);
           setTimer(true)
@@ -98,7 +98,7 @@ let previousRandomImage = null;
             setAlternate(null);
             setScore(0);
             setStartClicked(true)
-            setRemainingTime(20)
+            setRemainingTime(45)
             setLoss(null)
 
         
@@ -110,7 +110,7 @@ let previousRandomImage = null;
         
             
         else{
-        setRemainingTime(20)
+        setRemainingTime(45)
           setErrors(0);
         
           setCountdown(3)
@@ -140,7 +140,7 @@ let previousRandomImage = null;
            setWin(true)
             setProgress(0);
         
-        }, 63300); // 60 seconds
+        }, 48300); // 60 seconds
       };
 
       
@@ -355,8 +355,6 @@ const intervalDuration = Math.max(baseIntervalDuration - intervalReduction, 1000
           const progress = (elapsedTime / intervalDuration) * 100;
           setTooSlow(false)
 
-     
-    
           if ((elapsedTime >= intervalDuration+1000) && gameOver) {
             
             setRandomImage(getRandomImage());
@@ -585,6 +583,8 @@ const scaleDown = () =>{
     return (
         <>
 
+        <div className='cardset-container'>
+
 <NavBar 
 gameOver={gameOver}/>
 
@@ -627,28 +627,20 @@ style={{zIndex:9000}}>Incorrect! -100</div>}
 
       { (startClicked && countdown > 0)  && <div className="countdown-text">{countdown}</div>}
 
+<div className='buttons'>
+
       <button
        onClick={
         ()=>startGame()}
        className={!gameOver ? 'no-show' : win !== null ? 'start-button-gameOver' : 'start-button'}
-     
      >
        Start game!
      </button>
 
-
-
   <button className={win!== null ? 'home-button' : 'no-show'}
 onClick={()=>homeScreen()}>Home screen</button>
+   </div>
 
-{/* <div className="progress-bar"
-style={{transform: gameOver? 'scale(0)' : 'scale(1)'}}>
-<div
-className="progress-bar-filled"
-style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle, width: `${progress}%` }}
-></div>
-
-</div> */}
 
 
 
@@ -678,12 +670,8 @@ style={filling ? { ...progressStyle, width: `${progress}%` } : { ...declineStyle
             text={cardData[i]}
          
             />
-          ))}
+          ))}  
 
-       
-
-
-       
 </div>
 <div className={`scoreboard-container ${gameOver ? 'gameOver' : ''}`}>
 <p className='scoreboard-text'>
@@ -731,6 +719,7 @@ startClicked={startClicked}
 
            
 
+        </div>
         </div>
 
 

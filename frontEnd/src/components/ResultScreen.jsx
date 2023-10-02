@@ -65,7 +65,7 @@ const ResultScreen = ({ win, score, startClicked}) => {
 
   return (
     <>
-
+<div className='results-container'>
   
       <img src={ win && score > 100 ? saiyans : win && score < 101? clown : null} style={styles} alt="Result"
       className={win && score > 100 ? 'result-img' : 'result-img-loss'} />
@@ -74,6 +74,7 @@ const ResultScreen = ({ win, score, startClicked}) => {
         <p>{score < 0 && win? "ridiculous! you scored below zero" :win && score > 100 ? ` Your score was ${score}` : score < 101 && win ? `Get your points up playa! You only scored ${score}`  : null}</p>
         
         
+      </div>
       </div>
     </>
   );
