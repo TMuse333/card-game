@@ -44,11 +44,10 @@ const NavBar = ({gameOver}) => {
     'You have 1 minute to get as many matches as possible and the order of '+
     "the cards is randomized every turn. Good luck!",
 
-    "If you want to view the cards in more detail, click on the view card tab up top, remember to enter your name "+
-    "so you can be on the leaderboard and get the highest score!",
+    "If you want to view the cards in more detail, click on the view card tab up top!",
 
-    "Once you complete a round, you will have to refresh the webstie "+
-    "to see your score on the leaderboard, apologies for this minor inconvinience!"
+    // "Once you complete a round, you will have to refresh the webstie "+
+    // "to see your score on the leaderboard, apologies for this minor inconvinience!"
     // Add more rules as needed
   ];
 
