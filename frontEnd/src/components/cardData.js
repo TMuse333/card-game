@@ -24,9 +24,22 @@ import Majikarp from '../images/pokemon-magikarp.gif'
   +"that I designed based off my own physique "
   ,
    
-  "This is Majin Vegeta","This is obito as ten tails jinchurkiki",
-  "This is goku and vegeta", "this is Sasuke",
-  "This is Kakashi Hatake", "this is Obito", "this is Vegeta!"
+  "This is Majin Vegeta he is an alternate version "+
+  "of the Dragon Ball Z character Vegeta, who lets himself "+
+  'be taken over by the wizard Bhabadi for more power '+
+  "denoted by the M on his forehead",
+
+  "This is obito as ten tails jinchurkiki, one of the most important "+
+  "characters of the anime series Naruto. In this form he has the power of all "+
+  "nine tailed beasts, which are creatures of immense power in the series.",
+
+  "This is goku and vegeta fighting side by side during the tournament of power. "+
+  "Goku is in his super saiyan blue kaioken times 20 form while vegeta is in has reached a level even higher than super saiyan blue",
+   "this is Sasuke, one of the main characters in the anime Naruto. He is Narutos best friend while also being his biggest rival ",
+  "This is Kakashi Hatake using a susanno. Kakashi is the sensei of Naruto and Sasuke",
+   "this is Obito during the war arc of Naruto."+
+   "Through out the whole series Obito remains a masked figure, hiding his identity unitl he takes power of all 9 of the tailed beasts",
+    "this is Vegeta! Vegeta is one of my favorite anime characters of all time because of his no excuses mentaility and determination to be as strong as he can possibly be"
 ]
 
 export const card_names =
