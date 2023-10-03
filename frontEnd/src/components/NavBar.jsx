@@ -29,7 +29,7 @@ const NavBar = ({gameOver}) => {
     'In this card game, there are 8 cards, each card'+
     " has an alternative picture on the back of it, which can "+
     "be accessed by simply clicking on the desired card and can be "+
-    "flipped back by reclicking it.",
+    "flipped back by reclicking it. Memorize what is on the back of each card as it will be important for the game!",
 
 
     'When you click on the start button, the alternative image '+

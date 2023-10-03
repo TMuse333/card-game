@@ -583,18 +583,21 @@ const scaleDown = () =>{
     return (
         <>
 
+        <NavBar
+        gameOver={gameOver}
+        />
+
         <div className='cardset-container'>
 
-<NavBar 
-gameOver={gameOver}/>
+
 
    
-      <QuantumBackground />
+     
 
-     {/* <Leaderboard
+     <Leaderboard
      gameOver={gameOver}
      win={win}
-     selectedImage={selectedImage}/> */}
+     selectedImage={selectedImage}/>
 
 <div className={gameOver || loss? 'object-card-gameOver' : 'object-card'}
         >
@@ -703,7 +706,8 @@ startClicked={startClicked}
 
 
 <div className="name-input"
-        style={inputStyles}>
+        style={inputStyles}
+        >
             <label htmlFor="name">Enter Your Name: </label>
             <input
                 type="text"

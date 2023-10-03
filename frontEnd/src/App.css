@@ -5,58 +5,15 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 
-.read-the-docs {
-  color: #888;
-}
 
-.welcome {
-  background-color: aqua;
-  position: fixed;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 15px;
-  height: 80px;
-  text-align: center;
-}
 
-.welcome p {
-  margin-top: 1px;
-  color: black;
-  font-size: 20px;
-}
 
-.card {
-  padding: 2em;
-}
+
+
+
 
 .banner {
   position: fixed;
@@ -74,14 +31,6 @@
   
 }
 
-
-
-.banner.scrollable {
-  /* position: relative; */
- 
-
-  
-}
 
 .card-text-box {
   transform: translateY(-3rem);
@@ -113,6 +62,7 @@
   padding-top: 20px;
   z-index: 2099200;
   position: relative;
+  justify-content: center;
 }
 
 
@@ -177,7 +127,7 @@ ul.navLinks li a {
   grid-gap: 0.5em;
   margin-top: 3rem;
   margin-left: -1rem;
-  margin-bottom: 3rem;
+  
   transition: ease 0.3s;
 
 }
@@ -218,7 +168,7 @@ ul.navLinks li a {
 
 .start-button {
   min-width: 50px;
-  min-height:30px ;
+ 
   max-width: fit-content;
   width:10vw;
   position: relative;
@@ -313,7 +263,7 @@ ul.navLinks li a {
   transform: scale(1);
   transition: all 0.7s ease-in;
   z-index: -2;
-  margin-top: -2.5rem;
+ margin-top: 1rem;
 }
 
 .score-container {
@@ -328,7 +278,7 @@ ul.navLinks li a {
   font-size: 0.5rem;
 
   
-  transform: translate(14rem,6rem);
+
 
   
 
@@ -340,6 +290,7 @@ ul.navLinks li a {
   color: #333;
   text-shadow: 1px 1px 1px #ccc;
   z-index: -2;
+ 
 }
 
 .scoreboard-container.gameOver {
@@ -585,7 +536,7 @@ ul.navLinks li a {
 }
 
 .name-input{
-  margin-top:-2.5rem;
+
 }
 
 .about-card {
@@ -603,12 +554,13 @@ ul.navLinks li a {
 
 .about-text{
   padding: 20px;
-  color:yellow;
+  font-size: 15px;
+ 
 }
 
 .about-image{
-  width: 90vw;
-  height:55vw;
+  height:15rem;
+  width:22rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -672,6 +624,10 @@ ul.navLinks li a {
   margin-right: auto;
   margin-top: 30px;
 
+}
+
+.cardset-container{
+  margin-top: -5rem;
 }
 
 
@@ -914,209 +870,79 @@ ul.navLinks li a {
   }
 }
 
-
-  
-
- 
-
-
-
-
-
-
-
-/*macbook*/
-
-@media  screen 
-and (min-height: 200px) and (min-width: 740px)
-{
-
-.about-text{
-  color:#0b380b;
-}
-
-.about-image{
-  width: 520px;
-  height: 316px;
-  margin-left: auto;
-  margin-right:auto;
-}
-
-.slat{
-  height:30vw;
-  width:19vw;
-}
-
-.object-card{
-  margin-top: 1.5rem;
-  margin-bottom: -5.3rem;
-  
-}
-
-.start-button-gameOver{
- 
-}
-
-.home-button{
- 
-}
-
-.about-button{
-  width: 10rem;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-
-.about-card{
-  height: 400px;
-  width:285px
-
-}
-
-.result-img-loss{
-  height: 300px;
-}
-
-.popup-buttons{
-  margin-top: 1rem;
-  transform: translateY(7rem);
-  margin-bottom: 1rem;
-}
-
-
-}
-
-
-/*macbook full sizing*/
-
-@media  screen 
-and (min-height: 637px) and (min-width:1025px){
- 
-  .about-text{
-    color:red;
+@media screen and (max-height: 414px){
+  .cardset-container{
+    transform: translateY(2.8rem);
   }
 
-  .object-card{
-    margin-top: 80px;
-    transform: translateY(-3rem);
-    margin-bottom: -8.5rem;
-  }
-
-  
-
- .slat{
-  height:155px;
-  width:110px;
- }
-
-
-
-  .leader-button{
-    transform: translate(-3rem);
+  .start-button{
+transform: translateY(2.5rem);
+   height:15px;
+   font-size: 6px;
+   padding-top: 3px;
     
   }
 
-  .result-img-loss{
-    animation: moveAndScaleClown3 1.5s infinite ease;
+  .slat{
+    height:80px;
   }
 
-  .result-text-loss{
-   margin-top: -3rem;
+  .about-image{
+    /* width:250px; */
+  }
+}
+
+@media screen and (min-width: 415px)
+and (min-height: 767px){
+
+  .slat{
+    height:12rem;
+    width:8rem;
+  }
+
+  .cardset-container{
+  margin-top: -40px;
   }
 
   .about-card{
-    width: 377px;
-    height: 668px;
-  }
-
-  .card-text-box{
-    height: 85px;
-    width: 563px;
-    font-size: 15px;
-  }
-
-  .view-card-buttons{
-    transform: translateY(-35px);
-  }
-
-  .card-close-button{
-    transform: translate(0,-35px);
-  }
-
-  .popup-content{
-   width: 644px;
-   height: 172px;
+    height:30rem;
+    width: 20rem;
   }
 
   .result-img{
     height:500px;
-    width:356px;
   }
 
-  .about-card{
-    height:500px;
-    width:356px;
+  .buttons{
+    margin-bottom: 2rem;
   }
 
   .about-image{
-    height:450px;
-    width: 900px;
+    height:60vh;
+  width: 80vw;
+   /* min-width:350px;
+   max-height: 350px; */
+   max-width:1027px;
+   max-height:573px;
+
   }
-
-  .about-button{
-
-  }
-
-
-} 
-
-
-/*imac*/
-
-@media screen and (min-height: 500px)  and (min-width: 880px) {
 
   .about-text{
-    color:wheat;
-  }
-
-  .about-button{
-
-   
-  
-  }
-
-  .about-image{
-    width: 800px;
-    height:500px;
-  }
-
-  .about-card{
-    
-    height: 500px;
-    width:355px;
-  }
-
-  .about-card-container{
-    transform: translateY(5rem);
-  }
-
-  .slat{
-    height:200px;
-    width: 142px;
-  }
-
-  .object-card{
-    margin-bottom: -5rem;
-    position: relative;
-    z-index: 99999999;
-    /* margin-top: 80px; */
-  }
-
-  .points-text{
-    margin-top: 0.5rem;
+    font-size: 25px;
   }
   
 }
+
+
+  
+
+ 
+
+
+
+
+
+
+
+
+
